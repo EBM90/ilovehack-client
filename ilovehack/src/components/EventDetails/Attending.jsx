@@ -1,11 +1,9 @@
 import { Component } from "react";
 import React from "react";
 import eventservice from "../../lib/event-service";
-import profileservice from '../../lib/user-service';
-import Creator from './Creator'
-import Attending from './Attending'
+import profileservice from '../../lib/user-service'
 
-class EventDetail extends Component {
+class Creator extends Component {
     state = {
         event: {},
         user: {},
@@ -13,7 +11,6 @@ class EventDetail extends Component {
 
     getEvent = async () =>{
         try {
-            console.log(this.props.match)
             const {params} = this.props.match
             const theEvent = await eventservice.getTheEvent(params.id)
             const theUser = await profileservice.getUser()
@@ -36,11 +33,16 @@ class EventDetail extends Component {
         const {event, user} = this.state
         return(
             <div className='main'>
-            <Creator />
-                    {/* {event.creator && event.creator === user._id ? 
-                    <Creator/> : <Attending/>} */}
+                {event.date ? 
+                <div>
+                    <h1>{event.name}</h1>
+                     <p>{event.date.slice(0,16)} {event.location}</p>
+                </div>
+                   
+                : null} 
+
             </div>
         )
     }
 }
-export default EventDetail;
+export default Creator;

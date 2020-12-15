@@ -25,6 +25,15 @@ class Event {
         console.log(error)
     }
   }
+
+  editEvent = async({id, name, date, location }) =>{
+    try {
+      const theEvent = await this.event.put(`/events/edit/${id}`, name, date, location)
+      return theEvent.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 const axiosRequestFunctions = new Event();
