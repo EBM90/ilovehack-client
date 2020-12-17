@@ -26,9 +26,28 @@ class Event {
     }
   }
 
+  addEvent = async({ name, creator, description, location, cohort}) =>{
+    try {
+      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, description, location, cohort})
+      return theEvent.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   editEvent = async({id, name, date, location }) =>{
     try {
       const theEvent = await this.event.put(`/events/edit/${id}`, name, date, location)
+      return theEvent.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  joinEvent = async(user_id, event_id ) =>{
+    try {
+      console.log(user_id, event_id)
+      const theEvent = await this.event.post(`/events/fav`, {user_id, event_id})
       return theEvent.data
     } catch (error) {
       console.log(error)

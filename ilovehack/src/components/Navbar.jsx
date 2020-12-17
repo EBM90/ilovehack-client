@@ -30,11 +30,11 @@ class Navbar extends Component {
           <div className="navbar-nav ">
             {isLoggedin ? (
               <>
-                <Link to={`/profile/${user._id}`} className="nav-link">
+                <Link to={`/myprofile`} className="nav-link">
                   My profile
                 </Link>
-                <Link to="/calendar" className="nav-link">
-                  Calendar
+                <Link to="/events" className="nav-link">
+                  Events
                 </Link>
                 <Link to="/videos" className="nav-link">
                   Exercises

@@ -13,7 +13,6 @@ class EventDetail extends Component {
 
     getEvent = async () =>{
         try {
-            console.log(this.props.match)
             const {params} = this.props.match
             const theEvent = await eventservice.getTheEvent(params.id)
             const theUser = await profileservice.getUser()
@@ -31,16 +30,69 @@ class EventDetail extends Component {
         this.getEvent()
     }
 
+    joinThisEvent= async(user_id, event_id) =>{
+        try {
+            console.log(user_id, event_id)
+            await eventservice.joinEvent(user_id, event_id)
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
     //create components for event if creator and else
     render(){
         const {event, user} = this.state
         return(
             <div className='main'>
-            <Creator />
-                    {/* {event.creator && event.creator === user._id ? 
-                    <Creator/> : <Attending/>} */}
-            </div>
-        )
-    }
+                {event.creator && event.creator === user._id ? 
+                    <div>
+                    <form onSubmit={this.handleFormSubmit}>
+                    <div className="form_part">
+                    <label>Name:</label>
+                    <input
+                            type="text"
+                            name="name"
+                            value={event.name}
+                            onChange={this.handleChange}
+                  />
+                  <label>Location:</label>
+                    <input
+                            type="text"
+                            name="location"
+                            value={event.location}
+                            onChange={this.handleChange}
+                  />
+                  <label>Date:</label>
+                    <input
+                            type="text"
+                            name="date"
+                            value={event.date}
+                            onChange={this.handleChange}
+                  />
+
+                    <input
+                    className="form_button_btn_edit"
+                    type="submit"
+                    value="Edit"
+                  />
+                </div>
+
+                        </form>
+                    </div> 
+                : 
+                <>
+                {event.date ? 
+                <div>
+                    <h1>{event.name}</h1>
+                     <p>{event.date.slice(0,16)} {event.location}</p>
+                </div>
+                   
+                : null}  
+                </>
+                 }
+                 <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+    </div>)
+}
 }
 export default EventDetail;
