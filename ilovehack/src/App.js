@@ -13,6 +13,7 @@ import EventDetail from './components/EventDetails/EventDetails.jsx'
 import Signup from './components/SignUp/Signup.jsx'
 import Navbar from './components/Navbar.jsx'
 import Create from './components/createEvent/Create.jsx'
+import Login from './components/LogIn/Log-in.jsx'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <PrivateRoute exact path='/add-event' component={Create}/>
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
       <AnonRoute exact path='/signup' component={Signup}/>
+      <AnonRoute exact path='/login' component={Login}/>
       </Switch> 
     </div>
     </AuthProvider>
