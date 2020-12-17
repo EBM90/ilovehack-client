@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
+import service from "../../lib/auth-service";
 
 class Signup extends Component {
   state = { 
@@ -35,7 +36,7 @@ class Signup extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor } = this.state;
-    this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor });
+    service.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor });
   };
 
   handleChange = event => {
@@ -86,7 +87,7 @@ class Signup extends Component {
  }
 
   render() {
-    const { fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor } = this.state;
+    const { fullname, email, password, repeatPassword, birthdate, gender, description, answers, isHorny, searchFor } = this.state;
     return (
       <div className="">
         <h1 className="">Sign Up</h1>
@@ -127,6 +128,24 @@ class Signup extends Component {
           {this.state.isError.birthdate.length > 0 && (
           <span className="">{this.state.isError.birthdate}</span>
           )} 
+          </div>
+          <div className="">
+          <label>Gender:</label>
+          <select name="gender" value={gender} onChange={ e => this.handleChange(e)}>
+            <option defaultValue="0"> Choose one </option>
+            <option value="male">Male</option>
+            <option value="female">Fimale</option>
+            <option value="nonBinary">Non-binary</option>
+          </select>
+          </div>
+          <div className="">
+          <label>Looking for:</label>
+          <select name="isHorny" value={isHorny} onChange={ e => this.handleChange(e)}>
+            <option defaultValue="0"> Choose one </option>
+            <option value="love">Love</option>
+            <option value="friends">Friends</option>
+            <option value="nip">Nothing in particular</option>
+          </select>
           </div>
           <div className="">
           <input className="" type="submit" value="Signup" onClick={this.errorMessage}/>
