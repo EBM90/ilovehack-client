@@ -1,0 +1,14 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px black solid;
+    width: 50%;
+    margin: 20px;
+}
