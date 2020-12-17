@@ -62,10 +62,10 @@ class AuthProvider extends React.Component {
   }
 
   signup = (user) => {
-    const { username, password, email } = user;
+    const { fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor } = user;
 
     auth
-      .signup({ username, password, email })
+      .signup({ fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor })
       .then((user) => this.setState({ isLoggedin: true, user: user }))
       .catch(({ response }) =>
         this.setState({ message: response.data.statusMessage })
@@ -73,9 +73,9 @@ class AuthProvider extends React.Component {
   };
 
   login = (user) => {
-    const { username, password } = user;
+    const { email, password } = user;
     auth
-      .login({ username, password })
+      .login({ email, password })
       .then((user) => this.setState({ isLoggedin: true, user: user }))
       .catch((err) => console.log(err));
   };
