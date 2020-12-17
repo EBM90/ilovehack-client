@@ -26,7 +26,7 @@ class Home extends Component {
     render(){
         const {user} = this.state
         return(
-            <h1>Hello World</h1>
+            <h1>Hello {user.fullname}</h1>
         )
     }
 }
