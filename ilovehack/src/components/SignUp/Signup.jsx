@@ -33,8 +33,8 @@ class Signup extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    const { fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor } = this.state;
-    this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor });
+    const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state;
+    this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
   };
 
   handleChange = event => {
@@ -85,7 +85,7 @@ class Signup extends Component {
  }
 
   render() {
-    const { fullname, email, password, repeatPassword, birthdate, gender, description, answers, isHorny, searchFor } = this.state;
+    const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
     return (
       <div className="">
         <h1 className="">Sign Up</h1>
@@ -100,7 +100,7 @@ class Signup extends Component {
           </div>
           <div className="">
           <label>Email:</label>
-          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  /*required*/ />
+          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  required />
           {this.state.isError.email.length > 0 && (
           <span className="">{this.state.isError.email}</span>
           )}
@@ -108,21 +108,21 @@ class Signup extends Component {
           </div>
           <div className="">
           <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
+          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  required />
           {this.state.isError.password.length > 0 && (
           <span className="">{this.state.isError.password}</span>
           )}  
           </div>
           <div className="">
           <label>Repeat Password:</label>
-          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
+          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  required />
           {this.state.isError.repeatPassword.length > 0 && (
           <span className="">{this.state.isError.repeatPassword}</span>
           )} 
           </div>
           <div className="">
           <label>Birth date:</label>
-          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} /*required*/ />
+          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} required />
           {this.state.isError.birthdate.length > 0 && (
           <span className="">{this.state.isError.birthdate}</span>
           )} 
@@ -137,6 +137,14 @@ class Signup extends Component {
           </select>
           </div>
           <div className="">
+          <label>Id your heart already hacked?</label>
+          <select name="isHorny" value={isHorny} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            <option value='false'>I already have my pair programming partner</option>
+            <option value='true'>I want to find someone whi I can deploy with</option>
+          </select>
+          </div>
+          <div className="">
           <label>Looking for:</label>
           <select name="searchFor" value={searchFor} onChange={ e => this.handleChange(e)}>
             <option defaultValue=""> Choose one </option>
@@ -147,12 +155,14 @@ class Signup extends Component {
           </select>
           </div>
           <div className="">
+          <label>Description:</label>
+          <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" required></textarea>
+          </div>
+          <div className="">
           <input className="" type="submit" value="Signup" onClick={this.errorMessage}/>
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
         </form>
-
-        
       </div>
     );
   }

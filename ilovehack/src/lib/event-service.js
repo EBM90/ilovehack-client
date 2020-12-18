@@ -10,7 +10,7 @@ class Event {
 
   getAllEvents = async() => {
     try {
-        const all = await this.event.get('/events/all-events')
+        const all = await this.event.get('/all-events')
         return all.data
     } catch (error) {
         console.log(error)
@@ -19,7 +19,7 @@ class Event {
 
   getTheEvent = async(id) => {
     try {
-        const theEvent = await this.event.get(`/events/event-details/${id}`)
+        const theEvent = await this.event.get(`/event-details/${id}`)
         return theEvent.data
     } catch (error) {
         console.log(error)
@@ -28,7 +28,7 @@ class Event {
 
   addEvent = async({ name, creator, description, location, cohort}) =>{
     try {
-      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, description, location, cohort})
+      const theEvent = await this.event.post(`/add-event`,{ name, creator, description, location, cohort})
       return theEvent.data
     } catch (error) {
       console.log(error)
@@ -37,7 +37,7 @@ class Event {
 
   editEvent = async({id, name, date, location }) =>{
     try {
-      const theEvent = await this.event.put(`/events/edit/${id}`, name, date, location)
+      const theEvent = await this.event.put(`/edit/${id}`, name, date, location)
       return theEvent.data
     } catch (error) {
       console.log(error)
@@ -47,7 +47,7 @@ class Event {
   joinEvent = async(user_id, event_id ) =>{
     try {
       console.log(user_id, event_id)
-      const theEvent = await this.event.post(`/events/fav`, {user_id, event_id})
+      const theEvent = await this.event.post(`/fav`, {user_id, event_id})
       return theEvent.data
     } catch (error) {
       console.log(error)

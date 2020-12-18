@@ -24,7 +24,7 @@ function App() {
      <Switch>
       <AnonRoute exact path='/' component={Home} /> 
       <PrivateRoute exact path='/myprofile' component={Profile}/>
-      <PrivateRoute exact path='/events' component={Events}/>
+      <PrivateRoute exact path='/all-events' component={Events}/>
       <PrivateRoute exact path='/add-event' component={Create}/>
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
       <AnonRoute exact path='/signup' component={Signup}/>
