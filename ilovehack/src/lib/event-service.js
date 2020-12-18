@@ -11,6 +11,7 @@ class Event {
   getAllEvents = async() => {
     try {
         const all = await this.event.get('/events/all-events')
+        console.log(all)
         return all.data
     } catch (error) {
         console.log(error)
