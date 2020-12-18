@@ -9,49 +9,26 @@ class Auth {
   }
 
   signup({ fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor }) {
-    const formValid = ({ isError, ...rest }) => {
-      let isValid = false;
-  
-      Object.values(isError).forEach(val => {
-          if (val.length > 0) {
-              isValid = false
-          } else {
-              isValid = true
-          }
-      });
-  
-      Object.values(rest).forEach(val => {
-          if (val === null) {
-              isValid = false
-          } else {
-              isValid = true
-          }
-      });
-  
-      return isValid;
-  };
-
-
     return this.auth
-      .post("/auth/signup", { fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor })
+      .post("/signup", { fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor })
       .then(({ data }) => data);
     // .then((response) => response.data);
   }
 
   login({ email, password }) {
     return this.auth
-      .post("/auth/login", { email, password })
+      .post("/login", { email, password })
       .then(({ data }) => data);
     // .then((response) => response.data);
   }
 
   logout() {
-    return this.auth.post("/auth/logout", {}).then(({ data }) => data);
+    return this.auth.post("/logout", {}).then(({ data }) => data);
     // return this.auth.post("/auth/logout", {}).then((response) => response.data);
   }
 
   me() {
-    return this.auth.get("/auth/me").then((response) => response.data);
+    return this.auth.get("/me").then((response) => response.data);
   }
 }
 

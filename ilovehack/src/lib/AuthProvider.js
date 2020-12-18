@@ -56,10 +56,9 @@ class AuthProvider extends Component {
 
   signup = (user) => {
     const { fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor } = user;
-
     auth
       .signup({ fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor })
-      .then((user) => this.setState({ isLoggedin: true, user }))
+      .then((user) => this.setState({ isLoggedin: true, user:user }))
       .catch(({ error }) =>
       this.setState({ message: error.data.statusMessage })
       );
