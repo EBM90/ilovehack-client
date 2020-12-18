@@ -12,8 +12,7 @@ class Signup extends Component {
     email: "",
     description: "",
     answers: [],
-    email: "",
-    isHorny: "",
+    isHorny: false,
     searchFor: "",
     isError: {
       fullname: "",
@@ -61,7 +60,7 @@ class Signup extends Component {
                 isError.repeatPassword =
                    value !== this.state.password ? "Passwords don't match" : "";
             break;
-            case "repeatPassword":
+            case "birthdate":
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -86,7 +85,7 @@ class Signup extends Component {
  }
 
   render() {
-    const { fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor } = this.state;
+    const { fullname, email, password, repeatPassword, birthdate, gender, description, answers, isHorny, searchFor } = this.state;
     return (
       <div className="">
         <h1 className="">Sign Up</h1>
@@ -101,7 +100,7 @@ class Signup extends Component {
           </div>
           <div className="">
           <label>Email:</label>
-          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com" required/>
+          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  /*required*/ />
           {this.state.isError.email.length > 0 && (
           <span className="">{this.state.isError.email}</span>
           )}
@@ -109,24 +108,43 @@ class Signup extends Component {
           </div>
           <div className="">
           <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******" required/>
+          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
           {this.state.isError.password.length > 0 && (
           <span className="">{this.state.isError.password}</span>
           )}  
           </div>
           <div className="">
           <label>Repeat Password:</label>
-          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******" required/>
+          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
           {this.state.isError.repeatPassword.length > 0 && (
           <span className="">{this.state.isError.repeatPassword}</span>
           )} 
           </div>
           <div className="">
           <label>Birth date:</label>
-          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} required/>
+          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} /*required*/ />
           {this.state.isError.birthdate.length > 0 && (
           <span className="">{this.state.isError.birthdate}</span>
           )} 
+          </div>
+          <div className="">
+          <label>Gender:</label>
+          <select name="gender" value={gender} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="none">Non-binary</option>
+          </select>
+          </div>
+          <div className="">
+          <label>Looking for:</label>
+          <select name="searchFor" value={searchFor} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="none">Non binary</option>
+            <option value="all">All</option>
+          </select>
           </div>
           <div className="">
           <input className="" type="submit" value="Signup" onClick={this.errorMessage}/>

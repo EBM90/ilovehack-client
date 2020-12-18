@@ -37,7 +37,7 @@ class Navbar extends Component {
                   Events
                 </Link>
                 <Link to="/videos" className="nav-link">
-                  Exercises
+                  Matches
                 </Link>
                 <Link to="/faqP" className="nav-link">
                   FAQ

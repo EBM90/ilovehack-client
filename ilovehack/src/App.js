@@ -1,6 +1,6 @@
 import './App.css';
 
-import {Switch, Route} from 'react-router-dom'
+import {Switch} from 'react-router-dom'
 import AuthProvider from './lib/AuthProvider'
 import AnonRoute from "./components/componentRoutes/AnonRoute";
 import PrivateRoute from "./components/componentRoutes/PrivateRoute";
