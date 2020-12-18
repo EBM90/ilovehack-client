@@ -12,7 +12,7 @@ class Signup extends Component {
     email: "",
     description: "",
     answers: [],
-    isHorny: "",
+    isHorny: false,
     searchFor: "",
     isError: {
       fullname: "",
