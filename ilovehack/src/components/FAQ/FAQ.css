@@ -1,0 +1,59 @@
+@import url(https://fonts.googleapis.com/css?family=Nova+Mono);
+.title-FAQ {
+  background-color: #4A5679;
+}
+.box-container {
+  width: 800px;
+  margin:0 auto;
+  position: absolute;
+  left:0;
+  right:0;
+  color:#fff;
+  font-family: 'Nova Mono';
+}
+.box-left {
+  height:220px;
+  width: 400px;
+  display: block;
+  background-color: #6F84C1;
+  float:left;
+  margin-bottom:5px;
+}
+.box-right {
+  height:220px;
+  width: 400px;
+  display: block;
+  background-color: #51608A;
+  float:right;
+  z-index: 0; 
+  margin-bottom:5px;
+}
+.box-right::before {
+  content:"";
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #6F84C1;
+  float: left;
+  position: relative;
+  margin-top: 85px;
+  margin-left: 0px;  
+}
+.box-left-text {
+  overflow: auto;
+  height:200px;
+  padding: 10px;
+
+}
+.box-right-text {
+  overflow:auto;
+  height:200px;
+  padding: 10px;
+
+
+}
+.box-left-text::-webkit-scrollbar {
+    display: none;
+}
+.box-right-text::-webkit-scrollbar {
+    display: none;
+}

@@ -20,7 +20,7 @@ class Event {
 
   getTheEvent = async(id) => {
     try {
-        const theEvent = await this.event.get(`/event-details/${id}`)
+        const theEvent = await this.event.get(`/events/event-details/${id}`)
         return theEvent.data
     } catch (error) {
         console.log(error)

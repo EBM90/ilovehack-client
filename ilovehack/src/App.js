@@ -14,6 +14,10 @@ import Signup from './components/SignUp/Signup.jsx'
 import Navbar from './components/Navbar.jsx'
 import Create from './components/createEvent/Create.jsx'
 import Login from './components/LogIn/Log-in.jsx'
+import Error from './components/ErrorPage/Error.jsx'
+import FAQ from './components/FAQ/FAQ.jsx'
+import Onboarding from './components/Onboarding/Onboarding';
+import Onboarding2 from './components/Onboarding2/Onboarding2';
 
 
 function App() {
@@ -29,6 +33,10 @@ function App() {
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
       <AnonRoute exact path='/signup' component={Signup}/>
       <AnonRoute exact path='/login' component={Login}/>
+      <AnonRoute exact path='/error' component={Error}/>
+      <AnonRoute exact path='/FAQ' component={FAQ}/>
+      <AnonRoute exact path='/onboarding' component={Onboarding}/>
+      <AnonRoute exact path='/onboarding2' component={Onboarding2}/>
       </Switch> 
     </div>
     </AuthProvider>
