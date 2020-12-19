@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { withAuth } from "../lib/AuthProvider";
 
 class Navbar extends Component {
@@ -13,31 +12,30 @@ Toggle = () => {
   render() {
     const { user, logout, isLoggedin } = this.props;
     return (
-      <div className={this.state.toggle ?  '"topnav responsive"' : "topnav" } id="myTopnav">
+      <div className={this.state.toggle ?  "topnav responsive" : "topnav" } id="myTopnav">
       {isLoggedin ? (
                     <> 
-                    <Link to="/" > Home </Link>
-        <Link to="/myprofile" > My profile </Link>
-        <Link to="/matches" > Matches </Link>
+                    <a href="/"> Home </a>
+        <a href="/myprofile"> My profile </a>
+        <a href="/matches"> Matches </a>
         <div className="dropdown">
           <button className="dropbtn">Events
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-content">
-          <Link to="/fav-events" > My events </Link>
-          <Link to="/my-events" > Favourite events </Link>
-          <Link to="/all-events" > All events </Link>
+          <a href="/fav-events"> My events </a>
+          <a href="/my-events"> Favourite events </a>
+          <a href="/all-events"> All events </a>
           </div>
         </div>
+          <a href="#" onClick={logout}> Log out </a>
         </>) : (<> 
-          <Link to="/" > Home </Link>
-        <Link to="/login" > Log-in </Link>
-        <Link to="/signup" > Sign-up </Link>
+          <a href="/"> Home </a>
+        <a href="/login"> Log-in </a>
+        <a href="/signup"> Sign-up </a>
                       </>)}
-        <Link to="/faq" > FAQ </Link>
-        <button onClick={() => this.Toggle()} className={this.state.toggle ? 'nav-toggle nav-open' : "nav-toggle" } aria-label="toggle navigation">
-                <span className={this.state.toggle ?  'hamburger nav-open' : "hamburger" }>&#9776;</span>
-            </button>
+        <a href="/faq"> FAQ </a>
+        <a onClick={() => this.Toggle()} className="icon"> &#9776; </a>
       </div> 
     );
   }
