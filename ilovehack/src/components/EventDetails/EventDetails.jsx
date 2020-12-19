@@ -82,10 +82,11 @@ class EventDetail extends Component {
                     </div> 
                 : 
                 <>
-                {event.date ? 
+                {event.name ? 
                 <div>
                     <h1>{event.name}</h1>
-                     <p>{event.date.slice(0,16)} {event.location}</p>
+                     <p>{event.location}</p>
+                     <p>{event.description}</p>
                 </div>
                    
                 : null}  
