@@ -1,24 +1,49 @@
+/* GENERAL LAYOUT */
+
 * {
   margin: 0;
   padding: 0;
+}
+
+.App {
+  padding-top: 4rem;
 }
 
 
 /* NAVBAR STYLING */
 
  .topnav {
-    background-color: #333;
+    background-color: rgb(37, 37, 182);
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 0.3rem 1rem darkgray;
   }
   
   .topnav a {
-    float: left;
+    float: right;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 7px 16px;
     text-decoration: none;
     font-size: 17px;
+  }
+
+  .logout {
+    float: left;
+    color: #f2f2f2;
+    font-size: 17px;
+    padding: 7px 25px;
+  }
+
+  #logo-container {
+    float: left;
+    padding: 3px 16px;
+  }
+
+  .logo {
+    width: 2rem;
   }
   
   .topnav .icon {
@@ -26,7 +51,7 @@
   }
   
   .dropdown {
-    float: left;
+    float: right;
     overflow: hidden;
   }
   
@@ -35,10 +60,14 @@
     border: none;
     outline: none;
     color: white;
-    padding: 14px 16px;
+    padding: 7px 16px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
+  }
+
+  .dropbtn i {
+    margin-left: 3px;
   }
   
   .dropdown-content {
@@ -53,14 +82,14 @@
   .dropdown-content a {
     float: none;
     color: black;
-    padding: 12px 16px;
+    padding: 7px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
   }
   
-  .topnav a:hover, .dropdown:hover .dropbtn {
-    background-color: #555;
+  .topnav a:hover, .logout:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(23, 23, 151);
     color: white;
   }
   
@@ -81,10 +110,13 @@
       float: right;
       display: block;
     }
-  }
-  
-  @media screen and (max-width: 600px) {
-    .topnav.responsive {position: relative;}
+
+    .mobile-dropdown {
+      display:flex;
+      flex-direction: column;
+    }
+
+    .topnav.responsive {position: fixed;}
     .topnav.responsive a.icon {
       position: absolute;
       right: 0;
@@ -101,5 +133,9 @@
       display: block;
       width: 100%;
       text-align: left;
+    }
+
+    .dropdown-content {
+      display: block;
     }
   } 
