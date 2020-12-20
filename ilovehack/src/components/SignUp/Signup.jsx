@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
+import Test from "./Test";
+/* import Filler from "./Test";
+import ProgressBar from "./Test"; */
+import './SignUp.css';
 
 class Signup extends Component {
-  state = { 
+  constructor(props) {
+    super(props);
+  this.state = { 
     fullname: "", 
     password: "",
     repeatPassword: "",
@@ -20,22 +26,22 @@ class Signup extends Component {
       password: "",
       repeatPassword: "",
       birthdate: "",
-  },
-  arrayPlaceHolder: [
-      "Ej: Cher",
-      "Ej: Mark Zuckerberg",
-      "Ej: Mariano Rajoy",
-      "Ej: Donald Trump",
-      "Ej: Ellen Degeneres",
-      "Ej: Lisa Simpson",
-  ]
+    },
+    arrayPlaceHolder: [
+        "Ej: Cher",
+        "Ej: Mark Zuckerberg",
+        "Ej: Mariano Rajoy",
+        "Ej: Donald Trump",
+        "Ej: Ellen Degeneres",
+        "Ej: Lisa Simpson",
+    ],
   };
+}
 
   handleFormSubmit = event => {
     event.preventDefault();
     const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state;
-    this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
-    this.props.history.push(`/test`)
+    /* this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor }); */
   };
 
   handleChange = event => {
@@ -79,6 +85,10 @@ class Signup extends Component {
     });
   };
 
+  renderQuestions = () => {
+        return <Test />
+  }
+
   randomPlaceHolder = () => {
     const randomPhrase = Math.floor((Math.random()) * (this.state.arrayPlaceHolder.length));
     const objPic = this.state.arrayPlaceHolder[randomPhrase];
@@ -94,14 +104,14 @@ class Signup extends Component {
         <form className="" onSubmit={this.handleFormSubmit} >
           <div className="">
           <label>Full name:</label>
-          <input type="text" name="fullname" value={fullname} onChange={this.handleChange} placeholder={this.randomPlaceHolder()} required/>
+          <input type="text" name="fullname" value={fullname} onChange={this.handleChange} placeholder={this.randomPlaceHolder()} /*required*//>
           {this.state.isError.fullname.length > 0 && (
            <span className="">{this.state.isError.fullname}</span>
           )}
           </div>
           <div className="">
           <label>Email:</label>
-          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  required />
+          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  /*required*/ />
           {this.state.isError.email.length > 0 && (
           <span className="">{this.state.isError.email}</span>
           )}
@@ -109,21 +119,21 @@ class Signup extends Component {
           </div>
           <div className="">
           <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  required />
+          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
           {this.state.isError.password.length > 0 && (
           <span className="">{this.state.isError.password}</span>
           )}  
           </div>
           <div className="">
           <label>Repeat Password:</label>
-          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  required />
+          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
           {this.state.isError.repeatPassword.length > 0 && (
           <span className="">{this.state.isError.repeatPassword}</span>
           )} 
           </div>
           <div className="">
           <label>Birth date:</label>
-          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} required />
+          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} /*required*/ />
           {this.state.isError.birthdate.length > 0 && (
           <span className="">{this.state.isError.birthdate}</span>
           )} 
@@ -157,13 +167,12 @@ class Signup extends Component {
           </div>
           <div className="">
           <label>Description:</label>
-          <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" required></textarea>
+          <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" /*required*/></textarea>
           </div>
           <div className="">
-          <input className="" type="submit" value="take the test"  />
+         {this.renderQuestions()}
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
-          
           </form>
       </div>
     );
