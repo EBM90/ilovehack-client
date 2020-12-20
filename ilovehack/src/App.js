@@ -18,6 +18,7 @@ import Error from './components/ErrorPage/Error.jsx'
 import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
+import Test from "./components/SignUp/Test";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <PrivateRoute exact path='/add-event' component={Create}/>
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
       <AnonRoute exact path='/signup' component={Signup}/>
+      <AnonRoute exact path='/test' component={Test}/>
       <AnonRoute exact path='/login' component={Login}/>
       <AnonRoute exact path='/error' component={Error}/>
       <AnonRoute exact path='/FAQ' component={FAQ}/>

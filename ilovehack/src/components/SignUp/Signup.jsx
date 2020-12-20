@@ -35,6 +35,7 @@ class Signup extends Component {
     event.preventDefault();
     const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state;
     this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
+    this.props.history.push(`/test`)
   };
 
   handleChange = event => {
@@ -90,7 +91,7 @@ class Signup extends Component {
       <div className="">
         <h1 className="">Sign Up</h1>
 
-        <form className="" onSubmit={this.handleFormSubmit}>
+        <form className="" onSubmit={this.handleFormSubmit} >
           <div className="">
           <label>Full name:</label>
           <input type="text" name="fullname" value={fullname} onChange={this.handleChange} placeholder={this.randomPlaceHolder()} required/>
@@ -159,10 +160,11 @@ class Signup extends Component {
           <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" required></textarea>
           </div>
           <div className="">
-          <input className="" type="submit" value="Signup" onClick={this.errorMessage}/>
+          <input className="" type="submit" value="take the test"  />
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
-        </form>
+          
+          </form>
       </div>
     );
   }
