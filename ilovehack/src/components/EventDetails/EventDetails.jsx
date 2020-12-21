@@ -4,6 +4,7 @@ import eventservice from "../../lib/event-service";
 import profileservice from '../../lib/user-service';
 import Creator from './Creator'
 import Attending from './Attending'
+import './EventDetails.css'
 
 class EventDetail extends Component {
     state = {

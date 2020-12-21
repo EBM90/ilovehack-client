@@ -36,10 +36,12 @@ class Event extends Component {
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
                     {/* <h5>{event.date.slice(0,16)}</h5> */}
                     <h5>{event.location}</h5>
+                    <h5>{event.date ? event.date.slice(0,16) : ""}</h5>
                     <h5>Attending: </h5>
-                    {event.attending ? event.attending.map((attendee, index)=>{
+                    {event.attending && event.attending.length !== 0 ? event.attending.map((attendee, index)=>{
                         return <p key={index}><Link to={`/profile/${attendee._id}`}>{attendee.fullname}</Link></p>
-                    }): <p>Join this event!</p>}
+                    }): <p>Be the first to join this event!</p>}
+                   
                 </div>)
             }): null}
            </div>

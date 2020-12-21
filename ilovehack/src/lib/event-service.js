@@ -27,9 +27,9 @@ class Event {
     }
   }
 
-  addEvent = async({ name, creator, description, location, cohort}) =>{
+  addEvent = async({ name, creator, description, date, location, isAttending, cohort, isPublic}) =>{
     try {
-      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, description, location, cohort})
+      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, description, date, location, isAttending, cohort, isPublic})
       return theEvent.data
     } catch (error) {
       console.log(error)
