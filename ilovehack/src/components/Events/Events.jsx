@@ -13,7 +13,7 @@ class Event extends Component {
         try {
             const theEvents = await eventservice.getAllEvents()
             this.setState({
-                events: theEvents
+                events: theEvents,
             })
             console.log(theEvents)
         } catch (error) {
@@ -23,6 +23,11 @@ class Event extends Component {
 
     componentDidMount(){
         this.getEvents()
+    }
+
+    reverseString(str) {
+        let strArr = str.split('-')
+        return strArr.reverse().join('-')
     }
 
     render(){
@@ -37,7 +42,7 @@ class Event extends Component {
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
                     {/* <h5>{event.date.slice(0,16)}</h5> */}
                     <h5>{event.location}</h5>
-                    <h5>{event.date ? event.date.slice(0,16) : ""}</h5>
+                    <h5>{event.date ? this.reverseString(event.date.slice(0,10)) : ""}</h5>
                     <h5>Attending: </h5>
                     {event.attending && event.attending.length !== 0 ? event.attending.map((attendee, index)=>{
                         return <p key={index}><Link to={`/profile/${attendee._id}`}>{attendee.fullname}</Link></p>

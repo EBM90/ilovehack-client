@@ -1,6 +1,7 @@
 import { Component } from "react";
 import React from "react";
 import eventservice from "../lib/event-service.js";
+import {Link} from 'react-router-dom'
 
 class Home extends Component {
     state = {
@@ -24,9 +25,28 @@ class Home extends Component {
     }
 
     render(){
-
+        const {events} = this.state
         return(
-            <h1>Hello World</h1>
+            <div className='main'>
+                <h1>I 'insert logo here' hack</h1>
+                <div>
+                    <h3>Go to your homepage and see if you have any notifications</h3>
+                    <button><Link to={'/login'}>Log in</Link></button>
+                </div>
+
+                <div>
+                    <h3>Create an account and see who you're most compatible with</h3>
+                    <button><Link to={'/signup'}>Sign up</Link></button>
+                </div>
+
+                <div>
+                    <h3>Go to our events page and see join in on the fun</h3>
+                    {events.length !== 0 ? events.map((event, index) =>{
+                        return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
+                    }) : null}
+                </div>
+            </div>
+            
         )
     }
 }

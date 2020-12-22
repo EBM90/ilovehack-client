@@ -40,23 +40,23 @@ class Home extends Component {
                     <div className="matches">
                         <h3>Matches</h3>
                         {user.matches && user.matches.length !== 0 ? 
-                        user.matches.map((person)=>{
-                            <h6>{person.fullname}</h6>
+                        user.matches.map((person, index)=>{
+                            <h6 key={index}>{person.fullname}</h6>
                         }): <p>You don't have any matches yet. Check again tomorrow!</p>}
                     </div>
                     <div className="events">
                         <h3>My events:</h3>
-                        {events.map((event)=>{
+                        {events.map((event, index)=>{
                             if(event.creator && event.creator === user._id){
-                                return <h5><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
+                                return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
                             }
                         })}
                         <h3>Events I'm attending</h3>
-                        {events.map((event)=>{
-                            return <div>
-                            {event.attending ? event.attending.map((attendee)=>{
+                        {events.map((event, index)=>{
+                            return <div key={index}>
+                            {event.attending ? event.attending.map((attendee, index)=>{
                                 if(attendee._id === user._id){
-                                    return <h5><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
+                                    return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
                                 }
                             }) :null}
                             </div>
