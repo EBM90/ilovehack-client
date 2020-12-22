@@ -2,6 +2,8 @@ import { Component } from "react";
 import React from "react";
 import userservice from "../../lib/user-service";
 
+
+
 class Home extends Component {
     state = {
         user: {}
@@ -26,7 +28,10 @@ class Home extends Component {
     render(){
         const {user} = this.state
         return(
+            <div>
             <h1>Hello World</h1>
+            
+            </div>
         )
     }
 }

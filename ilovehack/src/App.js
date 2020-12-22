@@ -13,6 +13,7 @@ import Error from './components/ErrorPage/Error.jsx'
 import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
+import ControlledCarousel from './components/Prueba/ControlledCarousel';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route exact path='/FAQ' component={FAQ}/>
       <Route exact path='/onboarding' component={Onboarding}/>
       <Route exact path='/onboarding2' component={Onboarding2}/>
+      <Route exact path='/prueba' component={ControlledCarousel}/>
      </Switch>
     </div>
   );
