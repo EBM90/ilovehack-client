@@ -28,7 +28,7 @@ class Home extends Component {
         const {events} = this.state
         return(
             <div className='main'>
-                <h1>I 'insert logo here' hack</h1>
+                <h1>I <img src='./images/pixel-heart.png' alt='' style={{width: 50}}/> hack</h1>
                 <div>
                     <h3>Go to your homepage and see if you have any notifications</h3>
                     <button><Link to={'/login'}>Log in</Link></button>
@@ -40,7 +40,7 @@ class Home extends Component {
                 </div>
 
                 <div>
-                    <h3>Go to our events page and see join in on the fun</h3>
+                    <h3>Go to our events page and join in on the fun</h3>
                     {events.length !== 0 ? events.map((event, index) =>{
                         return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
                     }) : null}

@@ -109,6 +109,7 @@ handleFileUpload = async (e) => {
             isPublic: false, 
             cohort: '',
           });
+          this.props.history.push('/events')
         } catch (error) {
           console.log(error, "the error originated here");
         }
