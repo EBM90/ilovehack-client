@@ -7,7 +7,8 @@ class Create extends Component {
     state ={
         name: '', 
         creator: '', 
-        description: '',  
+        description: '',
+        imgPath: '',  
         location: '',
         date: '',
         isAttending: false, 
@@ -63,17 +64,37 @@ class Create extends Component {
   ToggleAttend = () => {
     this.setState({isAttending:!this.state.isAttending})
 }
+handleFileUpload = async (e) => {
+  console.log("the file to be uploaded is: ", e.target.files[0]);
+
+  // creamos un nuevo objeto FormData
+  const uploadData = new FormData();
+
+  // imageUrl (este nombre tiene que ser igual que en el modelo, ya que usaremos req.body como argumento del método .create() cuando creemos una nueva movie en la ruta POST '/api/movies/create')
+  uploadData.append("imgPath", e.target.files[0]);
+
+  try {
+    const res = await eventservice.handleUpload(uploadData);
+
+    console.log("response is", res);
+
+    this.setState({ imgPath: res.secure_url });
+  } catch (error) {
+    console.log("Error while uploading the file: ", error);
+  }
+};
     
       handleFormSubmit = async (event) => {
         try {
           event.preventDefault();
-            const {name, description, location, date, isAttending, isPublic, cohort} = this.state
+            const {name, description, location, imgPath, date, isAttending, isPublic, cohort} = this.state
             const creator = this.props.user._id
           await eventservice.addEvent({ name, 
           creator, 
           description,  
           location, 
           date,
+          imgPath,
           isAttending,
           isPublic, 
           cohort });
@@ -82,6 +103,7 @@ class Create extends Component {
             creator: '', 
             description: '', 
             location: '',
+            imgPath:'',
             date: '', 
             isAttending: false,
             isPublic: false, 
@@ -92,11 +114,15 @@ class Create extends Component {
         }
       };
     render() {
-        const {name, description, date, location, isAttending, cohort, isPublic} = this.state
+        const {name, description, imgPath, date, location, isAttending, cohort, isPublic} = this.state
         return (
             <div className='form'>
                     <form onSubmit={this.handleFormSubmit}>
                     <div className="form_part">
+                        <div>
+                          <img src={imgPath} alt="" style={{ width: 100 }} />
+                        </div>
+                    <input type="file" onChange={(e) => this.handleFileUpload(e)} />
                     <label>Name:</label>
                     <input
                             type="text"
@@ -108,8 +134,8 @@ class Create extends Component {
                     <span className="">{this.state.isError.name}</span>
                     )}
                   <label>Description:</label>
-                    <input
-                            type="text"
+                    <textarea
+                            type="textarea"
                             name="description"
                             value={description}
                             onChange={this.handleChange}

@@ -2,14 +2,15 @@ import { Component } from "react";
 import React from "react";
 import eventservice from "../../lib/event-service";
 import profileservice from '../../lib/user-service';
-import Creator from './Creator'
-import Attending from './Attending'
 import './EventDetails.css'
 
 class EventDetail extends Component {
     state = {
         event: {},
         user: {},
+        name: '',
+        description:'',
+        imgPath: '',
     }
 
     getEvent = async () =>{
@@ -19,7 +20,10 @@ class EventDetail extends Component {
             const theUser = await profileservice.getUser()
             this.setState({
                 event: theEvent,
-                user: theUser
+                user: theUser,
+                name: theEvent.name,
+                description:theEvent.description,
+                imgPath: theEvent.imgPath,
             })
 
         } catch (error) {
@@ -30,6 +34,26 @@ class EventDetail extends Component {
     componentDidMount(){
         this.getEvent()
     }
+
+    handleFileUpload = async (e) => {
+        console.log("the file to be uploaded is: ", e.target.files[0]);
+    
+        // creamos un nuevo objeto FormData
+        const uploadData = new FormData();
+    
+        // imageUrl (este nombre tiene que ser igual que en el modelo, ya que usaremos req.body como argumento del método .create() cuando creemos una nueva movie en la ruta POST '/api/movies/create')
+        uploadData.append("imgPath", e.target.files[0]);
+    
+        try {
+          const res = await eventservice.handleUpload(uploadData);
+    
+          console.log("response is", res);
+    
+          this.setState({ imgPath: res.secure_url });
+        } catch (error) {
+          console.log("Error while uploading the file: ", error);
+        }
+      };
 
     joinThisEvent= async(user_id, event_id) =>{
         try {
@@ -43,13 +67,19 @@ class EventDetail extends Component {
 
     //create components for event if creator and else
     render(){
-        const {event, user} = this.state
+        const {event, user, imgPath} = this.state
         return(
             <div className='main'>
                 {event.creator && event.creator === user._id ? 
                     <div>
                     <form onSubmit={this.handleFormSubmit}>
                     <div className="form_part">
+                    <div>
+                    <img src={imgPath} alt="" style={{ width: 100 }} />
+                    </div>
+
+                <input type="file" onChange={(e) => this.handleFileUpload(e)} />
+
                     <label>Name:</label>
                     <input
                             type="text"
@@ -84,11 +114,13 @@ class EventDetail extends Component {
                 : 
                 <>
                 {event.name ? 
-                <div>
-                    <h1>{event.name}</h1>
-                     <p>{event.location}</p>
-                     <p>{event.description}</p>
-                </div>
+                    <div>
+                        <img src={event.imgPath} alt='' style={{width: 100}}/>
+                        <h1>{event.name}</h1>
+                        <p>{event.date}</p>
+                        <p>{event.location}</p>
+                        <p>{event.description}</p>
+                    </div>
                    
                 : null}  
                 </>

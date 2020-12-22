@@ -27,14 +27,25 @@ class Event {
     }
   }
 
-  addEvent = async({ name, creator, description, date, location, isAttending, cohort, isPublic}) =>{
+  addEvent = async({ name, creator, imgPath, description, date, location, isAttending, cohort, isPublic}) =>{
     try {
-      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, description, date, location, isAttending, cohort, isPublic})
+      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, imgPath, description, date, location, isAttending, cohort, isPublic})
       return theEvent.data
     } catch (error) {
       console.log(error)
     }
   }
+
+  handleUpload = async (theFile) => {
+    console.log("file in service: ", theFile);
+
+    try {
+      const res = await this.event.post("/events/uploadpicture", theFile);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   editEvent = async({id, name, date, location }) =>{
     try {

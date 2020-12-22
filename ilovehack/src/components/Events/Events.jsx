@@ -32,7 +32,8 @@ class Event extends Component {
             <h1>All the events</h1>
             <Link to='/add-event' className='create'>Create an event</Link>
             {events && events.length !== 0 ? events.map((event, index) =>{
-                return (<div className='event' key={index}>
+                return (<div className='event' key={index} style={{backgroundImage: `url(${event.imgPath})` }}>
+                    {/* <img src={event.imgPath} alt="" style={{width: 50}} /> */}
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
                     {/* <h5>{event.date.slice(0,16)}</h5> */}
                     <h5>{event.location}</h5>
