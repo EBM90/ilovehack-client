@@ -64,6 +64,7 @@ class Home extends Component {
           event.preventDefault();
           const {fullname, description, email, imgPath} = this.state
           await userservice.editUser({fullname, description, email, imgPath})
+          this.props.history.push('/home')
         } catch (error) {
           console.log(error, "the error originated here");
         }
