@@ -70,7 +70,7 @@ class Home extends Component {
       };
 
     render(){
-        const {user, fullname, description, email, imgPath} = this.state
+        const {fullname, description, email, imgPath} = this.state
        
         return(
             
@@ -96,7 +96,6 @@ class Home extends Component {
                     type="text"
                     name="email"
                     value={email}
-                    placeholder={email}
                     onChange={(e) => this.handleChange(e)}
                   />
                 </div>
@@ -105,9 +104,7 @@ class Home extends Component {
                   <textarea
                     type="text"
                     name="description"
-                    // !
                     value={description}
-                    placeholder={description}
                     onChange={(e) => this.handleChange(e)}
                   />
                 </div>

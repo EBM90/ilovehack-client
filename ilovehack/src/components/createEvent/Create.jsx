@@ -11,9 +11,17 @@ class Create extends Component {
         imgPath: '',  
         location: '',
         date: '',
+        start: '',
+        finish: '',
+        hours: [],
+        minutes: [],
         isAttending: false, 
         isPublic: false, 
         cohort: '',
+        hourStart: '',
+        minStart: '',
+        hourFinish: '',
+        minFinish: '',
         isError: {
           name: "",
           description: "",
@@ -22,6 +30,34 @@ class Create extends Component {
         },
     }
 
+    setTime = () => {
+      let setHours = []
+      let setMinutes = []
+      for(let i = 0; i <= 23; i++){
+        if(i <10){
+          setHours.push('0'+ i)
+        } else {
+          setHours.push(i.toString())
+        }
+      }
+
+      for(let i = 0; i <= 59; i++){
+        if(i <10){
+          setMinutes.push('0'+ i)
+        } else {
+          setMinutes.push(i.toString())
+        }
+      }
+
+      this.setState({
+        hours: setHours,
+        minutes: setMinutes
+      })
+    }
+
+    componentDidMount = () =>{
+      this.setTime()
+    }
     handleChange = event => {
       const { name, value } = event.target;
     
@@ -58,7 +94,7 @@ class Create extends Component {
         [name]: value 
       });
     };
-    TogglePublic = () => {
+  TogglePublic = () => {
       this.setState({isPublic:!this.state.isPublic})
   }
   ToggleAttend = () => {
@@ -87,13 +123,15 @@ handleFileUpload = async (e) => {
       handleFormSubmit = async (event) => {
         try {
           event.preventDefault();
-            const {name, description, location, imgPath, date, isAttending, isPublic, cohort} = this.state
+            const {name, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             const creator = this.props.user._id
+            const time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
           await eventservice.addEvent({ name, 
           creator, 
           description,  
           location, 
           date,
+          time,
           imgPath,
           isAttending,
           isPublic, 
@@ -104,18 +142,21 @@ handleFileUpload = async (e) => {
             description: '', 
             location: '',
             imgPath:'',
-            date: '', 
+            date: '',
+            hourChosen: '',
+            minChosen: '', 
             isAttending: false,
             isPublic: false, 
             cohort: '',
           });
-          this.props.history.push('/events')
+          this.props.history.push('/all-events')
         } catch (error) {
           console.log(error, "the error originated here");
         }
       };
     render() {
-        const {name, description, imgPath, date, location, isAttending, cohort, isPublic} = this.state
+        const {name, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
+        
         return (
             <div className='form'>
                     <form onSubmit={this.handleFormSubmit}>
@@ -165,6 +206,36 @@ handleFileUpload = async (e) => {
                   {this.state.isError.date.length > 0 && (
           <span className="">{this.state.isError.date}</span>
           )}
+
+          <label>Start:</label>
+          <select name="hourStart" value={hourStart} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            {hours ? hours.map((hour)=>{
+              return <option value={hour}>{hour}</option>
+            }): null}
+          </select>
+
+          <select name="minStart" value={minStart} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            {minutes ? minutes.map((min)=>{
+              return <option value={min}>{min}</option>
+            }): null}
+          </select>
+
+          <label>Finish:</label>
+          <select name="hourFinish" value={hourFinish} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            {hours ? hours.map((hour)=>{
+              return <option value={hour}>{hour}</option>
+            }): null}
+          </select>
+
+          <select name="minFinish" value={minFinish} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            {minutes ? minutes.map((min)=>{
+              return <option value={min}>{min}</option>
+            }): null}
+          </select>
           <label>Cohort:</label>
           <select name="cohort" value={cohort} onChange={ e => this.handleChange(e)}>
             <option defaultValue=""> Choose one </option>

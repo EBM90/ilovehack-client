@@ -97,6 +97,7 @@ class EventDetail extends Component {
         try {
             console.log(user_id, event_id)
             await eventservice.joinEvent(user_id, event_id)
+            this.props.history.push('/home')
         } catch (error) {
             console.log(error)
         }

@@ -45,9 +45,11 @@ class Event extends Component {
                 return (<div className='event' key={index} style={{backgroundImage: `url(${event.imgPath})`}}>
                     {/* <img src={event.imgPath} alt="" style={{width: 50}} /> */}
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
+                    <h5>{event.description}</h5>
                     {/* <h5>{event.date.slice(0,16)}</h5> */}
                     <h5>{event.location}</h5>
                     <h5>{event.date ? this.reverseString(event.date.slice(0,10)) : ""}</h5>
+                    <h5>{event.time ? event.time : null}</h5>
                     <h5>Attending: </h5>
                     {event.attending && event.attending.length !== 0 ? event.attending.map((attendee, index)=>{
                         return <p key={index}><Link to={`/profile/${attendee._id}`}>{attendee.fullname}</Link></p>
