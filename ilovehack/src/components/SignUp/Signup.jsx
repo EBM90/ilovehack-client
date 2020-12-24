@@ -20,6 +20,7 @@ class Signup extends Component {
     answers: [],
     isHorny: false,
     searchFor: "",
+    testIsShowing: false,
     isError: {
       fullname: "",
       email: "",
@@ -41,7 +42,7 @@ class Signup extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state;
-    /* this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor }); */
+     this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
   };
 
   handleChange = event => {
@@ -72,9 +73,9 @@ class Signup extends Component {
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); 
                 var yyyy = today.getFullYear() - 18;
-                today = mm + dd + yyyy;
+                today = yyyy + '-' + mm + '-' + dd ;
                 isError.birthdate =
-                   value < today ? "You have to be 18 or older to find love here :)" : "";
+                   value > today ? "You have to be 18 or older to find love here :)" : "";
             break;
             default:
                 break;
@@ -86,7 +87,7 @@ class Signup extends Component {
   };
 
   renderQuestions = () => {
-        return <Test />
+    return <Test signupInfo={this.state}/>
   }
 
   randomPlaceHolder = () => {
@@ -95,8 +96,15 @@ class Signup extends Component {
     return  objPic 
  }
 
+ hideForm = () => {
+   if(!this.state.testIsShowing){
+    this.setState({testIsShowing: true });
+    }
+}
+
   render() {
     const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
+    if(!this.state.testIsShowing){
     return (
       <div className="">
         <h1 className="">Sign Up</h1>
@@ -104,7 +112,7 @@ class Signup extends Component {
         <form className="" onSubmit={this.handleFormSubmit} >
           <div className="">
           <label>Full name:</label>
-          <input type="text" name="fullname" value={fullname} onChange={this.handleChange} placeholder={this.randomPlaceHolder()} /*required*//>
+          <input type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/>
           {this.state.isError.fullname.length > 0 && (
            <span className="">{this.state.isError.fullname}</span>
           )}
@@ -170,12 +178,13 @@ class Signup extends Component {
           <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" /*required*/></textarea>
           </div>
           <div className="">
-         {this.renderQuestions()}
+          <button onClick={() => this.hideForm()}>Take the test</button>
+          {/* <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button> */}
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
           </form>
       </div>
-    );
+    )} else { return this.renderQuestions()};
   }
 }
 

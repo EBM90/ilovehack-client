@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './SignUp.css';
 import { withAuth } from "../../lib/AuthProvider";
 
@@ -18,19 +18,17 @@ class Test extends Component {
                 {question: "9", answers: ["x", "x", "x"], inputType: "radio"},
                 {question: "10", answers: ["x", "x", "x"], inputType: "radio"},
             ],
-            userAnswers: [],
+            answers: [],
             percentage: 0,
             testIsShowing: false,
+            number: 0,
+            signupInfo: props.signupInfo,
         }
     }
 
-    /* componentDidMount() {
-        const {questions, answers} = this.state;
-        this.setState({
-            questions: questions[0].question,
-            answers: questions[0].answers[0],
-        });
-    } */
+    componentDidMount() {
+        console.log(this.state)
+    }
 
     toggleForm = () => {
         if(!this.state.testIsShowing){
@@ -48,60 +46,51 @@ class Test extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         const { answers } = this.state;
-        /* this.props.signup({ answers }); */
+        const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state.signupInfo;
+        this.props.signup({ answers, fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
+        console.log(this.state)
       };
     
     addPercent = (event) => {
+        const percPerQuestion = 100 / this.state.questions.length
         const percentage = this.state.percentage;
-        this.setState({percentage: percentage + 10});
-        console.log(percentage, ' está')
+        this.setState({percentage: percentage + percPerQuestion});
     }
 
-    hideQuestions = () => {
-
-    }
-
-    showQuestions = () => {
-        
-        if(this.state.testIsShowing){
-            return (
-                <div>            
-                <ProgressBar percentage={this.state.percentage} />
-                    <form onSubmit={this.handleFormSubmit}>
-                        <label>preguntas</label>
-                        { this.state.questions ? this.state.questions.map((question, index) => {
-                        return (
-                            <div className="" key={index}>
-                                <div className="">
-                                <label for={index}>Question: {question.question}</label>
-                                { this.state.questions[index].answers ? this.state.questions[index].answers.map((answer, index) => {
-                                    console.log(answer, 'el index')
-                                    return (
-                                        <div key={index}>
-                                        <label for={index}>Answer: {answer}</label>
-                                        <input id={answer} type="radio" name={index} value={answer} />
-                                        </div>
-                                    )
-                                }) : <p>There are no answers yet!</p>}
-                                
-                                </div>
-                                <button className="" onClick={() => this.addPercent()} >Next question</button>
-                            </div>
-                        )}) : <p>There are no questions yet!</p>} 
-                                <input className="" type="submit" value="Sign up" />
-                    </form>
-                </div>
-            )
+    nextQuestion = () => {
+        const number = this.state.number;
+        const i = 0;
+        if(i < this.state.questions.length) {
+            return this.setState({number: number + 1});
+        } else if (i === this.state.questions.length ){
+            return i = 0;
         }
     }
 
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+        };
+
     render() {
+        const {questions, number} = this.state;
         return (
             <div>
-                <hr />
-                <button onClick={() => this.toggleForm()}> Take the test </button>
-                { this.showQuestions() }
-        </div>
+            <ProgressBar percentage={this.state.percentage} />
+            <form onSubmit={this.handleFormSubmit}>
+                <h3>{questions[number].question}</h3>
+                { questions[number].answers ? questions[number].answers.map((answer, index) => {
+                    return (
+                        <div key={index}>
+                        <label for={index}>Answer: {answer}</label>
+                        <input onChange={e => this.handleChange(e)} id={index} type="radio" name={answer} value={answer} />
+                        </div>
+                        )
+                        }) : <p>There are no answers yet!</p>}
+                        <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button>
+            </form>
+            <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-hide' : "button-submit-signup-show" } onClick={() => {this.nextQuestion(); this.addPercent()}}>next</button>
+            </div>
         )
     }
 }

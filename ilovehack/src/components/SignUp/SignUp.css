@@ -16,3 +16,11 @@
     border-radius: inherit;
     transition: width .2s ease-in;
 }
+
+.button-submit-signup-show {
+    display: block;
+}
+
+.button-submit-signup-hide {
+    display: none;
+}

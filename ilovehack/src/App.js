@@ -1,21 +1,21 @@
 import './App.css';
 
-import {Switch} from 'react-router-dom'
-import AuthProvider from './lib/AuthProvider'
+import {Switch} from 'react-router-dom';
+import AuthProvider from './lib/AuthProvider';
 import AnonRoute from "./components/componentRoutes/AnonRoute";
 import PrivateRoute from "./components/componentRoutes/PrivateRoute";
 
 
-import Home from './pages/landing.jsx'
-import Profile from './components/Profile/Profile.jsx'
-import Events from './components/Events/Events.jsx'
-import EventDetail from './components/EventDetails/EventDetails.jsx'
-import Signup from './components/SignUp/Signup.jsx'
-import Navbar from './components/Navbar.jsx'
-import Create from './components/createEvent/Create.jsx'
-import Login from './components/LogIn/Log-in.jsx'
-import Error from './components/ErrorPage/Error.jsx'
-import FAQ from './components/FAQ/FAQ.jsx'
+import Home from './pages/landing.jsx';
+import Profile from './components/Profile/Profile.jsx';
+import Events from './components/Events/Events.jsx';
+import EventDetail from './components/EventDetails/EventDetails.jsx';
+import Signup from './components/SignUp/Signup.jsx';
+import Navbar from './components/Navbar.jsx';
+import Create from './components/createEvent/Create.jsx';
+import Login from './components/LogIn/Log-in.jsx';
+import Error from './components/ErrorPage/Error.jsx';
+import FAQ from './components/FAQ/FAQ.jsx';
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/SignUp/Test";
