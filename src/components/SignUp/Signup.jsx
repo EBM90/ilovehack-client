@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
 import Test from "./Test";
-/* import Filler from "./Test";
-import ProgressBar from "./Test"; */
 import './SignUp.css';
 
 class Signup extends Component {
@@ -106,10 +104,10 @@ class Signup extends Component {
     const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
     if(!this.state.testIsShowing){
     return (
-      <div className="">
+      <div className="signup-container">
         <h1 className="">Sign Up</h1>
 
-        <form className="" onSubmit={this.handleFormSubmit} >
+        <form className="form-container" onSubmit={this.handleFormSubmit} >
           <div className="">
           <label>Full name:</label>
           <input type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/>

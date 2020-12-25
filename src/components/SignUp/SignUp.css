@@ -24,3 +24,23 @@
 .button-submit-signup-hide {
     display: none;
 }
+
+.test-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* SIGNUP STYLING */
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

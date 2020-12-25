@@ -1,6 +1,7 @@
+import { withAuth } from "../../lib/AuthProvider";
 import React, { Component } from 'react';
 import './SignUp.css';
-import { withAuth } from "../../lib/AuthProvider";
+import Signup from "./Signup";
 
 class Test extends Component {
     constructor(props) {
@@ -8,15 +9,15 @@ class Test extends Component {
         this.state = {
             questions: [
                 {question: "1", answers: ["x1", "x2", "x3"], inputType: "radio"},
-                {question: "hola ke tal", answers: ["ok", "mal", "y a ti ke"], inputType: "radio"},
-                {question: "3", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "4", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "5", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "6", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "7", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "8", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "9", answers: ["x", "x", "x"], inputType: "radio"},
-                {question: "10", answers: ["x", "x", "x"], inputType: "radio"},
+                {question: "2", answers: ["ok", "mal", "y a ti ke"], inputType: "radio"},
+                {question: "3", answers: ["a", "b", "c"], inputType: "radio"},
+                {question: "4", answers: ["d", "e", "f"], inputType: "radio"},
+                {question: "5", answers: ["g", "h", "i"], inputType: "radio"},
+                {question: "6", answers: ["j", "k", "l"], inputType: "radio"},
+                {question: "7", answers: ["m", "n", "ñ"], inputType: "radio"},
+                {question: "8", answers: ["o", "p", "q"], inputType: "radio"},
+                {question: "9", answers: ["r", "s", "t"], inputType: "radio"},
+                {question: "10", answers: ["u", "v", "w"], inputType: "radio"},
             ],
             answers: [],
             percentage: 0,
@@ -57,6 +58,12 @@ class Test extends Component {
         this.setState({percentage: percentage + percPerQuestion});
     }
 
+    deletePercent = (event) => {
+        const percPerQuestion = 100 / this.state.questions.length
+        const percentage = this.state.percentage;
+        this.setState({percentage: percentage - percPerQuestion});
+    }
+
     nextQuestion = () => {
         const number = this.state.number;
         let i = 0;
@@ -64,6 +71,16 @@ class Test extends Component {
             return this.setState({number: number + 1});
         } else if (i === this.state.questions.length ){
             return i = 0;
+        }
+    }
+
+    prevQuestion = () => {
+        const number = this.state.number;
+        let i = 0;
+        if(i < this.state.questions.length) {
+            return this.setState({number: number - 1});
+        } else if (i === 0 ){
+            return this.props.history.push(`/signup`);
         }
     }
 
@@ -75,7 +92,7 @@ class Test extends Component {
     render() {
         const {questions, number} = this.state;
         return (
-            <div>
+            <div className="test-container">
             <ProgressBar percentage={this.state.percentage} />
             <form onSubmit={this.handleFormSubmit}>
                 <h3>{questions[number].question}</h3>
@@ -89,7 +106,8 @@ class Test extends Component {
                         }) : <p>There are no answers yet!</p>}
                         <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button>
             </form>
-            <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-hide' : "button-submit-signup-show" } onClick={() => {this.nextQuestion(); this.addPercent()}}>next</button>
+            <button className='' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Previous</button>
+            <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-hide' : "button-submit-signup-show" } onClick={() => {this.nextQuestion(); this.addPercent()}}>Next</button>
             </div>
         )
     }
