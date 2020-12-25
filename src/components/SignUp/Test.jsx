@@ -59,7 +59,7 @@ class Test extends Component {
 
     nextQuestion = () => {
         const number = this.state.number;
-        const i = 0;
+        let i = 0;
         if(i < this.state.questions.length) {
             return this.setState({number: number + 1});
         } else if (i === this.state.questions.length ){
