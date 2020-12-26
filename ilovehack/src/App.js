@@ -1,12 +1,12 @@
 import './App.css';
 
-import {Switch} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import AuthProvider from './lib/AuthProvider'
 import AnonRoute from "./components/componentRoutes/AnonRoute";
 import PrivateRoute from "./components/componentRoutes/PrivateRoute";
 
 
-import Home from './pages/landing.jsx'
+import Home from './components/Home/Home.jsx'
 import Profile from './components/Profile/Profile.jsx'
 import Events from './components/Events/Events.jsx'
 import EventDetail from './components/EventDetails/EventDetails.jsx'
@@ -19,7 +19,8 @@ import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/SignUp/Test";
-import UpdateUser from "./components/UpdateUser/Update";
+import landing from './pages/landing.jsx'
+
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
     <Navbar />
     <div className="App">
      <Switch>
-      <AnonRoute exact path='/' component={Home} /> 
+      <AnonRoute exact path='/' component={landing} /> 
+      <PrivateRoute exact path='/home' component={Home} />
       <PrivateRoute exact path='/myprofile' component={Profile}/>
       <PrivateRoute exact path='/all-events' component={Events}/>
       <PrivateRoute exact path='/add-event' component={Create}/>
@@ -37,7 +39,7 @@ function App() {
       <AnonRoute exact path='/test' component={Test}/>
       <AnonRoute exact path='/login' component={Login}/>
       <AnonRoute exact path='/error' component={Error}/>
-      <AnonRoute exact path='/FAQ' component={FAQ}/>
+      <Route exact path='/FAQ' component={FAQ}/>
       <AnonRoute exact path='/onboarding' component={Onboarding}/>
       <AnonRoute exact path='/onboarding2' component={Onboarding2}/>
       </Switch> 

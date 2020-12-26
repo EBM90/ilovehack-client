@@ -4,8 +4,6 @@ import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
 import { Link } from "react-router-dom";
 
-
-
 class Home extends Component {
     state = {
         user: {},
@@ -43,7 +41,7 @@ class Home extends Component {
                         <h3>Matches</h3>
                         {user.matches && user.matches.length !== 0 ? 
                         user.matches.map((person, index)=>{
-                            return <h6 key={index}>{person.fullname}</h6>
+                            <h6 key={index}>{person.fullname}</h6>
                         }): <p>You don't have any matches yet. Check again tomorrow!</p>}
                     </div>
                     <div className="events">

@@ -27,18 +27,29 @@ class Event {
     }
   }
 
-  addEvent = async({ name, creator, description, location, cohort}) =>{
+  addEvent = async({ name, creator, imgPath, description, date, time, location, isAttending, cohort, isPublic}) =>{
     try {
-      const theEvent = await this.event.post(`/add-event`,{ name, creator, description, location, cohort})
+      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, imgPath, description, date, time, location, isAttending, cohort, isPublic})
       return theEvent.data
     } catch (error) {
       console.log(error)
     }
   }
 
+  handleUpload = async (theFile) => {
+    console.log("file in service: ", theFile);
+
+    try {
+      const res = await this.event.post("/events/uploadpicture", theFile);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   editEvent = async({id, name, date, location }) =>{
     try {
-      const theEvent = await this.event.put(`/edit/${id}`, name, date, location)
+      const theEvent = await this.event.put(`/events/edit/${id}`, name, date, location)
       return theEvent.data
     } catch (error) {
       console.log(error)
@@ -48,7 +59,7 @@ class Event {
   joinEvent = async(user_id, event_id ) =>{
     try {
       console.log(user_id, event_id)
-      const theEvent = await this.event.post(`/fav`, {user_id, event_id})
+      const theEvent = await this.event.post(`/events/fav`, {user_id, event_id})
       return theEvent.data
     } catch (error) {
       console.log(error)

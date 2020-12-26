@@ -13,9 +13,14 @@ class Event extends Component {
         try {
             const theEvents = await eventservice.getAllEvents()
             this.setState({
-                events: theEvents
+                events: theEvents.sort((a,b)=>{
+                    if(a.date < b.date){
+                        return -1
+                    } else {
+                        return 1
+                    }
+                }),
             })
-            console.log(theEvents)
         } catch (error) {
             console.log(error)
         }
@@ -25,6 +30,11 @@ class Event extends Component {
         this.getEvents()
     }
 
+    reverseString(str) {
+        let strArr = str.split('-')
+        return strArr.reverse().join('-')
+    }
+
     render(){
         const {events} = this.state
         return(
@@ -32,16 +42,19 @@ class Event extends Component {
             <h1>All the events</h1>
             <Link to='/add-event' className='create'>Create an event</Link>
             {events && events.length !== 0 ? events.map((event, index) =>{
-                return (<div className='event' key={index}>
+                return (<div className='event' key={index} style={{backgroundImage: `url(${event.imgPath})`}}>
+                    {/* <img src={event.imgPath} alt="" style={{width: 50}} /> */}
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
+                    <h5>{event.description}</h5>
                     {/* <h5>{event.date.slice(0,16)}</h5> */}
                     <h5>{event.location}</h5>
+                    <h5>{event.date ? this.reverseString(event.date.slice(0,10)) : ""}</h5>
+                    <h5>{event.time ? event.time : null}</h5>
                     <h5>Attending: </h5>
-                    {event.attending ? event.attending.map((attendee, index)=>{
+                    {event.attending && event.attending.length !== 0 ? event.attending.map((attendee, index)=>{
                         return <p key={index}><Link to={`/profile/${attendee._id}`}>{attendee.fullname}</Link></p>
-                    }): <p>Join this event!</p>}
-                    <h5>{event.date ? event.date.slice(0,16) : ""}</h5>
-                    <h5>{event.location}</h5>
+                    }): <p>Be the first to join this event!</p>}
+                   
                 </div>)
             }): null}
            </div>
