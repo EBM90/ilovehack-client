@@ -35,16 +35,6 @@ Your heart is a code, let them hack you.
 
 
 
-Link trello: <a>https://trello.com/b/OieWzAsk/ilovehack-v20</a>
-
-
-
-
-
-
-
-
-
-
-
-
+Link trello: [Link](https://trello.com/b/OieWzAsk/ilovehack-v20)
+Link I<3HACK client: [Link](https://github.com/EBM90/ilovehack-client)
+Link I<3HACK server: [Link](https://github.com/MartaCamacho/ILOVEHACK2.0-server)

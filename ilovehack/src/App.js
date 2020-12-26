@@ -1,35 +1,48 @@
 import './App.css';
 
-import {Switch, Route} from 'react-router-dom'
-
+import {Switch} from 'react-router-dom'
+import AuthProvider from './lib/AuthProvider'
 import AnonRoute from "./components/componentRoutes/AnonRoute";
 import PrivateRoute from "./components/componentRoutes/PrivateRoute";
 
 
-import Home from './components/Home/Home.jsx'
+import Home from './pages/landing.jsx'
+import Profile from './components/Profile/Profile.jsx'
 import Events from './components/Events/Events.jsx'
 import EventDetail from './components/EventDetails/EventDetails.jsx'
+import Signup from './components/SignUp/Signup.jsx'
+import Navbar from './components/Navbar.jsx'
+import Create from './components/createEvent/Create.jsx'
+import Login from './components/LogIn/Log-in.jsx'
 import Error from './components/ErrorPage/Error.jsx'
 import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
-import ControlledCarousel from './components/Prueba/ControlledCarousel';
-
+import Test from "./components/SignUp/Test";
+import UpdateUser from "./components/UpdateUser/Update";
 
 function App() {
   return (
+    <AuthProvider>
+    <Navbar />
     <div className="App">
      <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route exact path='/events' component={Events}/>
-      <Route exact path='/event/:id' component={EventDetail}/>
-      <Route exact path='/error' component={Error}/>
-      <Route exact path='/FAQ' component={FAQ}/>
-      <Route exact path='/onboarding' component={Onboarding}/>
-      <Route exact path='/onboarding2' component={Onboarding2}/>
-      <Route exact path='/prueba' component={ControlledCarousel}/>
-     </Switch>
+      <AnonRoute exact path='/' component={Home} /> 
+      <PrivateRoute exact path='/myprofile' component={Profile}/>
+      <PrivateRoute exact path='/all-events' component={Events}/>
+      <PrivateRoute exact path='/add-event' component={Create}/>
+      <PrivateRoute exact path='/event/:id' component={EventDetail}/>
+      <PrivateRoute exact path="/upload/:id" component={UpdateUser} />
+      <AnonRoute exact path='/signup' component={Signup}/>
+      <AnonRoute exact path='/test' component={Test}/>
+      <AnonRoute exact path='/login' component={Login}/>
+      <AnonRoute exact path='/error' component={Error}/>
+      <AnonRoute exact path='/FAQ' component={FAQ}/>
+      <AnonRoute exact path='/onboarding' component={Onboarding}/>
+      <AnonRoute exact path='/onboarding2' component={Onboarding2}/>
+      </Switch> 
     </div>
+    </AuthProvider>
   );
 }
 

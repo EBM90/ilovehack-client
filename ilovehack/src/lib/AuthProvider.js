@@ -1,18 +1,11 @@
-// ! Lo primero que nos encontramos despues de enlazar el back con el front
-
-// ! Crea metodos y estados para los demaas components de nuestro front
-
-import React from "react";
-
-// Llamadas axios a la API
-import auth from "./auth-service";
-
+import React, { Component } from "react";
+import auth from "./auth-service"; 
 const { Consumer, Provider } = React.createContext();
 
 // * HOC para crear Consumer
 // Ese component, + estos props de withAuth
 const withAuth = (WrappedComponent) => {
-  return class extends React.Component {
+  return class extends Component {
     render() {
       return (
         <Consumer>
@@ -43,7 +36,7 @@ const withAuth = (WrappedComponent) => {
 
 // ! Agrupamos informacion del backend
 // * Provider
-class AuthProvider extends React.Component {
+class AuthProvider extends Component {
   state = {
     isLoggedin: false,
     user: null,
@@ -62,29 +55,33 @@ class AuthProvider extends React.Component {
   }
 
   signup = (user) => {
-    const { username, password, email } = user;
-
+    const { fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor } = user;
     auth
-      .signup({ username, password, email })
-      .then((user) => this.setState({ isLoggedin: true, user: user }))
-      .catch(({ response }) =>
-        this.setState({ message: response.data.statusMessage })
+      .signup({ fullname, password, birthdate, gender, email, description, answers, isHorny, searchFor })
+      .then((user) => this.setState({ isLoggedin: true, user:user }))
+      .catch(({ error }) =>
+      this.setState({ message: error.data.statusMessage })
       );
   };
 
-  login = (user) => {
-    const { username, password } = user;
-    auth
-      .login({ username, password })
-      .then((user) => this.setState({ isLoggedin: true, user: user }))
-      .catch((err) => console.log(err));
+  login = async (user) => {
+    const { email, password } = user;
+    try {
+      const user = await auth.login({ email, password });
+      this.setState({ isLoggedin: true, user });
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  logout = () => {
-    auth
-      .logout()
-      .then(() => this.setState({ isLoggedin: false, user: null }))
-      .catch((err) => console.log(err));
+  logout = async () => {
+    try {
+      await auth.logout();
+      this.setState({ isLoggedin: false, user: null });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 

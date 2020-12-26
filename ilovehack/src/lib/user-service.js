@@ -11,6 +11,7 @@ class User {
   getUser = async() => {
     try {
         const theUser = await this.user.get('/profile')
+        console.log(theUser)
         return theUser.data
     } catch (error) {
         console.log(error)

@@ -34,7 +34,13 @@ class Event extends Component {
             {events && events.length !== 0 ? events.map((event, index) =>{
                 return (<div className='event' key={index}>
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
-                    <h5>{event.date.slice(0,16)}</h5>
+                    {/* <h5>{event.date.slice(0,16)}</h5> */}
+                    <h5>{event.location}</h5>
+                    <h5>Attending: </h5>
+                    {event.attending ? event.attending.map((attendee, index)=>{
+                        return <p key={index}><Link to={`/profile/${attendee._id}`}>{attendee.fullname}</Link></p>
+                    }): <p>Join this event!</p>}
+                    <h5>{event.date ? event.date.slice(0,16) : ""}</h5>
                     <h5>{event.location}</h5>
                 </div>)
             }): null}

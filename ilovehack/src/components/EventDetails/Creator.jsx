@@ -1,14 +1,19 @@
 import { Component } from "react";
 import React from "react";
 import eventservice from "../../lib/event-service";
-import profileservice from '../../lib/user-service';
-import Creator from './Creator'
-import Attending from './Attending'
+import profileservice from '../../lib/user-service'
 
-class EventDetail extends Component {
+class Creator extends Component {
     state = {
         event: {},
         user: {},
+        name: '', 
+        description: '', 
+        date: '', 
+        location: '', 
+        isPublic: '', 
+        cohort: '', 
+        imgPath: ''
     }
 
     getEvent = async () =>{
@@ -18,7 +23,10 @@ class EventDetail extends Component {
             const theUser = await profileservice.getUser()
             this.setState({
                 event: theEvent,
-                user: theUser
+                user: theUser,
+                name: theEvent.name,
+                date: theEvent.date,
+                location: theEvent.location
             })
 
         } catch (error) {
@@ -30,21 +38,27 @@ class EventDetail extends Component {
         this.getEvent()
     }
 
-    joinThisEvent= async(user_id, event_id) =>{
+    handleChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+      };
+    
+      handleFormSubmit = async (event) => {
         try {
-            console.log(user_id, event_id)
-            await eventservice.joinEvent(user_id, event_id)
+          event.preventDefault();
+          const {name, date, location} = this.state
+          const id = this.state.event._id
+          await eventservice.editEvent({id, name, date, location})
         } catch (error) {
-            console.log(error)
+          console.log(error, "the error originated here");
         }
-        
-    }
+      };
 
     //create components for event if creator and else
     render(){
         const {event, user} = this.state
         return(
-            <div className='main'>
+            <>
                 {event.creator && event.creator === user._id ? 
                     <div>
                     <form onSubmit={this.handleFormSubmit}>
@@ -80,20 +94,9 @@ class EventDetail extends Component {
 
                         </form>
                     </div> 
-                : 
-                <>
-                {event.name ? 
-                <div>
-                    <h1>{event.name}</h1>
-                     <p>{event.location}</p>
-                     <p>{event.description}</p>
-                </div>
-                   
-                : null}  
-                </>
-                 }
-                 <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
-    </div>)
+                : null} 
+            </>
+        )
+    }
 }
-}
-export default EventDetail;
+export default Creator;
