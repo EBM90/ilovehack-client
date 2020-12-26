@@ -32,7 +32,7 @@ class Event extends Component {
 
     reverseString(str) {
         let strArr = str.split('-')
-        return strArr.reverse().join('-')
+        return strArr.reverse().join('/')
     }
 
     render(){
