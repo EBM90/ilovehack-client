@@ -15,7 +15,6 @@ class Signup extends Component {
     gender: "",
     email: "",
     description: "",
-    answers: [],
     isHorny: false,
     searchFor: "",
     testIsShowing: false,
@@ -25,6 +24,9 @@ class Signup extends Component {
       password: "",
       repeatPassword: "",
       birthdate: "",
+      isHorny: "",
+      searchFor: "",
+      gender: "",
     },
     arrayPlaceHolder: [
         "Ej: Cher",
@@ -75,6 +77,18 @@ class Signup extends Component {
                 isError.birthdate =
                    value > today ? "You have to be 18 or older to find love here :)" : "";
             break;
+            case "isHorny":
+                isError.isHorny =
+                   value === "" ? "Select one" : "";
+            break;
+            case "searchFor":
+                isError.searchFor =
+                value === "" ? "Select one" : "";
+            break;
+            case "gender":
+                isError.gender =
+                value === "" ? "Select one" : "";
+            break;
             default:
                 break;
         }
@@ -88,17 +102,29 @@ class Signup extends Component {
     return <Test signupInfo={this.state}/>
   }
 
+  renderButton = () => {
+    return <button onClick={() => this.hideForm()}>Back to signup yass</button>
+  }
+
   randomPlaceHolder = () => {
     const randomPhrase = Math.floor((Math.random()) * (this.state.arrayPlaceHolder.length));
     const objPic = this.state.arrayPlaceHolder[randomPhrase];
-    return  objPic 
+    return objPic 
  }
 
  hideForm = () => {
    if(!this.state.testIsShowing){
     this.setState({testIsShowing: true });
+    } else {
+      this.setState({testIsShowing: false });
     }
-}
+  }
+
+  backToSignup = () => {
+    if(this.state.testIsShowing){
+     this.setState({testIsShowing: false });
+     }
+ }
 
   render() {
     const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
@@ -107,15 +133,15 @@ class Signup extends Component {
       <div className="signup-container">
         <h1 className="">Sign Up</h1>
 
-        <form className="form-container" onSubmit={this.handleFormSubmit} >
-          <div className="">
+        <form className="signup-form-container" onSubmit={this.handleFormSubmit} >
+          <div className="signup-form-field">
           <label>Full name:</label>
           <input type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/>
           {this.state.isError.fullname.length > 0 && (
            <span className="">{this.state.isError.fullname}</span>
           )}
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Email:</label>
           <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  /*required*/ />
           {this.state.isError.email.length > 0 && (
@@ -123,28 +149,28 @@ class Signup extends Component {
           )}
           
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Password:</label>
           <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
           {this.state.isError.password.length > 0 && (
           <span className="">{this.state.isError.password}</span>
           )}  
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Repeat Password:</label>
           <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
           {this.state.isError.repeatPassword.length > 0 && (
           <span className="">{this.state.isError.repeatPassword}</span>
           )} 
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Birth date:</label>
           <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} /*required*/ />
           {this.state.isError.birthdate.length > 0 && (
           <span className="">{this.state.isError.birthdate}</span>
           )} 
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Gender:</label>
           <select name="gender" value={gender} onChange={ e => this.handleChange(e)}>
             <option defaultValue=""> Choose one </option>
@@ -153,7 +179,7 @@ class Signup extends Component {
             <option value="none">Non-binary</option>
           </select>
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Id your heart already hacked?</label>
           <select name="isHorny" value={isHorny} onChange={ e => this.handleChange(e)}>
             <option defaultValue=""> Choose one </option>
@@ -161,7 +187,7 @@ class Signup extends Component {
             <option value='true'>I want to find someone whi I can deploy with</option>
           </select>
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Looking for:</label>
           <select name="searchFor" value={searchFor} onChange={ e => this.handleChange(e)}>
             <option defaultValue=""> Choose one </option>
@@ -171,18 +197,17 @@ class Signup extends Component {
             <option value="all">All</option>
           </select>
           </div>
-          <div className="">
+          <div className="signup-form-field">
           <label>Description:</label>
           <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" /*required*/></textarea>
           </div>
           <div className="">
-          <button onClick={() => this.hideForm()}>Take the test</button>
-          {/* <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button> */}
+          <button onClick={() => {this.hideForm(); this.renderButton()} }>Take the test</button>
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
           </form>
       </div>
-    )} else { return this.renderQuestions()};
+    )} else { return ( this.renderQuestions()) };
   }
 }
 

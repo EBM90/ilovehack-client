@@ -1,7 +1,6 @@
 import { withAuth } from "../../lib/AuthProvider";
 import React, { Component } from 'react';
 import './SignUp.css';
-import Signup from "./Signup";
 
 class Test extends Component {
     constructor(props) {
@@ -21,7 +20,6 @@ class Test extends Component {
             ],
             answers: [],
             percentage: 0,
-            testIsShowing: false,
             number: 0,
             signupInfo: props.signupInfo,
         }
@@ -77,16 +75,16 @@ class Test extends Component {
     prevQuestion = () => {
         const number = this.state.number;
         let i = 0;
-        if(i < this.state.questions.length) {
+        if(i < this.state.questions.length ) {
             return this.setState({number: number - 1});
-        } else if (i === 0 ){
-            return this.props.history.push(`/signup`);
+        } else if (i === 1 ){
+            return this.backToSignup()
         }
     }
 
     handleChange = event => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+        const { value } = event.target;
+        this.setState({ answers: [...this.state.answers, value] });
         };
 
     render() {
@@ -95,18 +93,18 @@ class Test extends Component {
             <div className="test-container">
             <ProgressBar percentage={this.state.percentage} />
             <form onSubmit={this.handleFormSubmit}>
-                <h3>{questions[number].question}</h3>
+            <p>{questions[number].question}</p>
                 { questions[number].answers ? questions[number].answers.map((answer, index) => {
                     return (
                         <div key={index}>
-                        <label for={index}>Answer: {answer}</label>
-                        <input onChange={e => this.handleChange(e)} id={index} type="radio" name={answer} value={answer} />
+                        <label for={answer}>Answer: {answer}</label>
+                        <input onChange={e => this.handleChange(e)} id={answer} type={questions[number].inputType} name={number} value={answer} />
                         </div>
                         )
                         }) : <p>There are no answers yet!</p>}
                         <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button>
             </form>
-            <button className='' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Previous</button>
+            {this.state.number === 0 ?  <button className='' onClick={() => {this.props.hideForm()}}>Back to sign up</button> : <button className='' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Previous</button>}
             <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-hide' : "button-submit-signup-show" } onClick={() => {this.nextQuestion(); this.addPercent()}}>Next</button>
             </div>
         )
