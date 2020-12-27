@@ -27,23 +27,45 @@ class Event {
     }
   }
 
-  addEvent = async({ name, creator, description, location, cohort}) =>{
+  addEvent = async({ name, creator, imgPath, description, date, time, location, isAttending, cohort, isPublic}) =>{
     try {
-      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, description, location, cohort})
+      const theEvent = await this.event.post(`/events/add-event`,{ name, creator, imgPath, description, date, time, location, isAttending, cohort, isPublic})
       return theEvent.data
     } catch (error) {
       console.log(error)
     }
   }
 
-  editEvent = async({id, name, date, location }) =>{
+  handleUpload = async (theFile) => {
+    console.log("file in service: ", theFile);
+
     try {
-      const theEvent = await this.event.put(`/events/edit/${id}`, name, date, location)
+      const res = await this.event.post("/events/uploadpicture", theFile);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  editEvent = async({id, name, imgPath, description, date, time, location, isAttending, cohort, isPublic}) =>{
+    try {
+      const theEvent = await this.event.put(`/events/edit/${id}`, {name, imgPath, description, date, time, location, isAttending, cohort, isPublic})
       return theEvent.data
     } catch (error) {
       console.log(error)
     }
   }
+
+  handlePic = async (theFile) => {
+    console.log("file in service: ", theFile);
+
+    try {
+      const res = await this.event.post("/events/upload", theFile);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   joinEvent = async(user_id, event_id ) =>{
     try {

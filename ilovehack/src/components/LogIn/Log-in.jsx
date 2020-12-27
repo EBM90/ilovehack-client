@@ -31,7 +31,7 @@ class Login extends Component {
           <label>Password:</label>
           <input type="password" name="password" value={password} placeholder="******" onChange={this.handleChange} />
           <div className="login-button-div">
-          <input className="login-button" type="submit" value="Login" />
+          <input className="login-button" type="submit" value="Log in" />
           </div>
           <p>Don't have an account? <Link to={"/signup"}> Sign up</Link></p>
         </form>

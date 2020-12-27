@@ -1,0 +1,142 @@
+/* GENERAL LAYOUT */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  padding-top: 4rem;
+}
+
+
+/* NAVBAR STYLING */
+
+ .topnav {
+    background-color: rgb(37, 37, 182);
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 0.3rem 1rem darkgray;
+    z-index: 100;
+  }
+  
+  .topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 7px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .logout {
+    float: left;
+    color: #f2f2f2;
+    font-size: 17px;
+    padding: 7px 25px;
+  }
+
+  #logo-container {
+    float: left;
+    padding: 3px 16px;
+  }
+
+  .logo {
+    width: 2rem;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+  
+  .dropdown {
+    float: right;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 17px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 7px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .dropbtn i {
+    margin-left: 3px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 7px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .topnav a:hover, .logout:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(23, 23, 151);
+    color: white;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child), .dropdown .dropbtn {
+      display: none;
+    }
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+
+    .mobile-dropdown {
+      display:flex;
+      flex-direction: column;
+    }
+
+    .topnav.responsive {position: fixed;}
+    .topnav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .topnav.responsive .dropdown {float: none;}
+    .topnav.responsive .dropdown-content {position: relative;}
+    .topnav.responsive .dropdown .dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+
+    .dropdown-content {
+      display: block;
+    }
+  } 

@@ -1,67 +1,44 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { withAuth } from "../lib/AuthProvider";
 
 class Navbar extends Component {
+  state = {
+    toggle:false,
+}
+
+Toggle = () => {
+    this.setState({toggle:!this.state.toggle})
+}
   render() {
-    const { user, logout, isLoggedin } = this.props;
+    const { logout, isLoggedin } = this.props;
     return (
-      <nav className="navbar navbar-expand-lg navbar-light ">
-        <Link to={"/"} className="navbar-brand">
-          <h4>
-            <img className="logo-navbar" alt="" src="#" />
-          </h4>
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNavAltMarkup"
-        >
-          <div className="navbar-nav ">
-            {isLoggedin ? (
-              <>
-                <Link to={`/myprofile`} className="nav-link">
-                  My profile
-                </Link>
-                <Link to="/events" className="nav-link">
-                  Events
-                </Link>
-                <Link to="/videos" className="nav-link">
-                  Matches
-                </Link>
-                <Link to="/faqP" className="nav-link">
-                  FAQ
-                </Link>
-                <button className="nav-link logout" onClick={logout}>
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
-                <Link to="/signup" className="nav-link ">
-                  Sign Up
-                </Link>
-                <Link to="/faq" className="nav-link">
-                  FAQ
-                </Link>
-              </>
-            )}
+      <nav className={this.state.toggle ?  "topnav responsive" : "topnav" }>
+      <a id="logo-container" href="/home"><img className="logo" src="https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_960_720.png" alt="pixel heart"/></a>
+      
+      {isLoggedin ? (
+        <div>
+          <button className="btn logout" href="#" onClick={logout}><i className="fa fa-power-off"></i></button>
+          <a href="/faq"> FAQ </a>
+          <a href="/myprofile"> My profile </a>
+          <div className="dropdown">
+            <button className="dropbtn">Events
+              <i className="fa fa-caret-down"></i>
+            </button>
+            <div className="dropdown-content">
+              <a href="/fav-events"> My events </a>
+              <a href="/my-events"> Favourite events </a>
+              <a href="/all-events"> All events </a>
+            </div>
           </div>
-        </div>
-      </nav>
+          <a href="/matches"> Matches </a>
+        </div>) : (<div> 
+            <a href="/faq"> FAQ </a>
+            <a href="/"> Home </a>
+            <a href="/login"> Log-in </a>
+            <a href="/signup"> Sign-up </a>
+          </div>)}
+        <a onClick={() => this.Toggle()} className="icon"> &#9776; </a>
+      </nav> 
     );
   }
 }

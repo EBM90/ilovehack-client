@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
+import Test from "./Test";
+/* import Filler from "./Test";
+import ProgressBar from "./Test"; */
+import './SignUp.css';
 
 class Signup extends Component {
-  state = { 
+  constructor(props) {
+    super(props);
+  this.state = { 
     fullname: "", 
     password: "",
     repeatPassword: "",
@@ -20,21 +26,22 @@ class Signup extends Component {
       password: "",
       repeatPassword: "",
       birthdate: "",
-  },
-  arrayPlaceHolder: [
-      "Ej: Cher",
-      "Ej: Mark Zuckerberg",
-      "Ej: Mariano Rajoy",
-      "Ej: Donald Trump",
-      "Ej: Ellen Degeneres",
-      "Ej: Lisa Simpson",
-  ]
+    },
+    arrayPlaceHolder: [
+        "Ej: Cher",
+        "Ej: Mark Zuckerberg",
+        "Ej: Mariano Rajoy",
+        "Ej: Donald Trump",
+        "Ej: Ellen Degeneres",
+        "Ej: Lisa Simpson",
+    ],
   };
+}
 
   handleFormSubmit = event => {
     event.preventDefault();
-    const { fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor } = this.state;
-    this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, answers, isHorny, searchFor });
+    const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state;
+    /* this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor }); */
   };
 
   handleChange = event => {
@@ -78,6 +85,10 @@ class Signup extends Component {
     });
   };
 
+  renderQuestions = () => {
+        return <Test />
+  }
+
   randomPlaceHolder = () => {
     const randomPhrase = Math.floor((Math.random()) * (this.state.arrayPlaceHolder.length));
     const objPic = this.state.arrayPlaceHolder[randomPhrase];
@@ -85,15 +96,15 @@ class Signup extends Component {
  }
 
   render() {
-    const { fullname, email, password, repeatPassword, birthdate, gender, description, answers, isHorny, searchFor } = this.state;
+    const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
     return (
       <div className="">
         <h1 className="">Sign Up</h1>
 
-        <form className="" onSubmit={this.handleFormSubmit}>
+        <form className="" onSubmit={this.handleFormSubmit} >
           <div className="">
           <label>Full name:</label>
-          <input type="text" name="fullname" value={fullname} onChange={this.handleChange} placeholder={this.randomPlaceHolder()} required/>
+          <input type="text" name="fullname" value={fullname} onChange={this.handleChange} placeholder={this.randomPlaceHolder()} /*required*//>
           {this.state.isError.fullname.length > 0 && (
            <span className="">{this.state.isError.fullname}</span>
           )}
@@ -137,6 +148,14 @@ class Signup extends Component {
           </select>
           </div>
           <div className="">
+          <label>Id your heart already hacked?</label>
+          <select name="isHorny" value={isHorny} onChange={ e => this.handleChange(e)}>
+            <option defaultValue=""> Choose one </option>
+            <option value='false'>I already have my pair programming partner</option>
+            <option value='true'>I want to find someone whi I can deploy with</option>
+          </select>
+          </div>
+          <div className="">
           <label>Looking for:</label>
           <select name="searchFor" value={searchFor} onChange={ e => this.handleChange(e)}>
             <option defaultValue=""> Choose one </option>
@@ -147,12 +166,14 @@ class Signup extends Component {
           </select>
           </div>
           <div className="">
-          <input className="" type="submit" value="Signup" onClick={this.errorMessage}/>
+          <label>Description:</label>
+          <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" /*required*/></textarea>
+          </div>
+          <div className="">
+         {this.renderQuestions()}
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
-        </form>
-
-        
+          </form>
       </div>
     );
   }

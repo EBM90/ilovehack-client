@@ -18,9 +18,20 @@ class User {
     }
   }
 
-  editUser = async({fullname, password, birthdate, gender, email, description, isHorny, searchFor, imgPath}) => {
+  handleUpload = async (theFile) => {
+    console.log("file in service: ", theFile);
+
     try {
-        const newUser = await this.user.put(`/profile/edit`, {fullname, password, birthdate, gender, email, description, isHorny, searchFor, imgPath})
+      const res = await this.user.post("/profile/uploadpicture", theFile);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  editUser = async({fullname, email, description, imgPath}) => {
+    try {
+        const newUser = await this.user.put(`/profile/edit`, {fullname, email, description, imgPath})
         return newUser.data
     } catch (error) {
         console.log(error)
