@@ -22,8 +22,8 @@ Toggle = () => {
                 <i className="fa fa-caret-down"></i>
               </button>
               <div className={!this.state.toggle ?  "dropdown-content" : "dropdown-content-show" }>
-                <a href="/fav-events"> My events </a>
-                <a href="/my-events"> Favourite events </a>
+                <a href="/my-events"> My events </a>
+                <a href="/fav-events"> Favourite events </a>
                 <a href="/all-events"> All events </a>
               </div>
             </div>
