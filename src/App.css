@@ -109,8 +109,12 @@
       display: inline-block;
     }
 
-    .topnav a:not(:first-child), .dropdown .dropbtn {
+    .topnav a, .dropdown .dropbtn {
       display: none;
+    }
+
+    #logo-container {
+      display: inline-block;
     }
 
     .navbar-content-align {
