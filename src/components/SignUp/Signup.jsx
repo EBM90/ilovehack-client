@@ -27,6 +27,7 @@ class Signup extends Component {
       isHorny: "",
       searchFor: "",
       gender: "",
+      description: "",
     },
     arrayPlaceHolder: [
         "Ej: Cher",
@@ -39,12 +40,6 @@ class Signup extends Component {
   };
 }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state;
-     this.props.signup({ fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
-  };
-
   handleChange = event => {
     const { name, value } = event.target;
     const regExp = RegExp(
@@ -55,7 +50,7 @@ class Signup extends Component {
         switch (name) {
             case "username":
                 isError.fullname =
-                    value.length < 1  ? "Introduce your name " : "";
+                    value.length < 1  ? "Introduce your name" : "";
                 break;
             case "email":
                 isError.email = regExp.test(value) ? "" : "Email address is invalid";
@@ -89,6 +84,10 @@ class Signup extends Component {
                 isError.gender =
                 value === "" ? "Select one" : "";
             break;
+            case "description":
+                isError.description =
+                value < 20 ? "Write a description of at least 20 characters" : "";
+            break;
             default:
                 break;
         }
@@ -99,11 +98,7 @@ class Signup extends Component {
   };
 
   renderQuestions = () => {
-    return <Test signupInfo={this.state}/>
-  }
-
-  renderButton = () => {
-    return <button onClick={() => this.hideForm()}>Back to signup yass</button>
+    return <Test signupInfo={this.state} hideForm={this.hideForm} />
   }
 
   randomPlaceHolder = () => {
@@ -120,20 +115,15 @@ class Signup extends Component {
     }
   }
 
-  backToSignup = () => {
-    if(this.state.testIsShowing){
-     this.setState({testIsShowing: false });
-     }
- }
-
   render() {
     const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
-    if(!this.state.testIsShowing){
+    
+    if(!this.renderQuestions().props.signupInfo.testIsShowing){
     return (
       <div className="signup-container">
         <h1 className="">Sign Up</h1>
 
-        <form className="signup-form-container" onSubmit={this.handleFormSubmit} >
+        <form className="signup-form-container">
           <div className="signup-form-field">
           <label>Full name:</label>
           <input type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/>
@@ -143,71 +133,88 @@ class Signup extends Component {
           </div>
           <div className="signup-form-field">
           <label>Email:</label>
-          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  /*required*/ />
+          <input type="email" name="email" value={email} onChange={ e => this.handleChange(e)} placeholder="ej: bill@gates.com"  required />
           {this.state.isError.email.length > 0 && (
           <span className="">{this.state.isError.email}</span>
           )}
-          
           </div>
           <div className="signup-form-field">
           <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
+          <input type="password" name="password" value={password} onChange={ e => this.handleChange(e)} placeholder="******"  required />
           {this.state.isError.password.length > 0 && (
           <span className="">{this.state.isError.password}</span>
           )}  
           </div>
           <div className="signup-form-field">
           <label>Repeat Password:</label>
-          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  /*required*/ />
+          <input type="password" name="repeatPassword" value={repeatPassword} onChange={ e => this.handleChange(e)} placeholder="******"  required />
           {this.state.isError.repeatPassword.length > 0 && (
           <span className="">{this.state.isError.repeatPassword}</span>
           )} 
           </div>
           <div className="signup-form-field">
           <label>Birth date:</label>
-          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} /*required*/ />
+          <input type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} required />
           {this.state.isError.birthdate.length > 0 && (
           <span className="">{this.state.isError.birthdate}</span>
           )} 
           </div>
           <div className="signup-form-field">
           <label>Gender:</label>
-          <select name="gender" value={gender} onChange={ e => this.handleChange(e)}>
+          <select name="gender" value={gender} onChange={ e => this.handleChange(e)} required>
             <option defaultValue=""> Choose one </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="none">Non-binary</option>
           </select>
+          {this.state.isError.gender !== "" && (
+          <span className="">{this.state.isError.gender}</span>
+          )}
           </div>
           <div className="signup-form-field">
           <label>Id your heart already hacked?</label>
-          <select name="isHorny" value={isHorny} onChange={ e => this.handleChange(e)}>
+          <select name="isHorny" value={isHorny} onChange={ e => this.handleChange(e)} required>
             <option defaultValue=""> Choose one </option>
             <option value='false'>I already have my pair programming partner</option>
             <option value='true'>I want to find someone whi I can deploy with</option>
           </select>
+          {this.state.isError.isHorny !== "" && (
+          <span className="">{this.state.isError.isHorny}</span>
+          )}
           </div>
           <div className="signup-form-field">
           <label>Looking for:</label>
-          <select name="searchFor" value={searchFor} onChange={ e => this.handleChange(e)}>
+          <select name="searchFor" value={searchFor} onChange={ e => this.handleChange(e)} required>
             <option defaultValue=""> Choose one </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="none">Non binary</option>
             <option value="all">All</option>
           </select>
+          {this.state.isError.searchFor !== "" && (
+          <span className="">{this.state.isError.searchFor}</span>
+          )}
           </div>
           <div className="signup-form-field">
           <label>Description:</label>
-          <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" /*required*/></textarea>
+          <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" required></textarea>
+          {this.state.isError.description !== "" && (
+          <span className="">{this.state.isError.description}</span>
+          )}
           </div>
           <div className="">
-          <button onClick={() => {this.hideForm(); this.renderButton()} }>Take the test</button>
+          <button onClick={() => {this.hideForm()}} >Take the test</button>
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
           </form>
       </div>
-    )} else { return ( this.renderQuestions()) };
+    )} else if (this.state.isError.fullname === "" && this.state.isError.email === "" && this.state.isError.password === "" 
+    && this.state.isError.repeatPassword === "" && this.state.isError.birthdate === "" && this.state.isError.isHorny === "" 
+    && this.state.isError.searchFor === "" && this.state.isError.gender === "" && this.state.isError.description === ""){ 
+      return this.renderQuestions();
+    } else {
+      return null
+    };
   }
 }
 

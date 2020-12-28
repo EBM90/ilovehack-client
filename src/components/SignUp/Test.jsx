@@ -25,18 +25,6 @@ class Test extends Component {
         }
     }
 
-    componentDidMount() {
-        console.log(this.state)
-    }
-
-    toggleForm = () => {
-        if(!this.state.testIsShowing){
-            this.setState({testIsShowing: true});
-        } else {
-          this.setState({testIsShowing: false});
-        }
-    }
-
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({[name]: value});
