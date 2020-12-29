@@ -17,8 +17,8 @@ class EventDetail extends Component {
         finish: '',
         hours: [],
         minutes: [],
-        isAttending: false, 
-        isPublic: false, 
+        isAttending: '', 
+        isPublic: '', 
         cohort: '',
         time: '',
         showForm: false,
@@ -35,6 +35,7 @@ class EventDetail extends Component {
             const {params} = this.props.match
             const theEvent = await eventservice.getTheEvent(params.id)
             const theUser = await profileservice.getUser()
+            console.log(theEvent)
             this.setState({
                 event: theEvent,
                 user: theUser,
@@ -205,7 +206,7 @@ class EventDetail extends Component {
     //create components for event if creator and else
     render(){
       const {event, user, name, description, imgPath, date, time, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish, showForm} = this.state
-
+      console.log(isAttending)
         return(
             <div className='main'>
                 {event.creator && event.creator === user._id ? 
@@ -309,6 +310,7 @@ class EventDetail extends Component {
                             type="checkbox"
                             name="isAttending"
                             value={isAttending}
+                            checked={isAttending}
                             onClick={() => this.ToggleAttend()}
                   />
                   
@@ -317,6 +319,7 @@ class EventDetail extends Component {
                             type="checkbox"
                             name="isPublic"
                             value={isPublic}
+                            checked={isPublic}
                             onClick={() => this.TogglePublic()}
                   />
                     <input
