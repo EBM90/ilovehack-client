@@ -1,5 +1,19 @@
 /* GENERAL LAYOUT */
 
+:root {
+  --ff-primary: 'Source Sans Pro', sans-serif;
+  --ff-secondary: 'Source Code Pro', monospace;
+  
+  --clr-light: #fff;
+	--clr-dark: #303030;
+  --clr-accent: #16e0bd;
+  
+  --fs-h1: 3rem;
+	--fs-h2: 2.25rem;
+	--fs-h3: 1.25rem;
+	--fs-body: 1rem;
+}
+
 * {
   margin: 0;
   padding: 0;
