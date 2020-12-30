@@ -3,6 +3,7 @@ import React from "react";
 import eventservice from "../lib/event-service.js";
 import {Link} from 'react-router-dom'
 import { withAuth } from "../lib/AuthProvider";
+import './landing.css'
 
 class Home extends Component {
     state = {
@@ -29,19 +30,25 @@ class Home extends Component {
         const {events} = this.state
         return(
             <div className='main'>
-                <h1>I <img src='./images/pixel-heart.png' alt='' style={{width: 50}}/> hack</h1>
-                <div>
-                    <h3>Go to your homepage and see if you have any notifications</h3>
-                    <button><Link to={'/login'}>Log in</Link></button>
+                <svg width="108" height="85" viewBox="0 0 108 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M53.55 6.375L73.7505 18.0378C77.1883 20.0226 79.3061 23.6907 79.3061 27.6603V57.3303C79.3061 61.2999 77.1883 64.968 73.7505 66.9528L53.55 78.6156L33.3495 66.9528C29.9117 64.968 27.7939 61.2999 27.7939 57.3303V27.6603C27.7939 23.6907 29.9117 20.0226 33.3495 18.0378L53.55 6.375Z" fill="#1E2434"/>
+<path d="M36.9444 3.2075C40.3822 1.22269 44.6178 1.22269 48.0556 3.2075L73.7505 18.0425C77.1883 20.0273 79.3061 23.6954 79.3061 27.665V57.335C79.3061 61.3046 77.1883 64.9727 73.7505 66.9575L48.0556 81.7925C44.6178 83.7773 40.3822 83.7773 36.9444 81.7925L11.2495 66.9575C7.81168 64.9727 5.69392 61.3046 5.69392 57.335V27.665C5.69392 23.6954 7.81169 20.0273 11.2495 18.0425L36.9444 3.2075Z" fill="#2DC5FA"/>
+<path d="M59.0444 3.2075C62.4822 1.22269 66.7177 1.22269 70.1555 3.2075L95.8505 18.0425C99.2883 20.0273 101.406 23.6954 101.406 27.665V57.335C101.406 61.3046 99.2883 64.9727 95.8505 66.9575L70.1555 81.7925C66.7177 83.7773 62.4822 83.7773 59.0444 81.7925L33.3494 66.9575C29.9117 64.9727 27.7939 61.3046 27.7939 57.335V27.665C27.7939 23.6954 29.9117 20.0273 33.3495 18.0425L59.0444 3.2075Z" fill="#1E2434"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M53.55 6.375L73.7505 18.0378C77.1883 20.0226 79.3061 23.6907 79.3061 27.6603V57.3303C79.3061 61.2999 77.1883 64.968 73.7505 66.9528L53.55 78.6156L33.3495 66.9528C29.9117 64.968 27.7939 61.2999 27.7939 57.3303V27.6603C27.7939 23.6907 29.9117 20.0226 33.3495 18.0378L53.55 6.375Z" fill="#EAEAED"/>
+</svg>
+
+                <div className="align-landing">
+                    <h1 className="landing-text">Findyour IronMatch</h1>
+                    <p className="landing-text">En tu vida seré uno de los que te ha amado con locura. Otro más de los que enloqueció bajo tu tierna mirada, seguramente te parecerá insignificante, un iluso más, pero retén esto en tu memoria por siempre jamás: de lejos incluso las estrellas parecen pequeñas.</p>
+                    <button className="btn-login"><Link to={'/login'}>Log in</Link></button>
                 </div>
 
                 <div>
-                    <h3>Create an account and see who you're most compatible with</h3>
-                    <button><Link to={'/signup'}>Sign up</Link></button>
+                    <p className="text-alreadyaccount">Do you have an account?<Link to={'/signup'}>Sign up here!</Link></p>
                 </div>
 
                 <div>
-                    <h3>Go to our events page and join in on the fun</h3>
+                    <h3>Latest events</h3>
                     {events.length !== 0 ? events.map((event, index) =>{
                         return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
                     }) : null}
