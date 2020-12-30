@@ -73,41 +73,6 @@ class Home extends Component {
         const {fullname, description, email, imgPath} = this.state
        
         return(
-<<<<<<< HEAD
-            <div>
-                {user && user.fullname ? 
-                <div className="main">
-                    <h1>Hello {user.fullname}</h1>
-                    <div className="matches">
-                        <h3>Matches</h3>
-                        {user.matches && user.matches.length !== 0 ? 
-                        user.matches.map((person)=>{
-                            <h6>{person.fullname}</h6>
-                        }): <p>You don't have any matches yet. Check again tomorrow!</p>}
-                    </div>
-                    <div className="events">
-                        <h3>My events:</h3>
-                        {events.map((event)=>{
-                            if(event.creator && event.creator === user._id){
-                                return <h5><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
-                            }
-                        })}
-                        <h3>Events I'm attending</h3>
-                        {events.map((event)=>{
-                            return <div>
-                            {event.attending ? event.attending.map((attendee)=>{
-                                if(attendee._id === user._id){
-                                    return <h5><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
-                                }
-                            }) :null}
-                            </div>
-                        })}
-                        
-                    </div>
-                    <button><a href={`/upload/${user._id}`}>Edit</a></button>
-                </div> 
-                : <h1>Loading...</h1>}
-=======
             
             <div className="form_container">
               <form onSubmit={this.handleFormSubmit}>
@@ -151,7 +116,6 @@ class Home extends Component {
                   />
                 </div>
               </form>
->>>>>>> 0aebf35ce9a01c3ea4c50e8f520a591d9b8fb390
             </div>
             
         )

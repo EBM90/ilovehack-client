@@ -19,10 +19,13 @@ import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/SignUp/Test";
-import landing from './pages/landing.jsx'
+import landing from './pages/landing.jsx';
+import Sockets from './components/sockets/Sockets.jsx';
+import socket from './components/sockets/Sockets.jsx';
 
 
 function App() {
+  socket.emit('coectado', "que pasa cra pasa")
   return (
     <AuthProvider>
     <Navbar />
@@ -34,7 +37,6 @@ function App() {
       <PrivateRoute exact path='/all-events' component={Events}/>
       <PrivateRoute exact path='/add-event' component={Create}/>
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
-      <PrivateRoute exact path="/upload/:id" component={UpdateUser} />
       <AnonRoute exact path='/signup' component={Signup}/>
       <AnonRoute exact path='/test' component={Test}/>
       <AnonRoute exact path='/login' component={Login}/>
