@@ -2,6 +2,7 @@ import { Component } from "react";
 import React from "react";
 import eventservice from "../lib/event-service.js";
 import {Link} from 'react-router-dom'
+import { withAuth } from "../lib/AuthProvider";
 
 class Home extends Component {
     state = {
@@ -10,11 +11,11 @@ class Home extends Component {
 
     getEvents = async () =>{
         try {
-            const theEvents = await eventservice.getAllEvents()
+            const theEvents = await this.getAllEvents()
             this.setState({
                 events: theEvents
             })
-            console.log(theEvents)
+            console.log(theEvents, 'los eventos')
         } catch (error) {
             console.log(error)
         }
@@ -50,4 +51,4 @@ class Home extends Component {
         )
     }
 }
-export default Home;
+export default withAuth(Home);

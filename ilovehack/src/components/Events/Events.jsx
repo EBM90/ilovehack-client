@@ -32,7 +32,7 @@ class Event extends Component {
 
     reverseString(str) {
         let strArr = str.split('-')
-        return strArr.reverse().join('-')
+        return strArr.reverse().join('/')
     }
 
     render(){
@@ -43,10 +43,8 @@ class Event extends Component {
             <Link to='/add-event' className='create'>Create an event</Link>
             {events && events.length !== 0 ? events.map((event, index) =>{
                 return (<div className='event' key={index} style={{backgroundImage: `url(${event.imgPath})`}}>
-                    {/* <img src={event.imgPath} alt="" style={{width: 50}} /> */}
                     <h3><Link to={`/event/${event._id}`}>{event.name}</Link></h3>
                     <h5>{event.description}</h5>
-                    {/* <h5>{event.date.slice(0,16)}</h5> */}
                     <h5>{event.location}</h5>
                     <h5>{event.date ? this.reverseString(event.date.slice(0,10)) : ""}</h5>
                     <h5>{event.time ? event.time : null}</h5>

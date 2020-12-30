@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import auth from "./auth-service"; 
 const { Consumer, Provider } = React.createContext();
 
-// * HOC para crear Consumer
-// Ese component, + estos props de withAuth
 const withAuth = (WrappedComponent) => {
   return class extends Component {
     render() {
       return (
         <Consumer>
-          {/* El componente <Consumer> provee un callback que recibe el "value" con el objeto Providers */}
           {({
             login,
             signup,
@@ -34,8 +31,6 @@ const withAuth = (WrappedComponent) => {
   };
 };
 
-// ! Agrupamos informacion del backend
-// * Provider
 class AuthProvider extends Component {
   state = {
     isLoggedin: false,
