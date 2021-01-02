@@ -1,7 +1,8 @@
 import { Component } from "react";
 import React from "react";
 import eventservice from "../lib/event-service.js";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { withAuth } from '../lib/AuthProvider';
 
 class Home extends Component {
     state = {
@@ -50,4 +51,4 @@ class Home extends Component {
         )
     }
 }
-export default Home;
+export default withAuth(Home);
