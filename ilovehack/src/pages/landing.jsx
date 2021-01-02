@@ -3,13 +3,16 @@ import React from "react";
 import eventservice from "../lib/event-service.js";
 import {Link} from 'react-router-dom'
 import { withAuth } from "../lib/AuthProvider";
-import './landing.css'
+import './landing.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button,Modal } from 'react-bootstrap';
+import Login from "../components/LogIn/Log-in.jsx";
 
 class Home extends Component {
     state = {
         events: []
     }
-
+    
     getEvents = async () =>{
         try {
             const theEvents = await this.getAllEvents()
@@ -26,6 +29,13 @@ class Home extends Component {
         this.getEvents()
     }
 
+    // function Example() {
+    //     const [show, setShow] = useState(false);
+      
+    //     const handleClose = () => setShow(false);
+    //     const handleShow = () => setShow(true);
+    
+
     render(){
         const {events} = this.state
         return(
@@ -40,13 +50,11 @@ class Home extends Component {
                 <div className="align-landing">
                     <h1 className="landing-text">Findyour IronMatch</h1>
                     <p className="landing-text">En tu vida seré uno de los que te ha amado con locura. Otro más de los que enloqueció bajo tu tierna mirada, seguramente te parecerá insignificante, un iluso más, pero retén esto en tu memoria por siempre jamás: de lejos incluso las estrellas parecen pequeñas.</p>
-                    <button className="btn-login"><Link to={'/login'}>Log in</Link></button>
+                    <button className="btn-login"><Link to={'/login'}>Log in</Link></button> 
                 </div>
-
                 <div>
                     <p className="text-alreadyaccount">Do you have an account?<Link to={'/signup'}>Sign up here!</Link></p>
                 </div>
-
                 <div>
                     <h3>Latest events</h3>
                     {events.length !== 0 ? events.map((event, index) =>{

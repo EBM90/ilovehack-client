@@ -22,17 +22,16 @@ class Login extends Component {
 
     return (
       <div className="login">
-        <h1 className="login-title">Login</h1>
+        <h1 className="login-title">Log In</h1>
 
         <form className="login-form" onSubmit={this.handleFormSubmit}>
           
-          <label>Email:</label>
-          <input type="email" name="email" value={email} placeholder="example@example.com" onChange={this.handleChange}/>
+          <input className="border" type="email" name="email" value={email} placeholder="Username" onChange={this.handleChange}/>
 
-          <label>Password:</label>
-          <input type="password" name="password" value={password} placeholder="******" onChange={this.handleChange} />
+          <input className="border" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} />
+
           <div className="login-button-div">
-          <input className="login-button" type="submit" value="Log in" />
+          <input className="btn-login2" type="submit" value="Log in" />
           </div>
           <p>Don't have an account? <Link to={"/signup"}> Sign up</Link></p>
         </form>
