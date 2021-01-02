@@ -2,7 +2,6 @@ import { Component } from "react";
 import React from "react";
 import eventservice from "../lib/event-service.js";
 import {Link} from 'react-router-dom'
-import { withAuth } from "../lib/AuthProvider";
 
 class Home extends Component {
     state = {
@@ -11,7 +10,7 @@ class Home extends Component {
 
     getEvents = async () =>{
         try {
-            const theEvents = await this.getAllEvents()
+            const theEvents = await eventservice.getAllEvents()
             this.setState({
                 events: theEvents
             })
@@ -51,4 +50,4 @@ class Home extends Component {
         )
     }
 }
-export default withAuth(Home);
+export default Home;
