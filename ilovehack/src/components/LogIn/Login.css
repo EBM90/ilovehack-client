@@ -6,8 +6,15 @@
 
 .login-title{
 font-weight: bold;
-font-size: 56px;
-padding-bottom: 30px;
+font-size: 36px;
+text-align: center;
+padding: 70px;
+border-radius: 0 0 26px 26px;
+height: 100%;
+width: 100%;
+color: white;
+background-color: #1E2434;
+margin-bottom: 50px;
 }
 
 .login-form {
@@ -17,21 +24,58 @@ padding-bottom: 30px;
     
 }
 
-.border{
-    border: none;  
-    border-bottom: 3px solid #8a8683;
+.border1{
+    /* border: unset;   */
+    /* border-bottom: 3px solid #8a8683; */
     padding: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
+    border: 0;
+    border-bottom: 1px solid #1E2434;
+    border-radius: 0;
+    width: 100%;
+    height: 2rem;
+    padding: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: black;
 }
 
+.signup-login{
+    padding-top: 30px;
+    font-size: 14px;
+}
+
+.suhere{
+    outline: none;
+    text-decoration:none;
+    color: black;
+}
+/* a:link, a:visited, a:active {
+    text-decoration:none;
+} */
+
 .btn-login2{
-    font-size:20px;
+    font-size:19px;
     color:white;
     text-decoration:none;
-    padding: 0.2rem 5rem;
-    border-radius:17px ;
+    border: none;
+    padding: 0.6rem 3rem;
+    border-radius:11px ;
     background-color:#2DC5FA;
     margin-top:15px;
-    font-weight: bold;
-   
+    font-weight: bold; 
+}
+.align-remember{
+    display: flex;
+    flex-direction: row;
+    font-size: 14px ;
+    margin-top:15px;
+    margin-bottom: 30px;
+}
+
+.forgotpass{
+    padding-left: 30px;
+    text-decoration:underline;
+    outline: none;
+    color: grey;
+    
 }
