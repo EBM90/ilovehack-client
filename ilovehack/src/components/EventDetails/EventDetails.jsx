@@ -56,10 +56,15 @@ class EventDetail extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount = async () =>{
+      try {
         this.getEvent()
         this.setTime()
         this.userAttendAlready()
+        this.joinButton()
+      } catch (error) {
+        
+      }
     }
 
     setTime = () => {
@@ -166,14 +171,21 @@ class EventDetail extends Component {
 
     joinThisEvent= async(user_id, event_id) =>{
         try {
-            console.log(user_id, event_id)
             await eventservice.joinEvent(user_id, event_id)
             this.props.history.push('/home')
         } catch (error) {
             console.log(error)
         }
-        
     }
+
+    unJoinThisEvent = async (user_id, event_id) =>{
+      try {
+          await eventservice.unJoinEvent(user_id, event_id)
+          this.props.history.push('/home')
+      } catch (error) {
+          console.log(error)
+      }
+  }
 
     reverseString(str) {
         let strArr = str.split('-')
@@ -220,10 +232,21 @@ class EventDetail extends Component {
         }
       };
 
+      joinButton = () => {
+          const {isAttending, user, event } = this.state
+          this.userAttendAlready()
+          console.log(isAttending, 'el atending')
+              if (isAttending === true){
+              return <button onClick={() => this.unJoinThisEvent(user._id, event._id)}>Unjoin</button>
+              } else {
+                return <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+              }
+          
+      }
+
     //create components for event if creator and else
     render(){
       const {event, user, name, description, imgPath, date, time, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish, showForm} = this.state
-      console.log(this.userAttendAlready(), 'atiende o no?')
         return(
             <div className='main'>
                 {event.creator && event.creator === user._id ? 
@@ -367,7 +390,8 @@ class EventDetail extends Component {
                 : null}  
                 </>
                  }
-                 <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+                 {this.joinButton()}
+                 
     </div>)
 }
 }

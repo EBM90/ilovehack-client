@@ -76,6 +76,15 @@ class Event {
       console.log(error)
     }
   }
+
+  unJoinEvent = async(user_id, event_id ) =>{
+    try {
+      const theEvent = await this.event.detele(`/events/fav`, {user_id, event_id})
+      return theEvent.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 const axiosRequestFunctions = new Event();
