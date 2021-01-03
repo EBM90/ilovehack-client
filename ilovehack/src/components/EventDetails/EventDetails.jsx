@@ -35,8 +35,6 @@ class EventDetail extends Component {
             const {params} = this.props.match
             const theEvent = await eventservice.getTheEvent(params.id)
             const theUser = await profileservice.getUser()
-            console.log(theEvent, 'el evento')
-            console.log(theUser, 'el user')
             this.setState({
                 event: theEvent,
                 user: theUser,
@@ -137,8 +135,6 @@ class EventDetail extends Component {
                     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
                     var yyyy = today.getFullYear();
                     today = yyyy + '-' + mm + '-' + dd;
-                    console.log(today)
-                    console.log(value)
                     isError.date =
                        value < today ? "Choose a date in the future :)" : "";
                 break;
@@ -150,6 +146,17 @@ class EventDetail extends Component {
           [name]: value 
         });
       };
+
+      reverseString(str) {
+          let strArr = str.split('-')
+          return strArr.reverse().join('/')
+      }
+  
+      dateForm(){
+        this.setState({
+          showForm: !this.state.showForm
+        })
+      }
 
     handleFileUpload = async (e) => {
         console.log("the file to be uploaded is: ", e.target.files[0]);
@@ -179,23 +186,24 @@ class EventDetail extends Component {
     }
 
     unJoinThisEvent = async (user_id, event_id) =>{
+      user_id = this.state.user._id
+      event_id = this.state.event._id
       try {
           await eventservice.unJoinEvent(user_id, event_id)
           this.props.history.push('/home')
       } catch (error) {
           console.log(error)
       }
-  }
-
-    reverseString(str) {
-        let strArr = str.split('-')
-        return strArr.reverse().join('/')
     }
 
-    dateForm(){
-      this.setState({
-        showForm: !this.state.showForm
-      })
+    joinButton = () => {
+        const {isAttending, user, event } = this.state
+        this.userAttendAlready()
+            if (isAttending === true){
+            return <button onClick={() => this.unJoinThisEvent(user._id, event._id)}>Unjoin</button>
+            } else {
+              return <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+            }
     }
 
     handleFormSubmit = async (event) => {
@@ -231,18 +239,6 @@ class EventDetail extends Component {
           console.log(error, "the error originated here");
         }
       };
-
-      joinButton = () => {
-          const {isAttending, user, event } = this.state
-          this.userAttendAlready()
-          console.log(isAttending, 'el atending')
-              if (isAttending === true){
-              return <button onClick={() => this.unJoinThisEvent(user._id, event._id)}>Unjoin</button>
-              } else {
-                return <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
-              }
-          
-      }
 
     //create components for event if creator and else
     render(){
