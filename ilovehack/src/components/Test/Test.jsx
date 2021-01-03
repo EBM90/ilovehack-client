@@ -1,37 +1,59 @@
 import { withAuth } from "../../lib/AuthProvider";
 import React, { Component } from 'react';
-import './SignUp.css';
+import userservice from '../../lib/user-service'
 
 class Test extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+        state = {
             questions: [
-                {question: "1", answers: ["x1", "x2", "x3"], inputType: "radio"},
-                {question: "2", answers: ["ok", "mal", "y a ti ke"], inputType: "radio"},
-                {question: "3", answers: ["a", "b", "c"], inputType: "radio"},
-                {question: "4", answers: ["d", "e", "f"], inputType: "radio"},
-                {question: "5", answers: ["g", "h", "i"], inputType: "radio"},
-                {question: "6", answers: ["j", "k", "l"], inputType: "radio"},
-                {question: "7", answers: ["m", "n", "ñ"], inputType: "radio"},
-                {question: "8", answers: ["o", "p", "q"], inputType: "radio"},
-                {question: "9", answers: ["r", "s", "t"], inputType: "radio"},
-                {question: "10", answers: ["u", "v", "w"], inputType: "radio"},
+                {question: "1?", answers: ["x1", "x2", "x3"], inputType: "radio"},
+                {question: "2?", answers: ["ok", "mal", "y a ti ke"], inputType: "radio"},
+                {question: "3?", answers: ["a", "b", "c"], inputType: "radio"},
+                {question: "4?", answers: ["d", "e", "f"], inputType: "radio"},
+                {question: "5?", answers: ["g", "h", "i"], inputType: "radio"},
+                {question: "6?", answers: ["j", "k", "l"], inputType: "radio"},
+                {question: "7?", answers: ["m", "n", "ñ"], inputType: "radio"},
+                {question: "8?", answers: ["o", "p", "q"], inputType: "radio"},
+                {question: "9?", answers: ["r", "s", "t"], inputType: "radio"},
+                {question: "10?", answers: ["u", "v", "w"], inputType: "radio"},
             ],
+            answer0:'',
+            answer1:'',
+            answer2:'',
+            answer3:'',
+            answer4:'',
+            answer5:'',
+            answer6:'',
+            answer7:'',
+            answer8:'',
+            answer9:'',
             answers: [],
             percentage: 0,
             number: 0,
-            signupInfo: props.signupInfo,
         }
-    }
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        const { answers } = this.state;
-        const { fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor } = this.state.signupInfo;
-        this.props.signup({ answers, fullname, password, repeatPassword, birthdate, gender, email, description, isHorny, searchFor });
-        console.log(this.state)
-      };
+    handleFormSubmit = async(event) => {
+        try {
+            event.preventDefault();
+            const {answer0, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9} = this.state
+            const { answers } = this.state;
+            answers.push(answer0)
+            answers.push(answer1)
+            answers.push(answer2)
+            answers.push(answer3)
+            answers.push(answer4)
+            answers.push(answer5)
+            answers.push(answer6)
+            answers.push(answer7)
+            answers.push(answer8)
+            answers.push(answer9)
+            console.log(answers)
+            await userservice.getAnswers(answers)
+            this.props.history.push('/home')
+        } catch (error) {
+            console.log(error)
+        }
+        
+    };
     
     addPercent = (event) => {
         const percPerQuestion = 100 / this.state.questions.length
@@ -66,8 +88,8 @@ class Test extends Component {
     }
 
     handleChange = event => {
-        const { value } = event.target;
-        this.setState({ answers: [...this.state.answers, value] });
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
         };
 
     render() {
@@ -80,7 +102,7 @@ class Test extends Component {
                     return (
                         <div key={index}>
                         <label for={answer}>{answer}</label>
-                        <input onChange={e => this.handleChange(e)} id={answer} type={questions[number].inputType} name={number} value={answer} />
+                        <input onChange={e => this.handleChange(e)} id={answer} type={questions[number].inputType} name={`answer${number}`} value={answer} />
                         </div>
                         )
                         }) : <p>There are no answers yet!</p>}

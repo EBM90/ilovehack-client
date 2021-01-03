@@ -17,6 +17,16 @@ class User {
     }
   }
 
+  getAnswers = async(answers) => {
+    try {
+      console.log(answers)
+      const theAnswers = await this.user.post('/profile/answers', answers)
+      return theAnswers.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   handleUpload = async (theFile) => {
     console.log("file in service: ", theFile);
 

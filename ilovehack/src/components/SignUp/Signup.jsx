@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
-import Test from "./Test";
+import Test from "../Test/Test";
 import './SignUp.css';
+import authservice from '../../lib/auth-service'
 
 class Signup extends Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class Signup extends Component {
     password: "",
     repeatPassword: "",
     birthdate: "",
-    gender: "",
+    // gender: "",
     email: "",
     description: "",
-    isHorny: false,
-    searchFor: "",
+    // isHorny: false,
+    // searchFor: "",
     testIsShowing: false,
     isError: {
       fullname: "",
@@ -24,10 +25,11 @@ class Signup extends Component {
       password: "",
       repeatPassword: "",
       birthdate: "",
-      isHorny: "",
-      searchFor: "",
-      gender: "",
+      // isHorny: "",
+      // searchFor: "",
+      // gender: "",
       description: "",
+      information: ''
     },
     arrayPlaceHolder: [
         "Ej: Cher",
@@ -72,21 +74,27 @@ class Signup extends Component {
                 isError.birthdate =
                    value > today ? "You have to be 18 or older to find love here :)" : "";
             break;
-            case "isHorny":
-                isError.isHorny =
-                   value === "" ? "Select one" : "";
-            break;
-            case "searchFor":
-                isError.searchFor =
-                value === "" ? "Select one" : "";
-            break;
-            case "gender":
-                isError.gender =
-                value === "" ? "Select one" : "";
-            break;
+            // case "isHorny":
+            //     isError.isHorny =
+            //        value === "" ? "Select one" : "";
+            // break;
+            // case "searchFor":
+            //     isError.searchFor =
+            //     value === "" ? "Select one" : "";
+            // break;
+            // case "gender":
+            //     isError.gender =
+            //     value === "" ? "Select one" : "";
+            // break;
             case "description":
                 isError.description =
                 value < 20 ? "Write a description of at least 20 characters" : "";
+            break;
+            case "information":
+                if(isError.fullname !== '' || isError.password !== '' || isError.email !== '' || 
+                isError.birthdate !== '' || isError.description !== '' || isError.repeatPassword !== ''){
+                  isError.information = 'Please fill in all the information before '
+                }
             break;
             default:
                 break;
@@ -115,6 +123,19 @@ class Signup extends Component {
     }
   }
 
+  handleFormSubmit = async(event) => {
+    try {
+      event.preventDefault();
+    
+      const { fullname, password, repeatPassword, gender, email, description } = this.state
+      await authservice.signup({fullname, password, repeatPassword, gender, email, description})
+      this.props.history.push('/test')
+    } catch (error) {
+      console.log(error)
+    }
+    
+  };
+
   render() {
     const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
     
@@ -123,7 +144,7 @@ class Signup extends Component {
       <div className="signup-container">
         <h1 className="">Sign Up</h1>
 
-        <form className="signup-form-container">
+        <form className="signup-form-container" onSubmit={this.handleFormSubmit}>
           <div className="signup-form-field">
           <label>Full name:</label>
           <input type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/>
@@ -159,7 +180,7 @@ class Signup extends Component {
           <span className="">{this.state.isError.birthdate}</span>
           )} 
           </div>
-          <div className="signup-form-field">
+          {/* <div className="signup-form-field">
           <label>Gender:</label>
           <select name="gender" value={gender} onChange={ e => this.handleChange(e)} required>
             <option defaultValue=""> Choose one </option>
@@ -194,7 +215,7 @@ class Signup extends Component {
           {this.state.isError.searchFor !== "" && (
           <span className="">{this.state.isError.searchFor}</span>
           )}
-          </div>
+          </div> */}
           <div className="signup-form-field">
           <label>Description:</label>
           <textarea name="description" value={description} onChange={this.handleChange} placeholder="Describe yourself like your mother would" required></textarea>
@@ -203,7 +224,11 @@ class Signup extends Component {
           )}
           </div>
           <div className="">
-          <button onClick={() => {this.hideForm()}} >Take the test</button>
+          <input
+                className="form_button_btn"
+                type="submit"
+                value="Start the personality test"
+              />
           </div>
           <p>Already have account? <Link to={"/login"}> Login</Link></p>
           </form>
