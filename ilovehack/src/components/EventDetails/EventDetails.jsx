@@ -35,7 +35,8 @@ class EventDetail extends Component {
             const {params} = this.props.match
             const theEvent = await eventservice.getTheEvent(params.id)
             const theUser = await profileservice.getUser()
-            console.log(theEvent)
+            console.log(theEvent, 'el evento')
+            console.log(theUser, 'el user')
             this.setState({
                 event: theEvent,
                 user: theUser,
@@ -58,6 +59,7 @@ class EventDetail extends Component {
     componentDidMount(){
         this.getEvent()
         this.setTime()
+        this.userAttendAlready()
     }
 
     setTime = () => {
@@ -90,6 +92,21 @@ class EventDetail extends Component {
     }
     ToggleAttend = () => {
       this.setState({isAttending:!this.state.isAttending})
+    }
+
+    userAttendAlready = async () => {
+      try {
+        const {user, event} = this.state;
+        const attendOrNot = event.attending.map((attendees, index) => (attendees._id))
+        const userAttend = attendOrNot.indexOf(user._id)
+      if(userAttend === -1){
+        this.setState({isAttending: false })
+        } else {
+          this.setState({isAttending: true })
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
     
     handleChange = event => {
@@ -206,7 +223,7 @@ class EventDetail extends Component {
     //create components for event if creator and else
     render(){
       const {event, user, name, description, imgPath, date, time, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish, showForm} = this.state
-      console.log(isAttending)
+      console.log(this.userAttendAlready(), 'atiende o no?')
         return(
             <div className='main'>
                 {event.creator && event.creator === user._id ? 
@@ -310,7 +327,7 @@ class EventDetail extends Component {
                             type="checkbox"
                             name="isAttending"
                             value={isAttending}
-                            checked={isAttending}
+                            defaultChecked={isAttending}
                             onClick={() => this.ToggleAttend()}
                   />
                   

@@ -16,3 +16,37 @@
     border-radius: inherit;
     transition: width .2s ease-in;
 }
+
+.button-submit-signup-show {
+    display: block;
+}
+
+.button-submit-signup-hide {
+    display: none;
+}
+
+.test-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* SIGNUP STYLING */
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
