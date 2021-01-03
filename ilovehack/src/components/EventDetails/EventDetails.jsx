@@ -17,6 +17,10 @@ class EventDetail extends Component {
         finish: '',
         hours: [],
         minutes: [],
+        hourStart: '', 
+        hourFinish: '', 
+        minStart: '', 
+        minFinish: '',
         isAttending: '', 
         isPublic: '', 
         cohort: '',
@@ -27,6 +31,7 @@ class EventDetail extends Component {
           description: "",
           location: "",
           date: "",
+          time: "",
         },
     }
 
@@ -44,9 +49,14 @@ class EventDetail extends Component {
                 imgPath: theEvent.imgPath,
                 location: theEvent.location,
                 time: theEvent.time,
+                hourStart: theEvent.time.slice(0,2), 
+                minStart: theEvent.time.slice(3,5), 
+                hourFinish: theEvent.time.slice(7,10), 
+                minFinish: theEvent.time.slice(11,13),
                 isAttending: theEvent.isAttending, 
                 isPublic: theEvent.isPublic, 
                 cohort: theEvent.cohort,
+                
                 })
 
         } catch (error) {
@@ -138,6 +148,10 @@ class EventDetail extends Component {
                     isError.date =
                        value < today ? "Choose a date in the future :)" : "";
                 break;
+                case "time":
+                    isError.time = 
+                      value === "" ? "Choose a right time" : "";
+                break;
                 default:
                     break;
             }
@@ -212,7 +226,7 @@ class EventDetail extends Component {
             let {name, description, location, imgPath, date, time, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             if ( hourStart !== '' || hourFinish !== '' || minStart !== '' || minFinish !== '' ){
               time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
-            }
+            } 
             // console.log(name, description, location, imgPath, date, time, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish)
             const id = this.state.event._id
             await eventservice.editEvent({ id, name, 
@@ -230,6 +244,7 @@ class EventDetail extends Component {
             location: '',
             imgPath:'',
             date: '', 
+            time: '',
             isAttending: false,
             isPublic: false, 
             cohort: '',
@@ -243,7 +258,8 @@ class EventDetail extends Component {
     //create components for event if creator and else
     render(){
       const {event, user, name, description, imgPath, date, time, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish, showForm} = this.state
-        return(
+
+      return(
             <div className='main'>
                 {event.creator && event.creator === user._id ? 
                   <div className='form'>
@@ -298,14 +314,14 @@ class EventDetail extends Component {
           )}
           <label>Start:</label>
           <select name="hourStart" value={hourStart} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={hourStart}> Choose one </option>
             {hours ? hours.map((hour)=>{
               return <option value={hour}>{hour}</option>
             }): null}
           </select>
 
           <select name="minStart" value={minStart} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={minStart}> Choose one </option>
             {minutes ? minutes.map((min)=>{
               return <option value={min}>{min}</option>
             }): null}
@@ -313,14 +329,14 @@ class EventDetail extends Component {
 
           <label>Finish:</label>
           <select name="hourFinish" value={hourFinish} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={hourFinish}> Choose one </option>
             {hours ? hours.map((hour)=>{
               return <option value={hour}>{hour}</option>
             }): null}
           </select>
 
           <select name="minFinish" value={minFinish} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={minFinish}> Choose one </option>
             {minutes ? minutes.map((min)=>{
               return <option value={min}>{min}</option>
             }): null}
@@ -331,6 +347,9 @@ class EventDetail extends Component {
           <div>
           <h5>Date: {time} {this.reverseString(date.slice(0,10))}</h5>
           <button onClick={() => this.dateForm()}>Change date</button>
+          {this.state.isError.time.length > 0 && (
+          <span className="">{this.state.isError.time}</span>
+          )}
           </div>}
           
           <label>Cohort:</label>
@@ -355,7 +374,7 @@ class EventDetail extends Component {
                             type="checkbox"
                             name="isPublic"
                             value={isPublic}
-                            checked={isPublic}
+                            defaultChecked={isPublic}
                             onClick={() => this.TogglePublic()}
                   />
                     <input
