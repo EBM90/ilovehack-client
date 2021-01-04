@@ -20,6 +20,7 @@ width: 100%;
 color: white;
 background-color: #1E2434;
 margin-bottom: 50px;
+box-shadow: 0 0.6rem 1rem darkgray;
 }
 
 .login-form {
