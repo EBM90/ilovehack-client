@@ -50,10 +50,10 @@ class Home extends Component {
                 <div className="align-landing">
                     <h1 className="landing-text">Findyour IronMatch</h1>
                     <p className="landing-text">En tu vida seré uno de los que te ha amado con locura. Otro más de los que enloqueció bajo tu tierna mirada, seguramente te parecerá insignificante, un iluso más, pero retén esto en tu memoria por siempre jamás: de lejos incluso las estrellas parecen pequeñas.</p>
-                    <button className="btn-login"><Link to={'/login'}>Log in</Link></button> 
+                    <button className="btn-login"><Link className="link-login-landing" to={'/login'}>Log in</Link></button> 
                 </div>
                 <div>
-                    <p className="text-alreadyaccount">Do you have an account?<Link to={'/signup'}>Sign up here!</Link></p>
+                    <p className="text-alreadyaccount">Do you have an account?  <Link className="suhere" to={'/signup'}>Sign up here!</Link></p>
                 </div>
                 <div>
                     <h3>Latest events</h3>

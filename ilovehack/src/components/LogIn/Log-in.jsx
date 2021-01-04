@@ -47,7 +47,7 @@ class Login extends Component {
           <div className="login-button-div">
           <input className="btn-login2" type="submit" value="Log In" />
           </div>
-          <p className="signup-login">Doesn´t have an account yet?  <i className="suhere"> <Link to={"/signup"}> Sign up here!</Link></i> </p>
+          <p className="signup-login">Doesn´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
         </form>
         {/* <Carousel /> */}
       </div>
