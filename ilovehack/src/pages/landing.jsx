@@ -6,7 +6,7 @@ import { withAuth } from "../lib/AuthProvider";
 import './landing.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button,Modal } from 'react-bootstrap';
-import Login from "../components/LogIn/Log-in.jsx";
+import Carousel1 from "../components/carousel/Carousel";
 
 class Home extends Component {
     state = {
@@ -61,6 +61,7 @@ class Home extends Component {
                         return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
                     }) : null}
                 </div>
+                <Carousel1 />
             </div>
             
         )

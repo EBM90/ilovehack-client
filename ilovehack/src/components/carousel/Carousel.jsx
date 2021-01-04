@@ -1,26 +1,27 @@
 import React, { Component } from 'react' 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Carousel from 'react-bootstrap';
+import Carousel from 'react-bootstrap/Carousel';
 
-export default function Carousel() {
+export default function Carousel1() {
+  
     return (
         <div>
-           <Carousel>
+        <Carousel>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="holder.js/800x400?text=First slide&bg=373940"
+      src="https://www.ngenespanol.com/wp-content/uploads/2018/08/7-buenas-razones-para-tomar-cerveza.png" height="200"
       alt="First slide"
     />
     <Carousel.Caption>
-      <h3>First slide label</h3>
+      <h3>IRON BEERS</h3>
       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="holder.js/800x400?text=Second slide&bg=282c34"
+      src="https://plantillasdeportivas.es/wp-content/uploads/2018/11/tenis.jpg" height="200"
       alt="Third slide"
     />
 
@@ -32,13 +33,12 @@ export default function Carousel() {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="holder.js/800x400?text=Third slide&bg=20232a"
-      alt="Third slide"
-    />
-
+      src="https://ipleones.cl/wp-content/uploads/2017/11/tec-programador.jpg" height="200"
+      alt="Third slide"/>
+      
     <Carousel.Caption>
       <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+   <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
     </Carousel.Caption>
   </Carousel.Item>
 </Carousel> 

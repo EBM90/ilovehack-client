@@ -3,7 +3,7 @@ import { withAuth } from '../../lib/AuthProvider.js';
 import { Link } from "react-router-dom";
 import './Login.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Carousel from "../components/carousel/Carousel";
+import Carousel1 from "../carousel/Carousel";
 
 class Login extends Component {
   state = { email: "", password: "" };
@@ -49,7 +49,7 @@ class Login extends Component {
           </div>
           <p className="signup-login">Doesn´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
         </form>
-        {/* <Carousel /> */}
+        <Carousel1 />
       </div>
     );
   }
