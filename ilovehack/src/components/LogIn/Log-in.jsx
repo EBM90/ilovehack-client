@@ -33,7 +33,7 @@ class Login extends Component {
         <i className="hawai"><img className="logo-login1 border1" src="/images/password.png" alt="pixel heart"/><input className="border1" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} /></i>
 
 <div className="align-remember">
-          <input type="checkbox" name="remember pass" />
+          <input className="checkbox-login" type="checkbox" name="remember pass" />
           <p>Remember me</p>
           <a className="forgotpass" href="#">Forgot your password?</a>
           </div>
