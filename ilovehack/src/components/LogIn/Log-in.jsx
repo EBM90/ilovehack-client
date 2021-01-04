@@ -28,9 +28,9 @@ class Login extends Component {
 
         <form className="login-form" onSubmit={this.handleFormSubmit}>
           
-        <i className="hawai"><img className="logo-login" src="/images/pngegg.png" alt="pixel heart"/><input className="border1" type="email" name="email" value={email} placeholder="Username" onChange={this.handleChange}/></i>
+        <i className="hawai"><img className="logo-login border1" src="/images/pngegg.png" alt="pixel heart"/><input className="border1" type="email" name="email" value={email} placeholder="Username" onChange={this.handleChange}/></i>
 
-        <i className="hawai"><img className="logo-login" src="/images/password.png" alt="pixel heart"/><input className="border1" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} /></i>
+        <i className="hawai"><img className="logo-login1 border1" src="/images/password.png" alt="pixel heart"/><input className="border1" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} /></i>
 
 <div className="align-remember">
           <input type="checkbox" name="remember pass" />
