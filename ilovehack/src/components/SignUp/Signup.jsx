@@ -29,7 +29,6 @@ class Signup extends Component {
       // searchFor: "",
       // gender: "",
       description: "",
-      information: ''
     },
     arrayPlaceHolder: [
         "Ej: Cher",
@@ -39,6 +38,8 @@ class Signup extends Component {
         "Ej: Ellen Degeneres",
         "Ej: Lisa Simpson",
     ],
+    noErrors: false,
+    warning:''
   };
 }
 
@@ -48,9 +49,10 @@ class Signup extends Component {
       /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
     )
     let isError = { ...this.state.isError };
+    const {fullname, password, email, description, birthdate} = this.state
 
         switch (name) {
-            case "username":
+            case "fullname":
                 isError.fullname =
                     value.length < 1  ? "Introduce your name" : "";
                 break;
@@ -99,6 +101,8 @@ class Signup extends Component {
             default:
                 break;
         }
+        // && fullname !== '' && email !== '' && password ==='' && description !== '' && birthdate !== ''
+       
     this.setState({ 
       isError,
       [name]: value 
@@ -126,10 +130,26 @@ class Signup extends Component {
   handleFormSubmit = async(event) => {
     try {
       event.preventDefault();
+      const { fullname, password, repeatPassword, gender, email, description, isError, noErrors, warning } = this.state
+      if(isError.fullname === '' && isError.password === ''){
+        this.setState({
+            noErrors: true
+        })
+      } else {
+        this.setState({
+          noErrors: false
+        })
+      }
     
-      const { fullname, password, repeatPassword, gender, email, description } = this.state
-      await authservice.signup({fullname, password, repeatPassword, gender, email, description})
-      this.props.history.push('/test')
+      if(noErrors){
+        await authservice.signup({fullname, password, repeatPassword, gender, email, description})
+        this.props.history.push('/test')
+      } else {
+        this.setState({
+            warning: 'Please fill in all the information correctly'
+        })
+      }
+      
     } catch (error) {
       console.log(error)
     }
@@ -137,8 +157,11 @@ class Signup extends Component {
   };
 
   render() {
-    const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor } = this.state;
+    const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor, noErrors, isError, warning } = this.state;
     
+    
+
+
     if(!this.renderQuestions().props.signupInfo.testIsShowing){
     return (
       <div className="signup-container">
@@ -224,6 +247,7 @@ class Signup extends Component {
           )}
           </div>
           <div className="">
+          <p>{warning}</p>
           <input
                 className="form_button_btn"
                 type="submit"
