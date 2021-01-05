@@ -5,16 +5,16 @@ import userservice from '../../lib/user-service'
 class Test extends Component {
         state = {
             questions: [
-                {question: "1?", answers: ["x1", "x2", "x3"], inputType: "radio"},
-                {question: "2?", answers: ["ok", "mal", "y a ti ke"], inputType: "radio"},
-                {question: "3?", answers: ["a", "b", "c"], inputType: "radio"},
-                {question: "4?", answers: ["d", "e", "f"], inputType: "radio"},
-                {question: "5?", answers: ["g", "h", "i"], inputType: "radio"},
-                {question: "6?", answers: ["j", "k", "l"], inputType: "radio"},
-                {question: "7?", answers: ["m", "n", "ñ"], inputType: "radio"},
-                {question: "8?", answers: ["o", "p", "q"], inputType: "radio"},
-                {question: "9?", answers: ["r", "s", "t"], inputType: "radio"},
-                {question: "10?", answers: ["u", "v", "w"], inputType: "radio"},
+                // {question: "3?", answers: ["a", "b", "c"], inputType: "radio", isChecked: false},
+                // {question: "3?", answers: ["a", "b", "c"], inputType: "radio", isChecked: false},
+                // {question: "3?", answers: ["a", "b", "c"], inputType: "radio", isChecked: false},
+                // {question: "4?", answers: ["d", "e", "f"], inputType: "radio", isChecked: false},
+                // {question: "5?", answers: ["g", "h", "i"], inputType: "radio", isChecked: false},
+                // {question: "6?", answers: ["j", "k", "l"], inputType: "radio", isChecked: false},
+                // {question: "7?", answers: ["m", "n", "ñ"], inputType: "radio", isChecked: false},
+                // {question: "8?", answers: ["o", "p", "q"], inputType: "radio", isChecked: false},
+                // {question: "9?", answers: ["r", "s", "t"], inputType: "radio", isChecked: false},
+                // {question: "10?", answers: ["u", "v", "w"], inputType: "radio", isChecked: false},
             ],
             answer0:'',
             answer1:'',
@@ -29,7 +29,23 @@ class Test extends Component {
             answers: [],
             percentage: 0,
             number: 0,
+            isChecked: false,
+            isChecked1: false,
+            isChecked2: false,
+            isChecked3: false,
         }
+
+    questions = async() =>{
+        const theQuestions = await userservice.getQuestions()
+        console.log(theQuestions)
+        this.setState({
+            questions: theQuestions
+        })
+    }
+
+    componentDidMount = () =>{
+        this.questions()
+    }
 
     handleFormSubmit = async(event) => {
         try {
@@ -87,28 +103,51 @@ class Test extends Component {
         }
     }
 
+    backToSignup =() =>{
+        this.props.history.push('/signup')
+    }
+
+    checkCheck =(option)=>{
+        console.log(option)
+        if(option === 'isChecked1'){
+            this.setState({
+                isChecked1: !this.state.isChecked1
+            })
+        } else if(option === 'isChecked2'){
+            this.setState({
+                isChecked2: !this.state.isChecked2
+            })
+        } else {
+            this.setState({
+                isChecked3: !this.state.isChecked3
+            })
+        }
+    }
+
     handleChange = event => {
         const { name, value } = event.target;
+        event.target.checked = true
         this.setState({ [name]: value });
         };
 
     render() {
-        const {questions, number} = this.state;
+        const {questions, number, isChecked} = this.state;
         return (
             <div className="test-container">
             <form onSubmit={this.handleFormSubmit}>
-            <p>{questions[number].question}</p>
-                { questions[number].answers ? questions[number].answers.map((answer, index) => {
+            {questions.length !== 0 && questions[number].question ? <p>{questions[number].question}</p> : null}
+            
+                {questions.length !== 0 && questions[number].answers ? questions[number].answers.map((answer, index) => {
                     return (
                         <div key={index}>
                         <label for={answer}>{answer}</label>
-                        <input onChange={e => this.handleChange(e)} id={answer} type={questions[number].inputType} name={`answer${number}`} value={answer} />
+                        <input onChange={e => this.handleChange(e)} id={`answer${number}`} type='radio' name={`answer${number}`} value={answer} />
                         </div>
                         )
                         }) : <p>There are no answers yet!</p>}
                         <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button>
             </form>
-            {this.state.number === 0 ?  <button className='' onClick={() => {this.props.hideForm()}}>Back to sign up</button> : <button className='' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Previous</button>}
+            {this.state.number === 0 ?  <button className='' onClick={() => {this.backToSignup()}}>Back to sign up</button> : <button className='' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Previous</button>}
             <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-hide' : "button-submit-signup-show" } onClick={() => {this.nextQuestion(); this.addPercent()}}>Next</button>
             <ProgressBar percentage={this.state.percentage} />
             </div>

@@ -18,6 +18,15 @@ class User {
     }
   }
 
+  getQuestions = async() =>{
+    try {
+      const theQuestions = await this.user.get('/profile/questions')
+      return theQuestions.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   getAnswers = async(answers) => {
     try {
       console.log(answers)
