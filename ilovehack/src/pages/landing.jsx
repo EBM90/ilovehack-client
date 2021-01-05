@@ -29,7 +29,7 @@ class Home extends Component {
         const {events} = this.state
         return(
             <div className='main'>
-                <h1>Hac<span id='k'>K</span>onnect</h1>
+                <h1 className='title'>Hac<span id='k'>K</span>onnect</h1>
                 <div>
                     <h3>Go to your homepage and see if you have any notifications</h3>
                     <button><Link to={'/login'}>Log in</Link></button>

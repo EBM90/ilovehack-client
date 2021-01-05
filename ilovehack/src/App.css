@@ -1,5 +1,5 @@
 /* GENERAL LAYOUT */
-/* rombo --> clip-path: polygon(50% 0%, 85% 25%, 85% 75%, 50% 100%, 50% 100%, 15% 75%, 15% 25%); */
+/* rombo --> clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%); */
 :root {
   --ff-primary: 'Source Sans Pro', sans-serif;
   --ff-secondary: 'Source Code Pro', monospace;
@@ -118,14 +118,84 @@
     display: block;
   }
 
-  #k{
-    background-color: var(--clr-accent);
-    border: 10px var(--clr-accent) solid;
-    padding: 0px 5px;
-    border-radius: 100px;
-    clip-path: polygon(50% 15%, 90% 30%, 90% 70%, 51% 85%, 50% 85%, 10% 70%, 10% 30%);
+  @keyframes background-change {
+    to { background: var(--clr-accent) ; }
+}
+
+@keyframes load {
+  0% {  background-position: top left;
+    padding: 50px;
+  color: #000; }
+
+  100% { background-position: bottom left; 
+    padding: 10px;
+    color: #fff; }
+}
+
+#k {
+  border: 5px solid var(--clr-accent);
+  background: linear-gradient(to top, var(--clr-accent) 50%, #fff 50%);
+  background-size: 100% 200%;
+  transition: all 1s ease-in;
+  
+  clip-path: polygon(50% 15%, 85% 30%, 85% 70%, 51% 85%, 50% 85%, 15% 70%, 15% 30%);
+  animation: load 2000ms forwards;
+}
+
+
+
+/* .title {
+  background: rgba(255,255,255,0.1);
+  justify-content: flex-start;
+  border-radius: 100px;
+  align-items: center;
+  position: relative;
+  padding: 0 5px;
+  display: flex;
+  height: 70px;
+  width: 500px;
+}
+
+#k {
+  border: 2px var(--clr-accent) solid;
+  color: #fff;
+  animation: load 3s normal forwards;
+  box-shadow: 0 10px 40px -10px #fff;
+  border-radius: 50px;
+  padding: 10px 20px;
+  background: var(--clr-accent);
+  clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%);
+  height: 0;
+} */
+
+  /* #k{
+    position: relative;
+    border: 20px var(--clr-accent) solid;
+    padding: 0px 10px;
+    border-radius: 50px;
+    clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%);
+    animation: background-change 1500ms forwards;
   }
 
+  #k:before {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 0px;
+    width: 100%;
+    background-color: var(--clr-accent); 
+    transition: all 1s;
+    z-index: -1;
+  }
+  
+  #k:after {
+    height: 100%;
+    background-color: var(--clr-accent); 
+    transition: all 1s;
+  } */
+
+ 
   
   @media screen and (max-width: 600px) {
     .topnav {
