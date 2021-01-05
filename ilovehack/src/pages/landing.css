@@ -1,0 +1,36 @@
+.btn-login{
+    font-size:20px;
+    color:white;
+    text-decoration:none;
+    padding: 0.5rem 7rem;
+    border-radius:10px ;
+    background-color:#1E2434;
+    margin-top:15px;
+   
+}
+.align-landing{
+    display:flex ;
+    align-items: center;
+    flex-direction: column;
+    text-align: justify;
+    margin-top:50px; 
+    /* font-family:Roboto;
+    font-style: normal;
+    font-weight: bold; */
+}
+
+.landing-text{
+    margin: 10px  35px;
+}
+
+.text-alreadyaccount{
+    font-size: 12px;
+    margin-top:10px;
+    color:#81828A
+}
+
+.link-login-landing{
+    outline: none;
+    color: white;
+}
+
