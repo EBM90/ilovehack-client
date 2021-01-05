@@ -12,19 +12,16 @@ class Auth {
     return this.auth
       .post("/auth/signup", { fullname, password, birthdate, email, description })
       .then(({ data }) => data);
-    // .then((response) => response.data);
   }
 
   login({ email, password }) {
     return this.auth
       .post("/auth/login", { email, password })
       .then(({ data }) => data);
-    // .then((response) => response.data);
   }
 
   logout() {
     return this.auth.post("/auth/logout", {}).then(({ data }) => data);
-    // return this.auth.post("/auth/logout", {}).then((response) => response.data);
   }
 
   me() {

@@ -14,7 +14,6 @@ class Home extends Component {
         try {
             const theUser = await userservice.getUser()
             const theEvents = await eventservice.getAllEvents()
-            console.log(theEvents)
             this.setState({
                 user: theUser,
                 events: theEvents
