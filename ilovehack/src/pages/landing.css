@@ -1,10 +1,10 @@
 .btn-login{
     font-size:20px;
-    color:white;
+    color:var(--clr-light);
     text-decoration:none;
     padding: 0.5rem 7rem;
     border-radius:10px ;
-    background-color:#1E2434;
+    background-color:var(--clr-darkblue);
     margin-top:15px;
    
 }
@@ -26,11 +26,11 @@
 .text-alreadyaccount{
     font-size: 12px;
     margin-top:10px;
-    color:#81828A
+    color: var(--clr-grey)
 }
 
 .link-login-landing{
     outline: none;
-    color: white;
+    color: var(--clr-light);
 }
 

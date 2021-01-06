@@ -4,9 +4,11 @@
   --ff-primary: 'Source Sans Pro', sans-serif;
   --ff-secondary: 'Source Code Pro', monospace;
   
-  --clr-light: #fff;
-	--clr-darkblue: #1E2434;
-  --clr-accent: #16e0bd;
+  --clr-light: white;
+  --clr-darkblue: #1E2434;
+  --clr-lightblue:#2DC5FA;
+  --clr-grey: #81828A;
+  --clr-black: black;
   
   --fs-h1: 36px;
 	--fs-h2: 18px;

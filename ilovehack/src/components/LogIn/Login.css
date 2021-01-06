@@ -1,7 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-  }
 
 .login {
     display: flex;
@@ -10,6 +6,7 @@
 }
 
 .login-title{
+margin-top:-27px;
 font-weight: bold;
 font-size: 36px;
 text-align: center;
@@ -17,10 +14,10 @@ padding: 70px;
 border-radius: 0 0 26px 26px;
 height: 100%;
 width: 100%;
-color: white;
-background-color: #1E2434;
+color: var(--clr-light);
+background-color: var(--clr-darkblue);
 margin-bottom: 50px;
-box-shadow: 0 0.6rem 1rem darkgray;
+box-shadow: 0 0.6rem 1rem var(--clr-grey);
 }
 
 .login-form {
@@ -36,26 +33,26 @@ box-shadow: 0 0.6rem 1rem darkgray;
     padding: 10px;
     margin-bottom: 35px;
     border: 0;
-    border-bottom: 1px solid #1E2434;
+    border-bottom: 1px solid var(--clr-darkblue);
     border-radius: 0;
     width: 100%;
     height: 1.46rem;
     padding: 0 0 0.25rem 0;
     font-size: 1rem;
-    color: black;
+    color: var(--clr-black);
 }
 
 
 .signup-login{
     padding-top: 30px;
     font-size: 14px;
-    color: grey;
+    color: var(--clr-grey);
 }
 
 .suhere{
     outline: none;
     text-decoration:underline;
-    color: black;
+    color: var(--clr-black);
 }
 /* a:link, a:visited, a:active {
     text-decoration:none;
@@ -63,12 +60,12 @@ box-shadow: 0 0.6rem 1rem darkgray;
 
 .btn-login2{
     font-size:19px;
-    color:white;
+    color:var(--clr-light);
     text-decoration:none;
     border: none;
     padding: 0.6rem 3rem;
     border-radius:11px ;
-    background-color:#2DC5FA;
+    background-color:var(--clr-lightblue);
     margin-top:15px;
     font-weight: bold; 
 }
@@ -84,7 +81,7 @@ box-shadow: 0 0.6rem 1rem darkgray;
     padding-left: 30px;
     text-decoration:underline;
     outline: none;
-    color: grey;
+    color: var(--clr-grey);
 }
 
 .hawai{
