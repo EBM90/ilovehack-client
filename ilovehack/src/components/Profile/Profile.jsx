@@ -3,6 +3,7 @@ import React from "react";
 import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
 import { Link } from "react-router-dom";
+import './Profile.css'
 
 class Home extends Component {
     state = {
@@ -40,18 +41,11 @@ class Home extends Component {
       };
 
       handleFileUpload = async (e) => {
-        console.log("the file to be uploaded is: ", e.target.files[0]);
-    
-        // creamos un nuevo objeto FormData
+  
         const uploadData = new FormData();
-    
-        // imageUrl (este nombre tiene que ser igual que en el modelo, ya que usaremos req.body como argumento del método .create() cuando creemos una nueva movie en la ruta POST '/api/movies/create')
-        uploadData.append("imgPath", e.target.files[0]);
-    
+
         try {
           const res = await userservice.handleUpload(uploadData);
-    
-          console.log("response is", res);
     
           this.setState({ imgPath: res.secure_url });
         } catch (error) {
@@ -75,13 +69,13 @@ class Home extends Component {
        
         return(
             
-            <div className="form_container">
-              <form onSubmit={this.handleFormSubmit}>
+            <div>
+              <form onSubmit={this.handleFormSubmit} className='form-profile'>
                 <div>
                   <img src={imgPath} alt="" style={{ width: 100 }} />
                 </div>
 
-                <input type="file" onChange={(e) => this.handleFileUpload(e)} />
+                <input type="file" onChange={(e) => this.handleFileUpload(e)} className="upload-input"/>
                 <div className="form_part">
                   <label>Full name:</label>
                   <input

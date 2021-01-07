@@ -34,9 +34,9 @@ class Login extends Component {
 
         <form className="login-form" onSubmit={this.handleFormSubmit}>
           
-        <i className="hawai"><img className="logo-login border1" src="/images/pngegg.png" alt="pixel heart"/><input className="border1" type="email" name="email" value={email} placeholder="Username" onChange={this.handleChange}/></i>
+        <i className="hawai"><img className="logo-login border1" src="/images/email-logo.png" alt="pixel heart"/><input className="border1" type="email" name="email" value={email} placeholder="E-mail" onChange={this.handleChange}/></i>
 
-        <i className="hawai"><img className="logo-login1 border1" src="/images/password.png" alt="pixel heart"/><input className="border1" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} /></i>
+        <i className="hawai"><img className="logo-login1 border1" src="/images/password-logo.png" alt="pixel heart"/><input className="border1" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} /></i>
 
 <div className="align-remember">
           <input className="checkbox-login" type="checkbox" name="remember pass" />
@@ -47,7 +47,7 @@ class Login extends Component {
           <div className="login-button-div">
           <input className="btn-login2" type="submit" value="Log In" />
           </div>
-          <p className="signup-login">Doesn´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
+          <p className="signup-login">Don´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
         </form>
         <Carousel1 />
       </div>
