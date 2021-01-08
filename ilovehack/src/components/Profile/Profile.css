@@ -1,0 +1,25 @@
+
+
+.form-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_part{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 20px;
+}
+
+.upload-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vh;
+    margin: 20px 0 0 0 ;
+}
