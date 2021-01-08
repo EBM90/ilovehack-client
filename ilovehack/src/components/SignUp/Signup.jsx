@@ -167,26 +167,26 @@ class Signup extends Component {
         <form className="signup-form-container" onSubmit={this.handleFormSubmit}>
 
           <div className='signup-form-field'>
-              <i className="hawai"><img className="logo-login1 border1" src="/images/user-logo.png" alt="pixel heart"/><input className="border1" type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/></i> 
+              <i className="input-signup"><img className="logo-input border-input" src="/images/user-logo.png" alt="pixel heart"/><input className="border-input" type="text" name="fullname" value={fullname} onChange={e => this.handleChange(e)} placeholder={this.randomPlaceHolder()} required/></i> 
               {this.state.isError.fullname.length > 0 && (
               <span className="error-input">{this.state.isError.fullname}</span>
               )}
           </div>
           
           <div className='signup-form-field'>
-              <i className="hawai"><img className="logo-login1 border1" src="/images/email-logo.png" alt="pixel heart"/><input className="border1" type="email" name="email" value={email} placeholder="E-mail" onChange={this.handleChange} required/></i>
+              <i className="input-signup"><img className="logo-input border-input" src="/images/email-logo.png" alt="pixel heart"/><input className="border-input" type="email" name="email" value={email} placeholder="E-mail" onChange={this.handleChange} required/></i>
               {this.state.isError.email.length > 0 && (
               <span className="error-input">{this.state.isError.email}</span>
               )}
           </div>
           <div className='signup-form-field'>
-                  <i className="hawai"><img className="logo-login1 border1" src="/images/password-logo.png" alt="pixel heart"/><input className="border1" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} required/></i> 
+                  <i className="input-signup"><img className="logo-input border-input" src="/images/password-logo.png" alt="pixel heart"/><input className="border-input" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} required/></i> 
                   {this.state.isError.password.length > 0 && (
                   <span className="error-input">{this.state.isError.password}</span>
                   )}  
           </div>
           <div className='signup-form-field'> 
-              <i className="hawai"><img className="logo-login1 border1" src="/images/calendar-logo.png" alt="pixel heart"/><input className="border1" type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} required /></i> 
+              <i className="input-signup"><img className="logo-input border-input" src="/images/calendar-logo.png" alt="pixel heart"/><input className="border-input" type="date" name="birthdate" value={birthdate} onChange={ e => this.handleChange(e)} required /></i> 
               {this.state.isError.birthdate.length > 0 && (
               <span className="error-input">{this.state.isError.birthdate}</span>
               )} 
@@ -258,12 +258,12 @@ class Signup extends Component {
               )} 
           
           <input
-                className="form_button_btn"
+                className="btn_lightblue"
                 type="submit"
                 value="Create account"
               />
           </div>
-          <p>Do you have an account? <Link to={"/login"} className='links'> Log in here!</Link></p>
+          <p className='text'>Do you have an account? <Link to={"/login"} className='links'> Log in here!</Link></p>
           </form>
       </div>
     )
