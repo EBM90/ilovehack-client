@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
 import Test from "./Test";
 import './SignUp.css';
+import Login from '../LogIn/Log-in'
 
 class Signup extends Component {
   constructor(props) {
