@@ -28,11 +28,21 @@ class Home extends Component {
 
     componentDidMount(){
         this.getUser()
+        this.redirectToSection()
     }
+
+
+      redirectToSection = async () => {
+        const search = await this.props.location.hash; 
+        if(search === '#events-attending'){
+         window.location.href = await window.location.href;
+        } else if (search === '#my-events')
+        window.location.href = await window.location.href;
+      }
+    
 
     render(){
         const {user, events} = this.state
-       
         return(
             <div>
                 {user && user.fullname ? 
@@ -47,13 +57,13 @@ class Home extends Component {
                         }): <p  className="text">You don't have any matches yet. Check again tomorrow!</p>}
                     </div>
                     <div className="events">
-                        <h3>My events:</h3>
+                        <h3 id="my-events">My events:</h3>
                         {events.map((event, index)=>{
                             if(event.creator && event.creator === user._id){
                                 return <h5 key={index}><Link to={`/event/${event._id}`} className="links">{event.name}</Link></h5>
                             }
                         })}
-                        <h3>Events I'm attending</h3>
+                        <h3 id="events-attending">Events I'm attending</h3>
                         {events.map((event, index)=>{
                             return <div key={index}>
                             {event.attending ? event.attending.map((attendee, index)=>{

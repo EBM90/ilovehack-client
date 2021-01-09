@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withAuth } from "../../lib/AuthProvider";
+import { Link } from "react-router-dom";
 import './Navbar.css'
 
 class Navbar extends Component {
@@ -10,11 +11,24 @@ class Navbar extends Component {
 Toggle = () => {
     this.setState({toggle:!this.state.toggle})
 }
+
+redirectToMyEvents = () => {
+  window.location.href = "#my-events";
+}
+
+redirectToFav = () => {
+  window.location.href = "#events-attending";
+}
+
   render() {
     const { logout, isLoggedin } = this.props;
     return (
       <nav className={this.state.toggle ?  "topnav responsive" : "topnav" }>
+<<<<<<< HEAD
       
+=======
+      <a id="logo-container" href="/"><img className="logo" src="images/logo.png" alt="logo" style={{width:20}}/></a>
+>>>>>>> 721c8b610d4904e48fe95ca753ed7bb9aa148456
       <div>
       {isLoggedin ? (
         <div>
@@ -23,20 +37,20 @@ Toggle = () => {
                 <i className="fa fa-caret-down"></i>
               </button>
               <div className={!this.state.toggle ?  "dropdown-content" : "dropdown-content-show" }>
-                <a href="/my-events"> My events </a>
-                <a href="/fav-events"> Favourite events </a>
-                <a href="/all-events"> All events </a>
+                <Link to="/home#my-events" onClick={() => {this.redirectToMyEvents(); this.Toggle()}}> My events </Link>
+                <Link to="/home#events-attending" onClick={() => {this.redirectToFav(); this.Toggle()}}> Favourite events </Link>
+                <Link to="/all-events" onClick={() => this.Toggle()}> All events </Link>
               </div>
             </div>
-            <a href="/myprofile"> My profile </a>
-            <a href="/matches"> Matches </a>
-            <a href="/faq"> FAQ </a>
+            <Link to="/myprofile" onClick={() => this.Toggle()}> My profile </Link>
+            <Link to="/matches" onClick={() => this.Toggle()}> Matches </Link>
+            <Link to="/faq" onClick={() => this.Toggle()}> FAQ </Link>
             <button className="btn logout dropdown" href="#" onClick={logout}><i className="fa fa-power-off"></i></button>
         </div>) : (<div> 
-            <a href="/"> Home </a>
-            <a href="/login"> Log-in </a>
-            <a href="/signup"> Sign-up </a>
-            <a href="/faq"> FAQ </a>
+            <Link to="/" onClick={() => this.Toggle()}> Home </Link>
+            <Link to="/login" onClick={() => this.Toggle()}> Log-in </Link>
+            <Link to="/signup" onClick={() => this.Toggle()}> Sign-up </Link>
+            <Link to="/faq" onClick={() => this.Toggle()}> FAQ </Link>
           </div>)}
         </div>
         <button onClick={() => this.Toggle()} className="icon btn"> &#9776; </button>

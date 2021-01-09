@@ -19,7 +19,6 @@ class Home extends Component {
             this.setState({
                 events: theEvents
             })
-            console.log(theEvents, 'los eventos')
         } catch (error) {
             console.log(error)
         }
