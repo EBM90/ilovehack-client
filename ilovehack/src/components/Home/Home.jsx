@@ -3,7 +3,7 @@ import React from "react";
 import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
 import { Link } from "react-router-dom";
-
+import './Home.css'
 
 
 class Home extends Component {
@@ -50,7 +50,7 @@ class Home extends Component {
                         <h3>My events:</h3>
                         {events.map((event, index)=>{
                             if(event.creator && event.creator === user._id){
-                                return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
+                                return <h5 key={index}><Link to={`/event/${event._id}`} className="links">{event.name}</Link></h5>
                             }
                         })}
                         <h3>Events I'm attending</h3>
@@ -58,7 +58,7 @@ class Home extends Component {
                             return <div key={index}>
                             {event.attending ? event.attending.map((attendee, index)=>{
                                 if(attendee._id === user._id){
-                                    return <h5 key={index}><Link to={`/event/${event._id}`}>{event.name}</Link></h5>
+                                    return <h5 key={index}><Link to={`/event/${event._id}`} className='links'>{event.name}</Link></h5>
                                 }
                             }) :null}
                             </div>
