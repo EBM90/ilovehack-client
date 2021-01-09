@@ -16,11 +16,9 @@ class Home extends Component {
     getEvents = async () =>{
         try {
             const theEvents = await eventservice.getAllEvents()
-            console.log(theEvents, 'los eventos')
             this.setState({
                 events: theEvents
             })
-           
         } catch (error) {
             console.log(error)
         }
