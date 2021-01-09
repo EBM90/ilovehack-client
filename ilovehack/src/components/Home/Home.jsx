@@ -26,9 +26,9 @@ class Home extends Component {
         }
     }
 
-    componentDidMount(){
-        this.getUser()
-        this.redirectToSection()
+    componentDidMount = async () =>{
+        await this.getUser()
+        await this.redirectToSection()
     }
 
 
