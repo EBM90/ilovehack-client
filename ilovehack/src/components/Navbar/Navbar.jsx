@@ -24,11 +24,6 @@ redirectToFav = () => {
     const { logout, isLoggedin } = this.props;
     return (
       <nav className={this.state.toggle ?  "topnav responsive" : "topnav" }>
-<<<<<<< HEAD
-      
-=======
-      <a id="logo-container" href="/"><img className="logo" src="images/logo.png" alt="logo" style={{width:20}}/></a>
->>>>>>> 721c8b610d4904e48fe95ca753ed7bb9aa148456
       <div>
       {isLoggedin ? (
         <div>

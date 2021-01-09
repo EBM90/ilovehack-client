@@ -4,6 +4,7 @@ import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
 import { Link } from "react-router-dom";
 import './Home.css'
+import Konnections from "../Konnections/Konnections";
 
 
 class Home extends Component {
@@ -48,13 +49,15 @@ class Home extends Component {
                 {user && user.fullname ? 
                 <div className="main">
                     <h1>Hello {user.fullname}</h1>
-                    <div className="konnections">
+                    <div>
                     <div className='konnections-title'>  <h3>Latest Konnections          </h3> <span className="links">See all </span></div>
+
+                    <Konnections />
                        
-                        {user.matches && user.matches.length !== 0 ? 
+                        {/* {user.matches && user.matches.length !== 0 ? 
                         user.matches.map((person, index)=>{
                             return <h6 key={index}>{person.fullname}</h6>
-                        }): <p  className="text">You don't have any matches yet. Check again tomorrow!</p>}
+                        }): <p  className="text">You don't have any matches yet. Check again tomorrow!</p>} */}
                     </div>
                     <div className="events">
                         <h3 id="my-events">My events:</h3>

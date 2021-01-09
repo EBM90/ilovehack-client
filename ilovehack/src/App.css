@@ -9,6 +9,7 @@
 	--clr-darkblue: #1E2434;
   --clr-accent: #2DC5FA;
   --clr-text: rgba(129, 130, 138, 1);
+  --clr-light-grey: #FAFAFA;
   
   --fs-h1: 36px;
 	--fs-h2: 18px;
@@ -37,6 +38,7 @@ body{
 .links{
     color: var(--clr-darkblue);
     text-decoration: underline;
+    margin: 0 10px;
 }
 
 .text{
