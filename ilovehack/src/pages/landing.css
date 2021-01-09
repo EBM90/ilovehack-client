@@ -1,32 +1,27 @@
-.btn-login{
-    font-size:20px;
-    color:white;
-    text-decoration:none;
-    padding: 0.5rem 7rem;
-    border-radius:10px ;
-    background-color:#1E2434;
-    margin-top:15px;
-   
-}
 .align-landing{
     display:flex ;
     align-items: center;
     flex-direction: column;
     text-align: justify;
-    margin-top:50px; 
+    margin: 20px 18px 0 18px; 
     /* font-family:Roboto;
     font-style: normal;
     font-weight: bold; */
 }
 
-.landing-text{
-    margin: 10px  35px;
+.landing-title{
+    font-size: var(--fs-h1);
+  
 }
 
-.text-alreadyaccount{
-    font-size: 12px;
-    margin-top:10px;
-    color:#81828A
+.landing-text{
+
+    margin: 20px  35px;
+}
+
+.title{
+    margin: 30px 0;
+    font-weight: bold;
 }
 
 .link-login-landing{
@@ -121,3 +116,8 @@
     margin-left: 45px;
     margin-top: 5px;
 }
+
+.highlighted{
+    color: var(--clr-accent);
+}
+

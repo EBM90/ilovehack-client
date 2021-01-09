@@ -48,12 +48,13 @@ class Home extends Component {
                 {user && user.fullname ? 
                 <div className="main">
                     <h1>Hello {user.fullname}</h1>
-                    <div className="matches">
-                        <h3>Matches</h3>
+                    <div className="konnections">
+                    <div className='konnections-title'>  <h3>Latest Konnections          </h3> <span className="links">See all </span></div>
+                       
                         {user.matches && user.matches.length !== 0 ? 
                         user.matches.map((person, index)=>{
                             return <h6 key={index}>{person.fullname}</h6>
-                        }): <p>You don't have any matches yet. Check again tomorrow!</p>}
+                        }): <p  className="text">You don't have any matches yet. Check again tomorrow!</p>}
                     </div>
                     <div className="events">
                         <h3 id="my-events">My events:</h3>

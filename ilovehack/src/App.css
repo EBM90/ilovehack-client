@@ -8,6 +8,7 @@
   --clr-light: #fff;
 	--clr-darkblue: #1E2434;
   --clr-accent: #2DC5FA;
+  --clr-text: rgba(129, 130, 138, 1);
   
   --fs-h1: 36px;
 	--fs-h2: 18px;
@@ -20,16 +21,55 @@
   padding: 0;
 }
 
-.App {
-  padding-top: 4rem;
-  font-family: var(--ff-primary);
+
+body{
+  font-family: var(--ff-primary); /*Montserrat*/
+  color: var(--clr-darkblue); 
+  font-size: var(--fs-body); /*16px*/
 }
 
-  .links{
+.App {
+  padding-top: 4rem;
+  
+}
+
+/* links for 'do you already have an account?' or don't have an account?'*/
+.links{
     color: var(--clr-darkblue);
     text-decoration: underline;
-  }
+}
+
+.text{
+  color:var(--clr-text)
+}
+
+/*button for light blue*/
+.btn_lightblue{
+    font-size:19px;
+    color:white;
+    text-decoration:none;
+    border: none;
+    padding: 0.6rem 3rem;
+    border-radius:11px ;
+    background-color:#2DC5FA;
+    margin-bottom:25px;
+    font-weight: bold; 
+}
+
+/* .btn-login{
+  font-size:20px;
+  color:white;
+  text-decoration:none;
+  padding: 0.5rem 7rem;
+  border-radius:10px ;
+  background-color:#1E2434;
+  margin-top:15px;
  
-  
- 
- 
+} */
+
+ /*esta clase esta en varios componentes pero no sé si es buena idea*/
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
