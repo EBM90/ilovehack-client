@@ -14,7 +14,7 @@ Toggle = () => {
     const { logout, isLoggedin } = this.props;
     return (
       <nav className={this.state.toggle ?  "topnav responsive" : "topnav" }>
-      <a id="logo-container" href="/"><img className="logo" src="images/logo.png" alt="pixel heart" style={{width:20}}/></a>
+      
       <div>
       {isLoggedin ? (
         <div>
@@ -40,6 +40,7 @@ Toggle = () => {
           </div>)}
         </div>
         <button onClick={() => this.Toggle()} className="icon btn"> &#9776; </button>
+        <a id="logo-container" href="/"><img className="logo" src="images/logo.png" alt="pixel heart" style={{width:20}}/></a>
         </nav> 
     );
   }
