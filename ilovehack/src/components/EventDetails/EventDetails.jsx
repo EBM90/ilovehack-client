@@ -51,14 +51,12 @@ class EventDetail extends Component {
                 time: theEvent.time,
                 hourStart: theEvent.time.slice(0,2), 
                 minStart: theEvent.time.slice(3,5), 
-                hourFinish: theEvent.time.slice(7,10), 
-                minFinish: theEvent.time.slice(11,13),
+                hourFinish: theEvent.time.slice(6,8), 
+                minFinish: theEvent.time.slice(9,11),
                 isAttending: theEvent.isAttending, 
                 isPublic: theEvent.isPublic, 
                 cohort: theEvent.cohort,
-                
                 })
-
         } catch (error) {
             console.log(error)
         }
@@ -85,7 +83,6 @@ class EventDetail extends Component {
           setHours.push(i.toString())
         }
       }
-
       for(let i = 0; i <= 59; i++){
         if(i <10){
           setMinutes.push('0'+ i)
@@ -93,7 +90,6 @@ class EventDetail extends Component {
           setMinutes.push(i.toString())
         }
       }
-
       this.setState({
         hours: setHours,
         minutes: setMinutes
@@ -173,17 +169,10 @@ class EventDetail extends Component {
       }
 
     handleFileUpload = async (e) => {
-        console.log("the file to be uploaded is: ", e.target.files[0]);
-    
         const uploadData = new FormData();
-      
         uploadData.append("imgPath", e.target.files[0]);
-    
         try {
           const res = await eventservice.handlePic(uploadData);
-    
-          console.log("response is", res);
-    
           this.setState({ imgPath: res.secure_url });
         } catch (error) {
           console.log("Error while uploading the file: ", error);
@@ -225,9 +214,9 @@ class EventDetail extends Component {
           event.preventDefault();
             let {name, description, location, imgPath, date, time, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             if ( hourStart !== '' || hourFinish !== '' || minStart !== '' || minFinish !== '' ){
-              time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
+              time = `${hourStart}:${minStart}-${hourFinish}:${minFinish}`
             } 
-            // console.log(name, description, location, imgPath, date, time, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish)
+             console.log(hourStart, 'la hora inicio', minStart, 'min inicio', hourFinish, 'hora fin', minFinish, 'min fin')
             const id = this.state.event._id
             await eventservice.editEvent({ id, name, 
           description,  
