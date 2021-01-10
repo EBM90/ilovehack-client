@@ -260,7 +260,7 @@ handleFileUpload = async (e) => {
                             onClick={() => this.TogglePublic()}
                   />
                     <input
-                    className="form_button_btn_edit"
+                    className="btn_lightblue"
                     type="submit"
                     value="Create"
                   />

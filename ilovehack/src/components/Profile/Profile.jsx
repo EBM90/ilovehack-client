@@ -105,7 +105,7 @@ class Home extends Component {
                 </div>
                 <div className="form_button_container">
                   <input
-                    className="form_button_btn"
+                    className="btn_lightblue"
                     type="submit"
                     value="Edit"
                   />

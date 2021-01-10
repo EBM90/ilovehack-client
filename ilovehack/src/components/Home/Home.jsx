@@ -50,7 +50,7 @@ class Home extends Component {
                 <div className="main">
                     <h1>Hello {user.fullname}</h1>
                     <div>
-                    <div className='konnections-title'>  <h3>Latest Konnections          </h3> <span className="links">See all </span></div>
+                    <div className='konnections-title'>  <h3>Latest Konnections          </h3> <span className="text">See all </span></div>
 
                     <Konnections />
                        

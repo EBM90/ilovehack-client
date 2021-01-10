@@ -55,8 +55,6 @@ class Home extends Component {
                     <img src='images/Polygon2.png' alt='polygon2' id='right'></img>
                     <img src='images/Polygon3.png' alt='polygon3' id='center'></img>
                 </div> */}
-                
-
                 <div className="align-landing">
                     <h1 className="landing-title">Hey <span className='highlighted'>IronHacker</span>!</h1>
                     <p className="text landing-text">Do you wanna meet other students with your same
