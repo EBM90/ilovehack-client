@@ -3,11 +3,8 @@ import React from "react";
 import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import { withAuth } from "../../lib/AuthProvider";
-=======
 import './Profile.css'
->>>>>>> branch-eric
 
 class Home extends Component {
     state = {
