@@ -27,7 +27,7 @@ box-shadow: 0 0.6rem 1rem var(--clr-grey);
     
 }
 
-.border1{
+.border-input{
     /* border: unset;   */
     /* border-bottom: 3px solid #8a8683; */
     padding: 10px;
@@ -84,18 +84,13 @@ box-shadow: 0 0.6rem 1rem var(--clr-grey);
     color: var(--clr-grey);
 }
 
-.hawai{
+.input-login{
     display:flex;
     flex-direction: row;
     width: 100%;
 }
 
-.logo-login{
-    width: 20px;
-    height: 23px;
-}
-
-.logo-login1{
+.logo-input{
     width: 20px;
     height: 23.5px;
 }

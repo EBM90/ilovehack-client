@@ -12,14 +12,14 @@ import Events from './components/Events/Events.jsx'
 import EventDetail from './components/EventDetails/EventDetails.jsx'
 import Userdetails from './components/User-details/User-details.jsx'
 import Signup from './components/SignUp/Signup.jsx'
-import Navbar from './components/Navbar.jsx'
+import Navbar from './components/Navbar/Navbar.jsx'
 import Create from './components/createEvent/Create.jsx'
 import Login from './components/LogIn/Log-in.jsx'
 import Error from './components/ErrorPage/Error.jsx'
 import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
-import Test from "./components/SignUp/Test";
+import Test from "./components/Test/Test.jsx";
 import landing from './pages/landing.jsx';
 import Sockets from './components/sockets/Sockets.jsx';
 import socket from './components/sockets/Sockets.jsx';
@@ -33,6 +33,7 @@ function App() {
     <div className="App">
      <Switch>
       <AnonRoute exact path='/' component={landing} /> 
+      <PrivateRoute exact path='/test' component={Test}/>
       <PrivateRoute exact path='/home' component={Home} />
       <PrivateRoute exact path='/myprofile' component={Profile}/>
       <PrivateRoute exact path='/all-events' component={Events}/>

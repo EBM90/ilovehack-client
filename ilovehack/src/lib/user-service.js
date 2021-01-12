@@ -21,10 +21,28 @@ class User {
   getUser = async() => {
     try {
         const theUser = await this.user.get('/profile')
-        console.log(theUser)
         return theUser.data
     } catch (error) {
         console.log(error)
+    }
+  }
+
+  getQuestions = async() =>{
+    try {
+      const theQuestions = await this.user.get('/profile/questions')
+      return theQuestions.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  getAnswers = async(answers) => {
+    try {
+      console.log(answers)
+      const theAnswers = await this.user.post('/profile/answers', answers)
+      return theAnswers.data
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -45,6 +63,15 @@ class User {
         return newUser.data
     } catch (error) {
         console.log(error)
+    }
+  }
+
+  getAllUsers = async() =>{
+    try {
+        const allOfThem = await this.user.get('/profile/allusers')
+        return allOfThem.data
+    } catch (error) {
+      console.log(error)
     }
   }
 }
