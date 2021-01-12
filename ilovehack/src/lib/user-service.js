@@ -8,6 +8,16 @@ class User {
     });
   }
 
+  getUserDetails = async(id) => {
+    try {
+        const theUserDetails = await this.user.get(`/profile/${id}`)
+        console.log(theUserDetails)
+        return theUserDetails.data
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
   getUser = async() => {
     try {
         const theUser = await this.user.get('/profile')
