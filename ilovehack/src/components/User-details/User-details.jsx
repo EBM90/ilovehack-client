@@ -1,6 +1,7 @@
 import { Component } from "react";
 import React from "react";
 import userservice from "../../lib/user-service";
+import './User-details.css'
 
 
 export default class Userdetails extends Component {
@@ -12,12 +13,12 @@ export default class Userdetails extends Component {
             try {
                 const {params}=this.props.match
                 const theUser = await userservice.getUserDetails(params.id)
-                console.log(theUser)
 
                 this.setState({
                     user: theUser,
-                    // description: theUser.description,
-                    // imgPath: theUser.imgPath
+                    description: theUser.description,
+                    fullname: theUser.fullname,
+                    imgPath: theUser.imgPath
                 })
                 
             } catch (error) {
@@ -31,10 +32,16 @@ export default class Userdetails extends Component {
 
     render() {
 
-        const {user} = this.state
+        const {user,imgPath} = this.state
         return (
-            <div>
-             <h1>{user.fullname}</h1>
+            <div className="align-profileDetails">
+                  <img className="profilePic" src={imgPath} alt="profile pic"  />
+<div className="profileBox">
+             <h1 className="profileName">{user.fullname}</h1>
+             <p className="profileDesc">{user.description}</p>
+             </div>
+
+             <button className="btn-profileDetails"> Konnect with {user.fullname}</button>
             </div>
         )
     }
