@@ -1,0 +1,43 @@
+.align-profileDetails{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profilePic{
+    margin-bottom:-2rem;
+    margin-top:-3rem;
+    /* height: 23rem;
+    width: 20rem; */
+    clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%);
+}
+
+.profileName{
+    font-family: var(--ff-primary);
+    color: aliceblue;
+    text-align: center;
+}
+
+.profileDesc{
+    font-family: var(--ff-primary); 
+    color: white;
+    text-align:center;
+    margin: 0 8px;
+}
+
+.profileBox{
+    background-color:var(--clr-accent);
+    width: 70%;
+    border-radius: 8px;
+}
+.btn-profileDetails{
+    font-size:19px;
+    color:white;
+    text-decoration:none;
+    border: none;
+    padding: 0.6rem 3rem;
+    border-radius:11px ;
+    background-color:#2DC5FA;
+    font-weight: bold; 
+    margin-top: 1rem;
+}

@@ -10,6 +10,7 @@ import Home from './components/Home/Home.jsx'
 import Profile from './components/Profile/Profile.jsx'
 import Events from './components/Events/Events.jsx'
 import EventDetail from './components/EventDetails/EventDetails.jsx'
+import Userdetails from './components/User-details/User-details.jsx'
 import Signup from './components/SignUp/Signup.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
 import Create from './components/createEvent/Create.jsx'
@@ -38,6 +39,7 @@ function App() {
       <PrivateRoute exact path='/all-events' component={Events}/>
       <PrivateRoute exact path='/add-event' component={Create}/>
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
+      <PrivateRoute exact path='/profile/:id' component={Userdetails}/>
       <AnonRoute exact path='/signup' component={Signup}/>
       <AnonRoute exact path='/test' component={Test}/>
       <AnonRoute exact path='/login' component={Login}/>
