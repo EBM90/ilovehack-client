@@ -2,6 +2,7 @@
 /* rombo --> clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%); */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 :root {
+  /*Título Montse y body Roboto */
   --ff-primary: 'Montserrat', sans-serif;
   --ff-secondary: 'Source Code Pro', monospace;
   
@@ -37,7 +38,6 @@ body{
 .links{
     color: var(--clr-darkblue);
     text-decoration: underline;
-    margin: 0 10px;
 }
 
 .links:hover{
@@ -58,7 +58,6 @@ body{
 
 .text{
   color:var(--clr-text);
-  margin: 10px;
 }
 
 
@@ -80,16 +79,18 @@ body{
     font-weight: bold; 
 }
 
-/* .btn-login{
-  font-size:20px;
-  color:white;
-  text-decoration:none;
-  padding: 0.5rem 7rem;
-  border-radius:10px ;
-  background-color:#1E2434;
-  margin-top:15px;
- 
-} */
+.btn_darkblue{
+    font-size:var(--fs-h2);
+    color:white;
+    text-decoration:none;
+    border: none;
+    padding: 0.6rem 3rem;
+    border-radius:11px ;
+    background-color:#2DC5FA;
+    margin: 15px 0;
+    font-weight: bold; 
+    background-color:#1E2434;
+}
 
  /*esta clase esta en varios componentes pero no sé si es buena idea*/
 .main{

@@ -97,7 +97,7 @@
       transition: all 1s ease-in;
       animation: moveInRight 2000ms forwards;
       position: relative;
-     /* margin-right: 10px; */
+      margin-right: 10px;
   }
 
   #left{
@@ -106,7 +106,7 @@
       transition: all 1s ease-in;
       animation: moveInLeft 2000ms forwards;
       z-index: -1;
-      /* margin-left: 10px; */
+      margin-left: 10px; 
 }
 
 #center{

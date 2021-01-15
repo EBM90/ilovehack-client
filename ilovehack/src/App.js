@@ -20,7 +20,7 @@ import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/Test/Test.jsx";
 import landing from './pages/landing.jsx';
-import Sockets from './components/sockets/Sockets.jsx';
+// import Sockets from './components/sockets/Sockets.jsx';
 import socket from './components/sockets/Sockets.jsx';
 
 

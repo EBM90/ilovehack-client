@@ -2,11 +2,7 @@
 import React, { Component } from 'react'
 import userservice from '../../lib/user-service'
 import './Konnections.css'
-                    // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-                    // Import Swiper styles
-import 'swiper/swiper.scss';
 export default class Konnections extends Component {
     state={
         konnections: []

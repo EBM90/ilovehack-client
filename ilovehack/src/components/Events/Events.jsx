@@ -44,7 +44,7 @@ class Event extends Component {
             {events && events.length !== 0 ? events.map((event, index) =>{
                 return (<div className='event-card' key={index} >
                     <div className='event-image' >
-                        <img src={event.imgPath} style={{width:250, height:125, borderTopLeftRadius:'30px', borderTopRightRadius:'30px'}}></img>
+                        <img src={event.imgPath} alt='event' style={{width:250, height:125, borderTopLeftRadius:'30px', borderTopRightRadius:'30px'}}></img>
                     </div>
                     <div className='event-info'>
                         <div className='event-info-name-location'>
