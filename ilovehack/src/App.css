@@ -56,6 +56,11 @@ body{
 
 }
 
+.big-links:hover{
+  transition: 1s all ease-in;
+  text-decoration: none;
+}
+
 .text{
   color:var(--clr-text);
 }

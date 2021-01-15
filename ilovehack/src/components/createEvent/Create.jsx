@@ -7,7 +7,7 @@ class Create extends Component {
     state ={
         name: '', 
         creator: '',
-        type: '', 
+        kind: '', 
         description: '',
         imgPath: '',  
         location: '',
@@ -120,12 +120,12 @@ handleFileUpload = async (e) => {
       handleFormSubmit = async (event) => {
         try {
           event.preventDefault();
-            const {name, type, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
+            const {name, kind, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             const creator = this.props.user._id
             const time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
-            console.log(type)
+            console.log(kind)
           await eventservice.addEvent({ name,
-          type, 
+          kind, 
           creator, 
           description,  
           location, 
@@ -137,7 +137,7 @@ handleFileUpload = async (e) => {
           cohort });
           this.setState({
             name: '', 
-            type:'',
+            kind:'',
             creator: '', 
             description: '', 
             location: '',
@@ -155,7 +155,7 @@ handleFileUpload = async (e) => {
         }
       };
     render() {
-        const {name, type, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
+        const {name, kind, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
         
         return (
             <div className='form'>
@@ -177,7 +177,7 @@ handleFileUpload = async (e) => {
                     )}
 
                     <label>Type:</label>
-                    <select name="type" value={type} onChange={ e => this.handleChange(e)}>
+                    <select name="kind" value={kind} onChange={ e => this.handleChange(e)}>
                       <option defaultValue=""> Choose one </option>
                       <option value="study">Study</option>
                       <option value="social">Social</option>

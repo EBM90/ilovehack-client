@@ -42,13 +42,15 @@ class Event extends Component {
             <h1>All the events</h1>
             <Link to='/add-event' className='links'>Create an event</Link>
             {events && events.length !== 0 ? events.map((event, index) =>{
-                return (<div className='event-card' key={index} >
+                return (
+                    <Link to={`/event/${event._id}`} className='big-links'>
+                    <div className='event-card' key={index} >
                     <div className='event-image' >
                         <img src={event.imgPath} alt='event' style={{width:250, height:125, borderTopLeftRadius:'30px', borderTopRightRadius:'30px'}}></img>
                     </div>
                     <div className='event-info'>
                         <div className='event-info-name-location'>
-                        <h3 ><Link to={`/event/${event._id}`} className='light-links'>{event.name}</Link></h3>
+                        <h3 >{event.name}</h3>
                         {/* <h5>{event.description}</h5> */}
                         <h5 className='highlighted'>{event.location}</h5>
                         </div>
@@ -58,6 +60,7 @@ class Event extends Component {
                         </div>
                         
                     </div>
+                    
                     {/* <div className='event-attending'>
                         <h5>Attending: </h5>
                         {event.attending && event.attending.length !== 0 ? event.attending.map((attendee, index)=>{
@@ -67,7 +70,9 @@ class Event extends Component {
                     
                     
                    
-                </div>)
+                </div>
+                
+                </Link>)
             }): null}
            </div>
         )
