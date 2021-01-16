@@ -5,6 +5,7 @@ import eventservice from "../../lib/event-service";
 import { Link } from "react-router-dom";
 import './Home.css'
 import Konnections from "../Konnections/Konnections";
+import Loading from '../Loading/loading'
 
 
 class Home extends Component {
@@ -78,7 +79,7 @@ class Home extends Component {
                         })}
                     </div>
                 </div> 
-                : <h1>Loading...</h1>}
+                : <Loading />}
             </div>
             
         )

@@ -69,6 +69,7 @@ class User {
   getAllUsers = async() =>{
     try {
         const allOfThem = await this.user.get('/profile/allusers')
+        console.log(allOfThem)
         return allOfThem.data
     } catch (error) {
       console.log(error)

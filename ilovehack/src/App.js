@@ -21,6 +21,7 @@ import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/Test/Test.jsx";
 import landing from './pages/landing.jsx';
+import Other from './components/Profile/OtherProfile.jsx'
 // import Sockets from './components/sockets/Sockets.jsx';
 import socket from './components/sockets/Sockets.jsx';
 
@@ -47,6 +48,7 @@ function App() {
       <Route exact path='/FAQ' component={FAQ}/>
       <AnonRoute exact path='/onboarding' component={Onboarding}/>
       <AnonRoute exact path='/onboarding2' component={Onboarding2}/>
+      <PrivateRoute exact path='/other' component={Other}/>
       </Switch> 
     </div>
     </AuthProvider>

@@ -1,10 +1,11 @@
 /* GENERAL LAYOUT */
 /* rombo --> clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%); */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 :root {
   /*Título Montse y body Roboto */
-  --ff-primary: 'Montserrat', sans-serif;
-  --ff-secondary: 'Source Code Pro', monospace;
+  --ff-primary: 'Roboto', sans-serif;
+  --ff-secondary: 'Montserrat', monospace;
   
   --clr-light: #fff;
 	--clr-darkblue: #1E2434;
@@ -25,9 +26,13 @@
 
 
 body{
-  font-family: var(--ff-primary); /*Montserrat*/
+  font-family: var(--ff-primary); /*Roboto*/
   color: var(--clr-darkblue); 
   font-size: var(--fs-body); /*16px*/
+}
+
+h1,h2,h3,h4,h5{
+  font-family: var(--ff-secondary);
 }
 
 .App {
