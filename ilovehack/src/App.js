@@ -12,7 +12,7 @@ import Events from './components/Events/Events.jsx'
 import EventDetail from './components/EventDetails/EventDetails.jsx'
 import Userdetails from './components/User-details/User-details.jsx'
 import Signup from './components/SignUp/Signup.jsx'
-import Navbar from './components/Navbar/Navbar.jsx'
+import Navibar from './components/Navbar/Navbar.jsx'
 import Create from './components/createEvent/Create.jsx'
 import Login from './components/LogIn/Log-in.jsx'
 import Error from './components/ErrorPage/Error.jsx'
@@ -31,7 +31,7 @@ function App() {
   socket.emit('coectado', "que pasa cra pasa")
   return (
     <AuthProvider>
-    <Navbar />
+    <Navibar />
     <div className="App">
      <Switch>
       <AnonRoute exact path='/' component={landing} /> 

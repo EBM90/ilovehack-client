@@ -23,7 +23,7 @@ export default class Konnections extends Component {
         return (
             <div className='konnections'>
             
-                {konnections.length !== 0 ? konnections.map((user, index) =>{
+                {/* {konnections.length !== 0 ? konnections.map((user, index) =>{
                     return (
                         
                         <div className='konnection-card' key={index}>
@@ -40,7 +40,7 @@ export default class Konnections extends Component {
                     )
                     
                     
-                }) : <div><p className='text'> You don't have any konnections yet!</p></div>}
+                }) : <div><p className='text'> You don't have any konnections yet!</p></div>} */}
             </div>
         )
     }
