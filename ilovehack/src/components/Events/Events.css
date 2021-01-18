@@ -1,8 +1,34 @@
-.event{
-    display: flex;
+.event-card{
+ 
+    flex: 0 0 auto;
     flex-direction: column;
     align-items: center;
-    border: 2px black solid;
-    width: 50%;
-    margin: 20px;
+    background-color: var(--clr-light-grey);
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0, 0.2);
+    border-radius: 30px;
+    justify-content: space-around;
+    height: 250px;
+    width:250px;
+    margin:20px;
 }
+
+.event-info{
+    display: flex;
+    align-items: center;
+    background-color: var(--clr-darkblue);
+    color: var(--clr-light);
+    height: 125px;
+    width:100%;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.event-info-name-location{
+    padding: 10px;
+    width: 50%;
+}
+
+.event-info-date-time{
+    padding: 10px;
+}
+

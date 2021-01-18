@@ -10,6 +10,7 @@ import Home from './components/Home/Home.jsx'
 import Profile from './components/Profile/Profile.jsx'
 import Events from './components/Events/Events.jsx'
 import EventDetail from './components/EventDetails/EventDetails.jsx'
+import Userdetails from './components/User-details/User-details.jsx'
 import Signup from './components/SignUp/Signup.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
 import Create from './components/createEvent/Create.jsx'
@@ -21,7 +22,8 @@ import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/Test/Test.jsx";
 import TestOfTest from "./components/Test/TestOfTest.jsx";
 import landing from './pages/landing.jsx';
-import Sockets from './components/sockets/Sockets.jsx';
+import Other from './components/Profile/OtherProfile.jsx'
+// import Sockets from './components/sockets/Sockets.jsx';
 import socket from './components/sockets/Sockets.jsx';
 
 
@@ -39,6 +41,7 @@ function App() {
       <PrivateRoute exact path='/all-events' component={Events}/>
       <PrivateRoute exact path='/add-event' component={Create}/>
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
+      <PrivateRoute exact path='/profile/:id' component={Userdetails}/>
       <AnonRoute exact path='/signup' component={Signup}/>
       <AnonRoute exact path='/test' component={Test}/>
       <AnonRoute exact path='/login' component={Login}/>
@@ -46,6 +49,7 @@ function App() {
       <Route exact path='/FAQ' component={FAQ}/>
       <AnonRoute exact path='/onboarding' component={Onboarding}/>
       <AnonRoute exact path='/onboarding2' component={Onboarding2}/>
+      <PrivateRoute exact path='/other' component={Other}/>
       </Switch> 
     </div>
     </AuthProvider>

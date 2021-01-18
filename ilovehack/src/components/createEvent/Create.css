@@ -1,8 +1,14 @@
-.form_part{
+.form-profile{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    margin: 20px;
+}
+
+.form_part{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { withAuth } from "../../lib/AuthProvider";
 import Test from "../Test/Test";
 import './SignUp.css';
-import authservice from '../../lib/auth-service'
+
 
 class Signup extends Component {
   constructor(props) {
@@ -49,12 +49,11 @@ class Signup extends Component {
       /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
     )
     let isError = { ...this.state.isError };
-    const {fullname, password, email, description, birthdate} = this.state
 
         switch (name) {
             case "fullname":
                 isError.fullname =
-                    value.length < 1  ? "Introduce your name" : "";
+                    value.length < 1  ? "Write a valid name" : "";
                 break;
             case "email":
                 isError.email = regExp.test(value) ? "" : "Email address is invalid";
@@ -129,7 +128,7 @@ class Signup extends Component {
 
   checkForErrors = async() =>{
 
-    const { fullname, password, repeatPassword, gender, email, birthdate, description, isError, noErrors, warning } = this.state
+    const { fullname, password, email, birthdate, isError } = this.state
     if(isError.fullname === '' && isError.password === ''){
 
       await this.props.signup({fullname, password, email, birthdate})
@@ -152,7 +151,7 @@ class Signup extends Component {
   };
 
   render() {
-    const { fullname, email, password, repeatPassword, birthdate, gender, description, isHorny, searchFor, noErrors, isError, warning } = this.state;
+    const { fullname, email, password, birthdate, warning } = this.state;
 
 
     return (

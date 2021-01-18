@@ -1,14 +1,17 @@
 /* GENERAL LAYOUT */
 /* rombo --> clip-path: polygon(50% 15%, 75% 30%, 75% 70%, 51% 85%, 50% 85%, 25% 70%, 25% 30%); */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 :root {
-  --ff-primary: 'Montserrat', sans-serif;
-  --ff-secondary: 'Source Code Pro', monospace;
+  /*Título Montse y body Roboto */
+  --ff-primary: 'Roboto', sans-serif;
+  --ff-secondary: 'Montserrat', monospace;
   
   --clr-light: #fff;
 	--clr-darkblue: #1E2434;
   --clr-accent: #2DC5FA;
   --clr-text: rgba(129, 130, 138, 1);
+  --clr-light-grey: #FAFAFA;
   
   --fs-h1: 36px;
 	--fs-h2: 18px;
@@ -23,49 +26,81 @@
 
 
 body{
-  font-family: var(--ff-primary); /*Montserrat*/
+  font-family: var(--ff-primary); /*Roboto*/
   color: var(--clr-darkblue); 
   font-size: var(--fs-body); /*16px*/
 }
 
-.App {
-  padding-top: 4rem;
-  
+h1,h2,h3,h4,h5{
+  font-family: var(--ff-secondary);
 }
 
-/* links for 'do you already have an account?' or don't have an account?'*/
+.App {
+  padding-top: 4rem;
+}
+
+/* links for 'do you already have an account?' or 'don't have an account?'*/
 .links{
     color: var(--clr-darkblue);
     text-decoration: underline;
 }
 
-.text{
-  color:var(--clr-text)
+.links:hover{
+  color: var(--clr-text)
 }
 
+.light-links{
+  color: var(--clr-light);
+  text-decoration: none;
+
+}
+
+.light-links:hover{
+  color: var(--clr-text);
+  text-decoration: underline;
+
+}
+
+.big-links:hover{
+  transition: 1s all ease-in;
+  text-decoration: none;
+}
+
+.text{
+  color:var(--clr-text);
+}
+
+
+.highlighted{
+  color: var(--clr-accent);
+} 
+
+/*BUTTONS*/
 /*button for light blue*/
 .btn_lightblue{
-    font-size:19px;
+    font-size:var(--fs-h2);
     color:white;
     text-decoration:none;
     border: none;
     padding: 0.6rem 3rem;
     border-radius:11px ;
     background-color:#2DC5FA;
-    margin-bottom:25px;
+    margin: 15px 0;
     font-weight: bold; 
 }
 
-/* .btn-login{
-  font-size:20px;
-  color:white;
-  text-decoration:none;
-  padding: 0.5rem 7rem;
-  border-radius:10px ;
-  background-color:#1E2434;
-  margin-top:15px;
- 
-} */
+.btn_darkblue{
+    font-size:var(--fs-h2);
+    color:white;
+    text-decoration:none;
+    border: none;
+    padding: 0.6rem 3rem;
+    border-radius:11px ;
+    background-color:#2DC5FA;
+    margin: 15px 0;
+    font-weight: bold; 
+    background-color:#1E2434;
+}
 
  /*esta clase esta en varios componentes pero no sé si es buena idea*/
 .main{

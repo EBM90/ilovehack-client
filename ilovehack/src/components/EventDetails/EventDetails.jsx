@@ -203,9 +203,9 @@ class EventDetail extends Component {
         const {isAttending, user, event } = this.state
         this.userAttendAlready()
             if (isAttending === true){
-            return <button onClick={() => this.unJoinThisEvent(user._id, event._id)}>Unjoin</button>
+            return <button onClick={() => this.unJoinThisEvent(user._id, event._id)} className='btn_darkblue'>Unjoin</button>
             } else {
-              return <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+              return <button onClick={() => this.joinThisEvent(user._id, event._id)} className='btn_lightblue'>Join</button>
             }
     }
 
@@ -378,17 +378,17 @@ class EventDetail extends Component {
                 : 
                 <>
                 {event.name ? 
-                    <div>
+                    <>
                         <img src={event.imgPath} alt='' style={{width: 100}}/>
                         <h1>{event.name}</h1>
                         <h5>{event.time ? event.time : null}  -  {event.date ? this.reverseString(event.date.slice(0,10)) : ""}</h5>
                         <p>{event.location}</p>
-                        <p>{event.description}</p>
+                        <p className='text'>{event.description}</p>
                         <h5>Attending: </h5>
                         {event.attending && event.attending.length !== 0 ? event.attending.map((attendee, index)=>{
-                            return <p key={index}><Link to={`/profile/${attendee._id}`}>{attendee.fullname}</Link></p>
+                            return <p key={index}><Link to={`/profile/${attendee._id}`} className='links'>{attendee.fullname}</Link></p>
                         }): <p>Be the first to join this event!</p>}
-                    </div>
+                    </>
                     
 
                 : null}  

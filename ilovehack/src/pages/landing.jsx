@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import { withAuth } from "../lib/AuthProvider";
 import './landing.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button,Modal } from 'react-bootstrap';
+// import { Button,Modal } from 'react-bootstrap';
 import Carousel1 from "../components/carousel/Carousel";
 
 class Home extends Component {
@@ -36,7 +36,6 @@ class Home extends Component {
     
 
     render(){
-        const {events} = this.state
         return(
             <div className='main'>
                 <h1 className='title'>Hac<span className='kaka'><span id='k'>K</span></span>onnect</h1>
@@ -55,8 +54,6 @@ class Home extends Component {
                     <img src='images/Polygon2.png' alt='polygon2' id='right'></img>
                     <img src='images/Polygon3.png' alt='polygon3' id='center'></img>
                 </div> */}
-                
-
                 <div className="align-landing">
                     <h1 className="landing-title">Hey <span className='highlighted'>IronHacker</span>!</h1>
                     <p className="text landing-text">Do you wanna meet other students with your same

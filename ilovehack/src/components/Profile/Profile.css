@@ -1,5 +1,4 @@
 
-
 .form-profile{
     display: flex;
     flex-direction: column;
@@ -10,16 +9,16 @@
 .form_part{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    width: 50%;
-    margin: 20px;
+    width: 90%;
+    margin: 20px; 
 }
 
 .upload-input{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vh;
+    width: 200px;
     margin: 20px 0 0 0 ;
 }

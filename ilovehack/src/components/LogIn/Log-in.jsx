@@ -45,7 +45,7 @@ class Login extends Component {
           </div>
 
           <div className="login-button-div">
-          <input className="btn-login2" type="submit" value="Log In" />
+          <input className="btn_lightblue" type="submit" value="Log In" />
           </div>
           <p className="signup-login">Don´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
         </form>

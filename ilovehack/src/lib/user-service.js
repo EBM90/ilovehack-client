@@ -8,6 +8,16 @@ class User {
     });
   }
 
+  getUserDetails = async(id) => {
+    try {
+        const theUserDetails = await this.user.get(`/profile/${id}`)
+        console.log(theUserDetails)
+        return theUserDetails.data
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
   getUser = async() => {
     try {
         const theUser = await this.user.get('/profile')
@@ -53,6 +63,16 @@ class User {
         return newUser.data
     } catch (error) {
         console.log(error)
+    }
+  }
+
+  getAllUsers = async() =>{
+    try {
+        const allOfThem = await this.user.get('/profile/allusers')
+        console.log(allOfThem)
+        return allOfThem.data
+    } catch (error) {
+      console.log(error)
     }
   }
 }

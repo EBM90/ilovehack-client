@@ -6,7 +6,8 @@ import './Create.css'
 class Create extends Component {
     state ={
         name: '', 
-        creator: '', 
+        creator: '',
+        kind: '', 
         description: '',
         imgPath: '',  
         location: '',
@@ -103,16 +104,12 @@ class Create extends Component {
 handleFileUpload = async (e) => {
   console.log("the file to be uploaded is: ", e.target.files[0]);
 
-  // creamos un nuevo objeto FormData
   const uploadData = new FormData();
 
-  // imageUrl (este nombre tiene que ser igual que en el modelo, ya que usaremos req.body como argumento del método .create() cuando creemos una nueva movie en la ruta POST '/api/movies/create')
   uploadData.append("imgPath", e.target.files[0]);
 
   try {
     const res = await eventservice.handleUpload(uploadData);
-
-    console.log("response is", res);
 
     this.setState({ imgPath: res.secure_url });
   } catch (error) {
@@ -123,10 +120,12 @@ handleFileUpload = async (e) => {
       handleFormSubmit = async (event) => {
         try {
           event.preventDefault();
-            const {name, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
+            const {name, kind, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             const creator = this.props.user._id
             const time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
-          await eventservice.addEvent({ name, 
+            console.log(kind)
+          await eventservice.addEvent({ name,
+          kind, 
           creator, 
           description,  
           location, 
@@ -138,6 +137,7 @@ handleFileUpload = async (e) => {
           cohort });
           this.setState({
             name: '', 
+            kind:'',
             creator: '', 
             description: '', 
             location: '',
@@ -155,7 +155,7 @@ handleFileUpload = async (e) => {
         }
       };
     render() {
-        const {name, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
+        const {name, kind, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
         
         return (
             <div className='form'>
@@ -175,6 +175,15 @@ handleFileUpload = async (e) => {
                   {this.state.isError.name.length > 0 && (
                     <span className="">{this.state.isError.name}</span>
                     )}
+
+                    <label>Type:</label>
+                    <select name="kind" value={kind} onChange={ e => this.handleChange(e)}>
+                      <option defaultValue=""> Choose one </option>
+                      <option value="study">Study</option>
+                      <option value="social">Social</option>
+                      <option value="sport">Sport</option>
+                      <option value="other">Other</option>
+                    </select>
                   <label>Description:</label>
                     <textarea
                             type="textarea"
@@ -260,7 +269,7 @@ handleFileUpload = async (e) => {
                             onClick={() => this.TogglePublic()}
                   />
                     <input
-                    className="form_button_btn_edit"
+                    className="btn_lightblue"
                     type="submit"
                     value="Create"
                   />

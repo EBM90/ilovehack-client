@@ -1,8 +1,8 @@
 import { Component } from "react";
 import React from "react";
 import userservice from "../../lib/user-service";
-import eventservice from "../../lib/event-service";
-import { Link } from "react-router-dom";
+// import eventservice from "../../lib/event-service";
+// import { Link } from "react-router-dom";
 import './Profile.css'
 
 class Home extends Component {
@@ -105,7 +105,7 @@ class Home extends Component {
                 </div>
                 <div className="form_button_container">
                   <input
-                    className="form_button_btn"
+                    className="btn_lightblue"
                     type="submit"
                     value="Edit"
                   />
