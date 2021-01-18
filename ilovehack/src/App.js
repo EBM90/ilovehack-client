@@ -19,6 +19,7 @@ import FAQ from './components/FAQ/FAQ.jsx'
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/Test/Test.jsx";
+import TestOfTest from "./components/Test/TestOfTest.jsx";
 import landing from './pages/landing.jsx';
 import Sockets from './components/sockets/Sockets.jsx';
 import socket from './components/sockets/Sockets.jsx';
@@ -32,7 +33,7 @@ function App() {
     <div className="App">
      <Switch>
       <AnonRoute exact path='/' component={landing} /> 
-      <PrivateRoute exact path='/test' component={Test}/>
+      {/* <PrivateRoute exact path='/test' component={TestOfTest}/> */}
       <PrivateRoute exact path='/home' component={Home} />
       <PrivateRoute exact path='/myprofile' component={Profile}/>
       <PrivateRoute exact path='/all-events' component={Events}/>

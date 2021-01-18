@@ -141,7 +141,7 @@ class Test extends Component {
                     return (
                         <div key={index}>
                         <label for={answer}>{answer}</label>
-                        <input onChange={e => this.handleChange(e)} id={`answer${number}`} type='radio' name={`answer${number}`} value={answer} />
+                        <input onChange={e => this.handleChange(e)} id={`answer${number}`} type='radio' name={`answer${number}`} value={answer} checked={answer} />
                         </div>
                         )
                         }) : <p>There are no answers yet!</p>}
