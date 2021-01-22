@@ -2,7 +2,8 @@ import { Component } from "react";
 import React from "react";
 import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
-import { Link } from "react-router-dom";
+import Event from '../Event/event'
+
 import './Home.css'
 import Konnections from "../Konnections/Konnections";
 import Loading from '../Loading/loading'
@@ -11,16 +12,35 @@ import Loading from '../Loading/loading'
 class Home extends Component {
     state = {
         user: {},
-        events: []
+        events: [],
+        created: [],
+        attend: []
     }
 
-    getUser = async () =>{
+    getInfo = async () =>{
         try {
             const theUser = await userservice.getUser()
             const theEvents = await eventservice.getAllEvents()
+            const eventsCreated = []
+            const eventsAttend = []
+
+            theEvents.forEach((event)=>{
+                if(event.creator && event.creator === theUser._id){
+                    eventsCreated.push(event)
+                }
+
+                event.attending.forEach((attendee)=>{
+                    if(attendee._id === theUser._id){
+                        eventsAttend.push(event)
+                    }
+                })
+            })
+
             this.setState({
                 user: theUser,
-                events: theEvents
+                events: theEvents,
+                created: eventsCreated,
+                attend: eventsAttend
             })
             
         } catch (error) {
@@ -29,7 +49,7 @@ class Home extends Component {
     }
 
     componentDidMount = async () =>{
-        await this.getUser()
+        await this.getInfo()
         await this.redirectToSection()
     }
 
@@ -41,46 +61,33 @@ class Home extends Component {
         } else if (search === '#my-events')
         window.location.href = await window.location.href;
       }
+
+      reverseString(str) {
+        let strArr = str.split('-')
+        return strArr.reverse().join('/')
+    }
     
 
     render(){
-        const {user, events} = this.state
+        const {user, created, attend} = this.state
         return(
-            <div>
+            <>
                 {user && user.fullname ? 
                 <div className="main">
-                    <h1>Hello {user.fullname}</h1>
+                   <Konnections />
                     <div>
-                    <div className='konnections-title'>  <h3>Latest Konnections          </h3> <span className="text">See all </span></div>
-
-                    <Konnections />
-                       
-                        {/* {user.matches && user.matches.length !== 0 ? 
-                        user.matches.map((person, index)=>{
-                            return <h6 key={index}>{person.fullname}</h6>
-                        }): <p  className="text">You don't have any matches yet. Check again tomorrow!</p>} */}
-                    </div>
-                    <div className="events">
-                        <h3 id="my-events">My events:</h3>
-                        {events.map((event, index)=>{
-                            if(event.creator && event.creator === user._id){
-                                return <h5 key={index}><Link to={`/event/${event._id}`} className="links">{event.name}</Link></h5>
-                            }
-                        })}
-                        <h3 id="events-attending">Events I'm attending</h3>
-                        {events.map((event, index)=>{
-                            return <div key={index}>
-                            {event.attending ? event.attending.map((attendee, index)=>{
-                                if(attendee._id === user._id){
-                                    return <h5 key={index}><Link to={`/event/${event._id}`} className='links'>{event.name}</Link></h5>
-                                }
-                            }) :null}
-                            </div>
-                        })}
+                        <h3>My events:</h3>
+                        <div className='slider-events'>
+                            <Event events={created} />
+                        </div>
+                        <h3>Events I'm attending</h3>
+                        <div className='slider-events'>
+                            <Event events={attend} />
+                        </div>
                     </div>
                 </div> 
                 : <Loading />}
-            </div>
+            </>
             
         )
     }

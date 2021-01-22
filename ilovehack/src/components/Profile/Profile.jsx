@@ -1,11 +1,11 @@
 import { Component } from "react";
 import React from "react";
 import userservice from "../../lib/user-service";
-// import eventservice from "../../lib/event-service";
-// import { Link } from "react-router-dom";
+import { withAuth } from "../../lib/AuthProvider";
 import './Profile.css'
 
-class Home extends Component {
+
+class Profile extends Component {
     state = {
         user: {},
         fullname: '',
@@ -66,16 +66,16 @@ class Home extends Component {
 
     render(){
         const {fullname, description, email, imgPath} = this.state
-       
+       const {logout} =this.props
         return(
-            
-            <div>
+            <>
+            <h1>Profile</h1>
+            <div className='main'>
               <form onSubmit={this.handleFormSubmit} className='form-profile'>
-                <div>
-                  <img src={imgPath} alt="" style={{ width: 100 }} />
+                <div className='card-image'>
+                  <img src={imgPath} alt="" className='rombo-image' />
+                  <input type="file" onChange={(e) => this.handleFileUpload(e)} className="upload-input"/>
                 </div>
-
-                <input type="file" onChange={(e) => this.handleFileUpload(e)} className="upload-input"/>
                 <div className="form_part">
                   <label>Full name:</label>
                   <input
@@ -111,9 +111,10 @@ class Home extends Component {
                   />
                 </div>
               </form>
+              <button className='btn_darkblue' onClick={logout}>Log out</button>
             </div>
-            
+            </>
         )
     }
 }
-export default Home;
+export default withAuth(Profile);

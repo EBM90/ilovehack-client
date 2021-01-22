@@ -1,0 +1,23 @@
+.title{
+    margin:50px;
+    font-weight: bolder;
+}
+
+/* .kaka{
+        border: 5px solid var(--clr-accent);
+        background: linear-gradient(to top, var(--clr-accent) 50%, #fff 50%);
+        background-size: 100% 200%;
+        transition: all 1s ease-in;
+        clip-path: polygon(50% 15%, 90% 30%, 90% 70%, 51% 85%, 50% 85%, 10% 70%, 10% 30%);
+        animation: load 2000ms forwards;  
+} */
+  
+#k {
+    border: 5px solid var(--clr-accent);
+    background: linear-gradient(to top, var(--clr-accent) 50%, #fff 50%);
+    background-size: 100% 200%;
+    transition: all 1s ease-in;
+    clip-path: polygon(50% 15%, 90% 30%, 90% 70%, 51% 85%, 50% 85%, 10% 70%, 10% 30%);
+    animation: load 3000ms forwards;
+    padding: 10px;
+  }

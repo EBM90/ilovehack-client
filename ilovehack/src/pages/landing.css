@@ -11,31 +11,20 @@
 
 .landing-title{
     font-size: var(--fs-h1);
-  
+    font-weight: bolder;
 }
 
 .landing-text{
-
     margin: 20px  35px;
-}
-
-.title{
-    margin: 30px 0;
-    font-weight: bold;
-}
-
-.link-login-landing{
-    outline: none;
-    color: var(--clr-light);
 }
 
 @keyframes load {
     0% {  background-position: top left;
-      padding: 50px;
+      /* padding: 50px; */
     color: #000; }
   
     100% { background-position: bottom left; 
-      padding: 10px;
+      /* padding: 10px; */
       color: #fff; }
   }
 
@@ -60,61 +49,9 @@
     100%{
         transform: translateX(-1.5rem);
     }
-
-    /* 100%{
-        opacity: 1;
-    } */
 }
 
-/* .kaka{
-        border: 5px solid var(--clr-accent);
-        background: linear-gradient(to top, var(--clr-accent) 50%, #fff 50%);
-        background-size: 100% 200%;
-        transition: all 1s ease-in;
-        clip-path: polygon(50% 15%, 90% 30%, 90% 70%, 51% 85%, 50% 85%, 10% 70%, 10% 30%);
-        animation: load 2000ms forwards;  
-} */
+
   
-  #k {
-    border: 5px solid var(--clr-accent);
-    background: linear-gradient(to top, var(--clr-accent) 50%, #fff 50%);
-    background-size: 100% 200%;
-    transition: all 1s ease-in;
-    clip-path: polygon(50% 15%, 90% 30%, 90% 70%, 51% 85%, 50% 85%, 10% 70%, 10% 30%);
-    animation: load 2000ms forwards;
-  }
-
-  .secondLogo{
-      display: flex;
-      flex-direction: row;
-      position: absolute;
-      margin-left: 20px;
-      margin: 60px 0px;
-  }
-
-  #right{
-      width: 70px;
-      transition: all 1s ease-in;
-      animation: moveInRight 2000ms forwards;
-      position: relative;
-      margin-right: 10px;
-  }
-
-  #left{
-      position: relative;
-      width: 70px;
-      transition: all 1s ease-in;
-      animation: moveInLeft 2000ms forwards;
-      z-index: -1;
-      margin-left: 10px; 
-}
-
-#center{
-    position: absolute;
-    width: 50px;
-    z-index: 1;
-    margin-left: 45px;
-    margin-top: 5px;
-}
 
 
