@@ -1,7 +1,7 @@
 import { Component } from "react";
 import React from "react";
 import eventservice from "../../lib/event-service.js";
-import EventSlider from '../../components/Event/event'
+import Event from '../../components/Event/event'
 import Title from '../../components/Title/title'
 import {Link} from 'react-router-dom'
 import { withAuth } from "../../lib/AuthProvider";
@@ -46,7 +46,9 @@ class Home extends Component {
                 </div>
                 <div className='landing-events'>
                 <div className='events-title'><h3 className='landing-title'>Events</h3> <Link to='/all-events' className='links'>See all</Link></div>
-                    <EventSlider events={events} />
+                    <div className='slider-events'>
+                        <Event events={events} />
+                    </div>
                 </div>
         </div>
         )}

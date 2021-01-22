@@ -1,41 +1,14 @@
 import { Component } from "react";
 import React from "react";
-import userservice from "../../lib/user-service";
-import eventservice from "../../lib/event-service";
-import { Link } from "react-router-dom";
 
 class OtherProfile extends Component {
-    state = {
-        user: {},
-        events: []
-    }
-
-    getUser = async () =>{
-        try {
-            const theUser = await userservice.getUser()
-            const theEvents = await eventservice.getAllEvents()
-            console.log(theEvents)
-            this.setState({
-                user: theUser,
-                events: theEvents
-            })
-            
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    componentDidMount(){
-        this.getUser()
-    }
 
     render(){
-        const {user, events} = this.state
        
         return(<>
             <div className="ui card">
                 <div className="image">
-                    <img src="./defaultpic.jpg" />
+                    <img src="./defaultpic.jpg" alt='default'/>
                 </div>
             <div className="content">
                 <a className="header">Kristy</a>

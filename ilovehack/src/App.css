@@ -130,3 +130,18 @@ h1,h2,h3,h4,h5{
   flex-direction: row;
   justify-content: space-between;
 }
+
+.slider-events{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  flex-direction: row;
+  -ms-overflow-style: none;
+  width: 320px;
+  height: auto;
+  padding: 20px 0;
+}
+
+.slider-events::-webkit-scrollbar{
+  display: none;
+}
