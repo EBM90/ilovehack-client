@@ -3,7 +3,7 @@ import { withAuth } from '../../lib/AuthProvider.js';
 import { Link } from "react-router-dom";
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Carousel1 from "../carousel/Carousel";
+import Carousel1 from "../../components/carousel/Carousel";
 
 class Login extends Component {
   state = { email: "", password: "" };

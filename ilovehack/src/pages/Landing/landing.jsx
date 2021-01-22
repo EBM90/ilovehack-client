@@ -1,10 +1,10 @@
 import { Component } from "react";
 import React from "react";
-import eventservice from "../lib/event-service.js";
-import EventSlider from '../components/Event/event'
-import Title from '../components/Title/title'
+import eventservice from "../../lib/event-service.js";
+import EventSlider from '../../components/Event/event'
+import Title from '../../components/Title/title'
 import {Link} from 'react-router-dom'
-import { withAuth } from "../lib/AuthProvider";
+import { withAuth } from "../../lib/AuthProvider";
 import './landing.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { Button,Modal } from 'react-bootstrap';

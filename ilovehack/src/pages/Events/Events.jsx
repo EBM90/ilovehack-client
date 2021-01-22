@@ -1,7 +1,7 @@
 import { Component } from "react";
 import React from "react";
 import eventservice from "../../lib/event-service";
-import Event from '../Event/event'
+import Event from '../../components/Event/event'
 import {Link} from 'react-router-dom'
 import './Events.css'
 

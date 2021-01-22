@@ -2,11 +2,11 @@ import { Component } from "react";
 import React from "react";
 import userservice from "../../lib/user-service";
 import eventservice from "../../lib/event-service";
-import Event from '../Event/event'
+import Event from '../../components/Event/event'
 
 import './Home.css'
-import Konnections from "../Konnections/Konnections";
-import Loading from '../Loading/loading'
+import Konnections from "../../components/Konnections/Konnections";
+import Loading from '../../components/Loading/loading'
 
 
 class Home extends Component {
