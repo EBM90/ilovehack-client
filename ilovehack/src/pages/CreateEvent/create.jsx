@@ -6,8 +6,7 @@ import './Create.css'
 class Create extends Component {
     state ={
         name: '', 
-        creator: '',
-        kind: '', 
+        creator: '', 
         description: '',
         imgPath: '',  
         location: '',
@@ -120,12 +119,10 @@ handleFileUpload = async (e) => {
       handleFormSubmit = async (event) => {
         try {
           event.preventDefault();
-            const {name, kind, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
+            const {name, description, location, imgPath, date, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             const creator = this.props.user._id
             const time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
-            console.log(kind)
-          await eventservice.addEvent({ name,
-          kind, 
+          await eventservice.addEvent({ name, 
           creator, 
           description,  
           location, 
@@ -137,7 +134,6 @@ handleFileUpload = async (e) => {
           cohort });
           this.setState({
             name: '', 
-            kind:'',
             creator: '', 
             description: '', 
             location: '',
@@ -155,7 +151,7 @@ handleFileUpload = async (e) => {
         }
       };
     render() {
-        const {name, kind, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
+        const {name, description, imgPath, date, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish} = this.state
         
         return (
             <div className='form'>
@@ -176,14 +172,6 @@ handleFileUpload = async (e) => {
                     <span className="">{this.state.isError.name}</span>
                     )}
 
-                    <label>Type:</label>
-                    <select name="kind" value={kind} onChange={ e => this.handleChange(e)}>
-                      <option defaultValue=""> Choose one </option>
-                      <option value="study">Study</option>
-                      <option value="social">Social</option>
-                      <option value="sport">Sport</option>
-                      <option value="other">Other</option>
-                    </select>
                   <label>Description:</label>
                     <textarea
                             type="textarea"

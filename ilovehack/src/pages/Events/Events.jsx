@@ -30,12 +30,7 @@ class Events extends Component {
     componentDidMount(){
         this.getEvents()
     }
-
-    reverseString(str) {
-        let strArr = str.split('-')
-        return strArr.reverse().join('/')
-    }
-
+    
     render(){
         const {events} = this.state
         return(

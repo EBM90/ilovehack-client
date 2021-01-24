@@ -61,11 +61,6 @@ class Home extends Component {
         } else if (search === '#my-events')
         window.location.href = await window.location.href;
       }
-
-      reverseString(str) {
-        let strArr = str.split('-')
-        return strArr.reverse().join('/')
-    }
     
 
     render(){
