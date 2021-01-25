@@ -17,6 +17,10 @@ class EventDetail extends Component {
         finish: '',
         hours: [],
         minutes: [],
+        hourStart: '', 
+        hourFinish: '', 
+        minStart: '', 
+        minFinish: '',
         isAttending: '', 
         isPublic: '', 
         cohort: '',
@@ -27,6 +31,7 @@ class EventDetail extends Component {
           description: "",
           location: "",
           date: "",
+          time: "",
         },
     }
 
@@ -35,7 +40,6 @@ class EventDetail extends Component {
             const {params} = this.props.match
             const theEvent = await eventservice.getTheEvent(params.id)
             const theUser = await profileservice.getUser()
-            console.log(theEvent)
             this.setState({
                 event: theEvent,
                 user: theUser,
@@ -45,19 +49,28 @@ class EventDetail extends Component {
                 imgPath: theEvent.imgPath,
                 location: theEvent.location,
                 time: theEvent.time,
+                hourStart: theEvent.time.slice(0,2), 
+                minStart: theEvent.time.slice(3,5), 
+                hourFinish: theEvent.time.slice(6,8), 
+                minFinish: theEvent.time.slice(9,11),
                 isAttending: theEvent.isAttending, 
                 isPublic: theEvent.isPublic, 
                 cohort: theEvent.cohort,
                 })
-
         } catch (error) {
             console.log(error)
         }
     }
 
-    componentDidMount(){
+    componentDidMount = async () =>{
+      try {
         this.getEvent()
         this.setTime()
+        this.userAttendAlready()
+        this.joinButton()
+      } catch (error) {
+        
+      }
     }
 
     setTime = () => {
@@ -70,7 +83,6 @@ class EventDetail extends Component {
           setHours.push(i.toString())
         }
       }
-
       for(let i = 0; i <= 59; i++){
         if(i <10){
           setMinutes.push('0'+ i)
@@ -78,7 +90,6 @@ class EventDetail extends Component {
           setMinutes.push(i.toString())
         }
       }
-
       this.setState({
         hours: setHours,
         minutes: setMinutes
@@ -90,6 +101,21 @@ class EventDetail extends Component {
     }
     ToggleAttend = () => {
       this.setState({isAttending:!this.state.isAttending})
+    }
+
+    userAttendAlready = async () => {
+      try {
+        const {user, event} = this.state;
+        const attendOrNot = event.attending.map((attendees, index) => (attendees._id))
+        const userAttend = attendOrNot.indexOf(user._id)
+      if(userAttend === -1){
+        this.setState({isAttending: false })
+        } else {
+          this.setState({isAttending: true })
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
     
     handleChange = event => {
@@ -115,10 +141,12 @@ class EventDetail extends Component {
                     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
                     var yyyy = today.getFullYear();
                     today = yyyy + '-' + mm + '-' + dd;
-                    console.log(today)
-                    console.log(value)
                     isError.date =
                        value < today ? "Choose a date in the future :)" : "";
+                break;
+                case "time":
+                    isError.time = 
+                      value === "" ? "Choose a right time" : "";
                 break;
                 default:
                     break;
@@ -129,18 +157,22 @@ class EventDetail extends Component {
         });
       };
 
+      reverseString(str) {
+          let strArr = str.split('-')
+          return strArr.reverse().join('/')
+      }
+  
+      dateForm(){
+        this.setState({
+          showForm: !this.state.showForm
+        })
+      }
+
     handleFileUpload = async (e) => {
-        console.log("the file to be uploaded is: ", e.target.files[0]);
-    
         const uploadData = new FormData();
-      
         uploadData.append("imgPath", e.target.files[0]);
-    
         try {
           const res = await eventservice.handlePic(uploadData);
-    
-          console.log("response is", res);
-    
           this.setState({ imgPath: res.secure_url });
         } catch (error) {
           console.log("Error while uploading the file: ", error);
@@ -149,24 +181,32 @@ class EventDetail extends Component {
 
     joinThisEvent= async(user_id, event_id) =>{
         try {
-            console.log(user_id, event_id)
             await eventservice.joinEvent(user_id, event_id)
             this.props.history.push('/home')
         } catch (error) {
             console.log(error)
         }
-        
     }
 
-    reverseString(str) {
-        let strArr = str.split('-')
-        return strArr.reverse().join('/')
+    unJoinThisEvent = async (user_id, event_id) =>{
+      user_id = this.state.user._id
+      event_id = this.state.event._id
+      try {
+          await eventservice.unJoinEvent(user_id, event_id)
+          this.props.history.push('/home')
+      } catch (error) {
+          console.log(error)
+      }
     }
 
-    dateForm(){
-      this.setState({
-        showForm: !this.state.showForm
-      })
+    joinButton = () => {
+        const {isAttending, user, event } = this.state
+        this.userAttendAlready()
+            if (isAttending === true){
+            return <button onClick={() => this.unJoinThisEvent(user._id, event._id)}>Unjoin</button>
+            } else {
+              return <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+            }
     }
 
     handleFormSubmit = async (event) => {
@@ -174,9 +214,9 @@ class EventDetail extends Component {
           event.preventDefault();
             let {name, description, location, imgPath, date, time, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish} = this.state
             if ( hourStart !== '' || hourFinish !== '' || minStart !== '' || minFinish !== '' ){
-              time = `${hourStart}:${minStart} - ${hourFinish}:${minFinish}`
-            }
-            // console.log(name, description, location, imgPath, date, time, isAttending, isPublic, cohort, hourStart, hourFinish, minStart, minFinish)
+              time = `${hourStart}:${minStart}-${hourFinish}:${minFinish}`
+            } 
+             console.log(hourStart, 'la hora inicio', minStart, 'min inicio', hourFinish, 'hora fin', minFinish, 'min fin')
             const id = this.state.event._id
             await eventservice.editEvent({ id, name, 
           description,  
@@ -193,6 +233,7 @@ class EventDetail extends Component {
             location: '',
             imgPath:'',
             date: '', 
+            time: '',
             isAttending: false,
             isPublic: false, 
             cohort: '',
@@ -206,8 +247,8 @@ class EventDetail extends Component {
     //create components for event if creator and else
     render(){
       const {event, user, name, description, imgPath, date, time, location, isAttending, cohort, isPublic, hours, minutes, hourStart, hourFinish, minStart, minFinish, showForm} = this.state
-      console.log(isAttending)
-        return(
+
+      return(
             <div className='main'>
                 {event.creator && event.creator === user._id ? 
                   <div className='form'>
@@ -262,14 +303,14 @@ class EventDetail extends Component {
           )}
           <label>Start:</label>
           <select name="hourStart" value={hourStart} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={hourStart}> Choose one </option>
             {hours ? hours.map((hour)=>{
               return <option value={hour}>{hour}</option>
             }): null}
           </select>
 
           <select name="minStart" value={minStart} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={minStart}> Choose one </option>
             {minutes ? minutes.map((min)=>{
               return <option value={min}>{min}</option>
             }): null}
@@ -277,14 +318,14 @@ class EventDetail extends Component {
 
           <label>Finish:</label>
           <select name="hourFinish" value={hourFinish} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={hourFinish}> Choose one </option>
             {hours ? hours.map((hour)=>{
               return <option value={hour}>{hour}</option>
             }): null}
           </select>
 
           <select name="minFinish" value={minFinish} onChange={ e => this.handleChange(e)}>
-            <option defaultValue=""> Choose one </option>
+            <option defaultValue={minFinish}> Choose one </option>
             {minutes ? minutes.map((min)=>{
               return <option value={min}>{min}</option>
             }): null}
@@ -295,6 +336,9 @@ class EventDetail extends Component {
           <div>
           <h5>Date: {time} {this.reverseString(date.slice(0,10))}</h5>
           <button onClick={() => this.dateForm()}>Change date</button>
+          {this.state.isError.time.length > 0 && (
+          <span className="">{this.state.isError.time}</span>
+          )}
           </div>}
           
           <label>Cohort:</label>
@@ -310,7 +354,7 @@ class EventDetail extends Component {
                             type="checkbox"
                             name="isAttending"
                             value={isAttending}
-                            checked={isAttending}
+                            defaultChecked={isAttending}
                             onClick={() => this.ToggleAttend()}
                   />
                   
@@ -319,7 +363,7 @@ class EventDetail extends Component {
                             type="checkbox"
                             name="isPublic"
                             value={isPublic}
-                            checked={isPublic}
+                            defaultChecked={isPublic}
                             onClick={() => this.TogglePublic()}
                   />
                     <input
@@ -350,7 +394,8 @@ class EventDetail extends Component {
                 : null}  
                 </>
                  }
-                 <button onClick={() => this.joinThisEvent(user._id, event._id)}>Join</button>
+                 {this.joinButton()}
+                 
     </div>)
 }
 }
