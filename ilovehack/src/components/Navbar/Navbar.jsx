@@ -6,11 +6,19 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button 
 
 class Navibar extends Component {
   state = {
-    toggle:false,
+    toggle: false,
 }
 
 Toggle = () => {
     this.setState({toggle:!this.state.toggle})
+}
+
+RenderLogo = () => {
+  if(this.state.toggle === true) {
+    return <img src="./images/LOGO_ALT_TRANSP.svg" alt="logo" className="navbar-logo-picture"/>
+  } else {
+    return 
+  }
 }
 
 redirectToMyEvents = () => {
@@ -23,10 +31,12 @@ redirectToFav = () => {
 
   render() {
     const { logout, isLoggedin, user } = this.props;
+    console.log(this.state.toggle, 'el logo')
     return (
       <Navbar className="navbar-container" bg="dark" expand="lg" variant="dark">
         <Navbar.Brand href="/"><img className="logo" src="images/logo.png" alt="logo" style={{width:20}}/></Navbar.Brand>
-        <Navbar.Toggle onClick={this.state.toggle ? () => this.Toggle() : null}  aria-controls="basic-navbar-nav" />
+        {() => this.RenderLogo()}
+        <div onClick={this.state.toggle ? () => this.Toggle() : null}><Navbar.Toggle aria-controls="basic-navbar-nav" /></div>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
           {isLoggedin ? (
