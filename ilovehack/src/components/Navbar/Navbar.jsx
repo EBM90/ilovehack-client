@@ -81,7 +81,7 @@ class Navibar extends Component {
                     <h2> {user.fullname} </h2>
                     <p> {user.email} </p>
                   </div>
-                  <Link to={`/profile/${user.id}`}>
+                  <Link to={`/myprofile`}>
                     <i class="far fa-edit"></i>
                   </Link>
                   <button
