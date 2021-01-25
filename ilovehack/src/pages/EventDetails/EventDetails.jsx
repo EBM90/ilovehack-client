@@ -367,7 +367,7 @@ class EventDetail extends Component {
                             onClick={() => this.TogglePublic()}
                   />
                     <input
-                    className="form_button_btn_edit"
+                    className="btn_lightblue"
                     type="submit"
                     value="Edit"
                   />

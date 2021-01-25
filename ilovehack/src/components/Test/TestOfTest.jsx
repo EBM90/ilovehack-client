@@ -1,6 +1,6 @@
 import { withAuth } from "../../lib/AuthProvider";
 import React, { Component } from 'react';
-import '../SignUp/SignUp.css';
+/* import '../SignUp/SignUp.css'; */
 import './Test.css';
 
 class Test extends Component {

@@ -3,7 +3,6 @@ import { withAuth } from '../../lib/AuthProvider.js';
 import { Link } from "react-router-dom";
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Carousel1 from "../carousel/Carousel";
 
 class Login extends Component {
   state = { email: "", password: "" };
@@ -47,9 +46,8 @@ class Login extends Component {
           <div className="login-button-div">
           <input className="btn_lightblue" type="submit" value="Log In" />
           </div>
-          <p className="signup-login">Don´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
+          <p className="signup-login">Don´t have an account yet?  <i className="links"> <Link className="links" to={"/signup"}> Sign up here!</Link></i> </p>
         </form>
-        <Carousel1 />
       </div>
     );
   }
