@@ -1,6 +1,6 @@
 /* TEST STYLING */
 
-.progress-bar {
+.progress_bar {
     position: relative;
     height: 20px;
     width: 350px;
@@ -11,7 +11,7 @@
 }
 
 .filler {
-    background: #1DA598;
+    background: var(--clr-accent);
     height: 100%;
     border-radius: inherit;
     transition: width .2s ease-in;
@@ -29,4 +29,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding:15px;
+    margin: 30px;
+    background-color: var(--clr-light-grey);
+    border-radius: 20px;
+    box-shadow: rgba(0,0,0,0.8);
+}
+
+.answer{
+    margin: 50px 0;
+}
+
+.theTest{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
