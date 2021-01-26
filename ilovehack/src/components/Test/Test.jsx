@@ -20,6 +20,7 @@ class Test extends Component {
             answers: [],
             percentage: 0,
             number: 0,
+            button: 'btn_inverted'
         }
 
     questions = async() =>{
@@ -96,12 +97,21 @@ class Test extends Component {
 
     handleChange = event => {
         const { name, value } = event.target;
-        event.target.checked = true
+        if(event.target.className === 'btn_inverted'){
+            event.target.className = 'btn_lightblue'
+        } else {
+            event.target.className = 'btn_inverted'
+        }
+
         this.setState({ [name]: value });
-        };
+
+        this.nextQuestion()
+        
+    };
+    
 
     render() {
-        const {questions, number} = this.state;
+        const {questions, number, button} = this.state;
         return (
             <>
             <div className="top-test">
@@ -114,15 +124,14 @@ class Test extends Component {
             
                 {questions.length !== 0 && questions[number].answers ? questions[number].answers.map((answer, index) => {
                     return (
-                        <div key={index} className='answer'>
-                            <a className='btn_inverted'>{answer}</a>
-                        </div>
+                            <input className={button} name={`answer${number}`} value={answer} onClick={(e) => this.handleChange(e)}></input>
+                        
                         )
                         }) : <Loading/>}
                         <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button>
             </form>
-            {this.state.number === 0 ?  <button className='' onClick={() => {this.backHome()}}>Back to your homepage</button> : <button className='' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Previous</button>}
-            <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-hide' : "button-submit-signup-show" } onClick={() => {this.nextQuestion(); this.addPercent()}}>Next</button>
+            {this.state.number === 0 ?  <button className='btn_inverted' onClick={() => {this.backHome()}}>Back to your homepage</button> : <button className='btn_inverted' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Back</button>}
+            <button className='btn_lightblue' onClick={() => {this.nextQuestion(); this.addPercent()}}>Next</button>
             
             </div>
             </>

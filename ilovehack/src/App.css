@@ -101,7 +101,7 @@ h1,h2,h3,h4,h5{
     border: 2px var(--clr-accent) solid;
     border-radius:11px ;
     background-color:var(--clr-light);
-    margin: 500px 0 10px 0;
+    margin: 30px 0;
     font-weight: bold;
     width: 100%; 
 }

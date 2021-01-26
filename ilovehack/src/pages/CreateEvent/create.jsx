@@ -1,7 +1,7 @@
 import React, { Component} from 'react'
 import eventservice from "../../lib/event-service";
 import { withAuth } from "../../lib/AuthProvider";
-import './Create.css'
+import './create.css'
 
 class Create extends Component {
     state ={
