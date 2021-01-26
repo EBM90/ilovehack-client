@@ -5,14 +5,13 @@ import AuthProvider from './lib/AuthProvider'
 import AnonRoute from "./components/componentRoutes/AnonRoute";
 import PrivateRoute from "./components/componentRoutes/PrivateRoute";
 
-
+import Navibar from './components/Navbar/Navbar.jsx';
 import Home from './pages/Home/Home.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 import Events from './pages/Events/Events.jsx'
 import EventDetail from './pages/EventDetails/EventDetails.jsx'
 import Userdetails from './pages/User-details/User-details.jsx'
 import Signup from './pages/SignUp/Signup.jsx'
-import Navbar from './components/Navbar/Navbar.jsx'
 import Create from './pages/CreateEvent/Create'
 import Login from './pages/LogIn/Log-in.jsx'
 import Error from './pages/ErrorPage/Error.jsx'
@@ -30,11 +29,11 @@ function App() {
   socket.emit('coectado', "que pasa cra pasa")
   return (
     <AuthProvider>
-    <Navbar />
+    <Navibar />
     <div className="App">
      <Switch>
       <AnonRoute exact path='/' component={landing} /> 
-      <PrivateRoute exact path='/test' component={Test}/>
+      {/* <PrivateRoute exact path='/test' component={TestOfTest}/> */}
       <PrivateRoute exact path='/home' component={Home} />
       <PrivateRoute exact path='/myprofile' component={Profile}/>
       <PrivateRoute exact path='/all-events' component={Events}/>
