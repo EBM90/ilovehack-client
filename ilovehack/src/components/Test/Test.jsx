@@ -20,14 +20,18 @@ class Test extends Component {
             answers: [],
             percentage: 0,
             number: 0,
-            button: 'btn_inverted'
+            unselected: 'btn_inverted',
+            selected: 'btn_lightblue',
+            count: 0,
         }
 
     questions = async() =>{
         const theQuestions = await userservice.getQuestions()
         console.log(theQuestions)
         this.setState({
-            questions: theQuestions
+            questions: theQuestions,
+            answers: [this.state.answer0, this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4,
+                this.state.answer5, this.state.answer6, this.state.answer7, this.state.answer8, this.state.answer9]
         })
     }
 
@@ -35,21 +39,13 @@ class Test extends Component {
         this.questions()
     }
 
+    
     handleFormSubmit = async(event) => {
         try {
             event.preventDefault();
-            const {answer0, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9} = this.state
+          
             const { answers } = this.state;
-            answers.push(answer0)
-            answers.push(answer1)
-            answers.push(answer2)
-            answers.push(answer3)
-            answers.push(answer4)
-            answers.push(answer5)
-            answers.push(answer6)
-            answers.push(answer7)
-            answers.push(answer8)
-            answers.push(answer9)
+         
             await userservice.getAnswers(answers)
             this.props.history.push('/home')
         } catch (error) {
@@ -58,36 +54,44 @@ class Test extends Component {
         
     };
     
-    addPercent = (event) => {
-        const percPerQuestion = 100 / this.state.questions.length
-        const percentage = this.state.percentage;
-        this.setState({percentage: percentage + percPerQuestion});
+    checkPercent = () => {
+        this.setState({
+            percentage: this.state.number * 10
+        }) 
     }
 
-    deletePercent = (event) => {
-        const percPerQuestion = 100 / this.state.questions.length
-        const percentage = this.state.percentage;
-        this.setState({percentage: percentage - percPerQuestion});
-    }
+    
 
     nextQuestion = () => {
         const number = this.state.number;
         let i = 0;
+        
         if(i < this.state.questions.length) {
-            return this.setState({number: number + 1});
+            this.setState({number: number + 1,
+                answers: [this.state.answer0, this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4,
+                    this.state.answer5, this.state.answer6, this.state.answer7, this.state.answer8, this.state.answer9]})
+            
         } else if (i === this.state.questions.length ){
-            return i = 0;
+            return i = 0
         }
+       
     }
 
     prevQuestion = () => {
         const number = this.state.number;
         let i = 0;
+        
         if(i < this.state.questions.length ) {
-            return this.setState({number: number - 1});
+            this.setState({number: number - 1,
+                answers: [this.state.answer0, this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4,
+                    this.state.answer5, this.state.answer6, this.state.answer7, this.state.answer8, this.state.answer9]
+            }
+            
+            )
         } else if (i === 1 ){
-            return this.backToSignup()
+            this.backToSignup()
         }
+       
     }
 
     backHome =() =>{
@@ -97,21 +101,23 @@ class Test extends Component {
 
     handleChange = event => {
         const { name, value } = event.target;
-        if(event.target.className === 'btn_inverted'){
-            event.target.className = 'btn_lightblue'
-        } else {
-            event.target.className = 'btn_inverted'
-        }
-
         this.setState({ [name]: value });
 
-        this.nextQuestion()
+        this.setState({
+            answers: [this.state.answer0, this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4,
+                this.state.answer5, this.state.answer6, this.state.answer7, this.state.answer8, this.state.answer9]
+        })
+
+        if(this.state.number < 8){
+            this.nextQuestion()
+        }
         
+        this.checkPercent()
     };
     
 
     render() {
-        const {questions, number, button} = this.state;
+        const {questions, number, unselected, selected} = this.state;
         return (
             <>
             <div className="top-test">
@@ -124,14 +130,17 @@ class Test extends Component {
             
                 {questions.length !== 0 && questions[number].answers ? questions[number].answers.map((answer, index) => {
                     return (
-                            <input className={button} name={`answer${number}`} value={answer} onClick={(e) => this.handleChange(e)}></input>
+                            <input className={this.state.answers[number] === answer ? selected : unselected} name={`answer${number}`} value={answer} onClick={(e) => this.handleChange(e)}></input>
                         
                         )
                         }) : <Loading/>}
-                        <button className={this.state.number ===  this.state.questions.length - 1?  'button-submit-signup-show' : "button-submit-signup-hide" } >Submit</button>
+                        <button className={this.state.number ===  this.state.questions.length - 1 ?  'btn_darkblue' : "button-submit-signup-hide" } >Submit</button>
             </form>
-            {this.state.number === 0 ?  <button className='btn_inverted' onClick={() => {this.backHome()}}>Back to your homepage</button> : <button className='btn_inverted' onClick={() => {this.prevQuestion(); this.deletePercent()}}>Back</button>}
-            <button className='btn_lightblue' onClick={() => {this.nextQuestion(); this.addPercent()}}>Next</button>
+            <div className='test-buttons'>
+                    {this.state.number === 0 ?  <button className='btn_inverted' onClick={() => {this.backHome()}}>Back to homepage</button> : <button className='btn_inverted' onClick={() => {this.prevQuestion()}}>Back</button>}
+                    <button className='btn_lightblue' onClick={() => {this.nextQuestion()}}>Next</button>
+            </div>
+            
             
             </div>
             </>

@@ -26,7 +26,7 @@ import socket from './components/sockets/Sockets.jsx';
 
 
 function App() {
-  socket.emit('coectado', "que pasa cra pasa")
+  socket.emit('conectado', "que pasa cra pasa")
   return (
     <AuthProvider>
     <Navibar />

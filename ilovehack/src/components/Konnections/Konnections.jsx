@@ -50,7 +50,7 @@ export default class Konnections extends Component {
         </div> :
                 <div className='highlighted-container'>
                     <p><b>Hey! </b>You have to complete the personality test to see your Konnections.</p>
-                    <button className='btn_lightblue'><Link to='/test' className='light-links'> START TEST</Link></button>
+                    <Link to='/test' className='light-links'><button className='btn_lightblue'> START TEST</button></Link>
                 </div>
             }
             </>
