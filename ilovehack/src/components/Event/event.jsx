@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './event.css'
 
-export default function eventSlider(props) {
+export default function event(props) {
     const reverseString = (str) => {
         let strArr = str.split('-')
         return strArr.reverse().join('/')
