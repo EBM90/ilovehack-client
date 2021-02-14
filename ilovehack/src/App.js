@@ -6,17 +6,17 @@ import AnonRoute from "./components/componentRoutes/AnonRoute";
 import PrivateRoute from "./components/componentRoutes/PrivateRoute";
 
 import Navibar from './components/Navbar/Navbar.jsx';
-import Home from './pages/Home/Home.jsx'
-import Profile from './pages/Profile/Profile.jsx'
-import Events from './pages/Events/Events.jsx'
-import EventDetail from './pages/EventDetails/EventDetails.jsx'
-import Userdetails from './pages/User-details/User-details.jsx'
-import Signup from './pages/SignUp/Signup.jsx'
-import Navbar from './components/Navbar/Navbar.jsx'
-import Create from './pages/CreateEvent/Create.jsx'
-import Login from './pages/LogIn/Log-in.jsx'
-import Error from './pages/ErrorPage/Error.jsx'
-import FAQ from './pages/FAQ/FAQ.jsx'
+import Home from './pages/Home/Home.jsx';
+import Profile from './pages/Profile/Profile.jsx';
+import Events from './pages/Events/Events.jsx';
+import EventDetail from './pages/EventDetails/EventDetails.jsx';
+import Userdetails from './pages/User-details/User-details.jsx';
+import Signup from './pages/SignUp/Signup.jsx';
+/* import Navbar from './components/Navbar/Navbar.jsx'; */
+import Create from './pages/CreateEvent/Create.jsx';
+import Login from './pages/LogIn/Log-in.jsx';
+import Error from './pages/ErrorPage/Error.jsx';
+import FAQ from './pages/FAQ/FAQ.jsx';
 import Onboarding from './components/Onboarding/Onboarding';
 import Onboarding2 from './components/Onboarding2/Onboarding2';
 import Test from "./components/Test/Test.jsx";
@@ -27,7 +27,7 @@ import socket from './components/sockets/Sockets.jsx';
 
 
 function App() {
-  socket.emit('coectado', "que pasa cra pasa")
+  socket.emit('conectado', "que pasa cra pasa")
   return (
     <AuthProvider>
     <Navibar />
@@ -42,7 +42,7 @@ function App() {
       <PrivateRoute exact path='/event/:id' component={EventDetail}/>
       <PrivateRoute exact path='/profile/:id' component={Userdetails}/>
       <AnonRoute exact path='/signup' component={Signup}/>
-      <AnonRoute exact path='/test' component={Test}/>
+      <PrivateRoute exact path='/test' component={Test}/>
       <AnonRoute exact path='/login' component={Login}/>
       <AnonRoute exact path='/error' component={Error}/>
       <Route exact path='/FAQ' component={FAQ}/>
