@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel1 from "../carousel/Carousel";
+import Modal from "../Modal/Modal";
 
 class Login extends Component {
   state = { email: "", password: "" };
@@ -50,6 +51,45 @@ class Login extends Component {
           <p className="signup-login">Don´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p>
         </form>
         <Carousel1 />
+
+        <div className="modal-align">
+            <div className="container-modal">
+
+                <img className="modal-img" src="images/logo.png" alt="love" width="400rem" />
+                <div className="buttons">
+                    <a className="btn_lightblue" href="#be-nice">Log In</a>
+                </div>
+            </div>
+
+
+
+            <div className="modal" id="be-nice">
+                <div className="modal-content">
+                <form className="login-form" onSubmit={this.handleFormSubmit}>
+          
+          <i className="input-login"><img className="logo-input border-input" src="/images/email-logo.png" alt="pixel heart"/><input className="border-input" type="email" name="email" value={email} placeholder="E-mail" onChange={this.handleChange}/></i>
+  
+          <i className="input-login"><img className="logo-input border-input" src="/images/password-logo.png" alt="pixel heart"/><input className="border-input" type="password" name="password" value={password} placeholder="Password" onChange={this.handleChange} /></i>
+  
+  <div className="align-remember">
+            <input className="checkbox-login" type="checkbox" name="remember pass" />
+            {/* <p>Remember me</p> */}
+            <a className="forgotpass" href="#">Forgot your password?</a>
+            </div>
+  
+            <div className="login-button-div">
+            <input className="btn_lightblue" type="submit" value="Log In" />
+            <a href="#close" className="button">Close</a>
+            </div>
+            {/* <p className="signup-login">Don´t have an account yet?  <i className="suhere"> <Link className="suhere" to={"/signup"}> Sign up here!</Link></i> </p> */}
+          </form>
+                    <i className="align-btn-portfolio">
+                    </i>
+                </div>
+                <a href="#close" className="background">.</a>
+            </div>
+
+        </div>
       </div>
     );
   }
