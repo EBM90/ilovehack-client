@@ -75,6 +75,16 @@ class User {
       console.log(error)
     }
   }
+
+  getAllKonnections = async() =>{
+    try {
+        const allOfThem = await this.user.get('/profile/allkonnections')
+        console.log(allOfThem)
+        return allOfThem.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 const axiosRequestFunctions = new User();

@@ -6,24 +6,58 @@ import { Link } from "react-router-dom";
 
 export default class Konnections extends Component {
     state={
-        konnections: [],
-        user: {}
+        possibleKonnections: [],
+        user: {},
+        konnections: []
     }
 
     getKonnections = async() =>{
-        const theKonnections = await userservice.getAllUsers()
+        const possibleKonnections = await userservice.getAllKonnections()
         const theUser = await userservice.getUser()
+        console.log(possibleKonnections, 'this is the length of the answers')
         this.setState({
-            konnections: theKonnections,
+            possibleKonnections: possibleKonnections,
             user: theUser
         })
     }
 
-    componentDidMount(){
-        this.getKonnections()
+    checkKonnections = () =>{
+        const {possibleKonnections, user} = this.state
+        let count= 0
+        let konnections = []
+        console.log(possibleKonnections)
+        possibleKonnections.forEach((konnection) =>{
+            for(let i = 0; i < konnection.answers.length; i++){
+                console.log(konnection.answers[i], 'this is the answer of the konnection')
+                console.log(user.answers[i], 'this is the answer of the user')
+                if(konnection.answers[i] === user.answers[i]){
+                    count++
+                }
+            }
+            console.log(count)
+            konnection.percentage = count * 10
+            konnections.push(konnection)
+            count = 0
+        })
+        console.log(konnections, 'these are the konnections')
+        this.setState({
+            konnections: konnections
+        })
+    }
+
+    componentDidMount= async() =>{
+        await this.getKonnections()
+        this.checkKonnections()
     }
     render() {
         const {konnections, user} = this.state
+        konnections.sort((a,b)=>{
+            if(a.percentage>b.percentage){
+                return -1
+            } else {
+                return 1
+            }
+        })
         return (
             <>
             <div className='konnections-title'>  <h3>Latest Konnections</h3></div>
@@ -35,7 +69,7 @@ export default class Konnections extends Component {
                                 <div className='konnection-card' key={index}>
                                 <div className='card-image'>
                                     <img  className='rombo-image' src={user.imgPath} alt='userimage'></img>
-                                    <p className='percentage'>69%</p>
+                                    <p className='percentage'>{user.percentage}%</p>
                                 </div>
                                 <div className='info-card'>
                                     <h3>{user.fullname}</h3>

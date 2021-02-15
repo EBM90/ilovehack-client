@@ -27,7 +27,6 @@ class Test extends Component {
 
     questions = async() =>{
         const theQuestions = await userservice.getQuestions()
-        console.log(theQuestions)
         this.setState({
             questions: theQuestions,
             answers: [this.state.answer0, this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4,
@@ -43,9 +42,7 @@ class Test extends Component {
     handleFormSubmit = async(event) => {
         try {
             event.preventDefault();
-          
             const { answers } = this.state;
-         
             await userservice.getAnswers(answers)
             this.props.history.push('/home')
         } catch (error) {
@@ -74,7 +71,7 @@ class Test extends Component {
         } else if (i === this.state.questions.length ){
             return i = 0
         }
-       
+        this.checkPercent()
     }
 
     prevQuestion = () => {
@@ -91,7 +88,7 @@ class Test extends Component {
         } else if (i === 1 ){
             this.backToSignup()
         }
-       
+        this.checkPercent()
     }
 
     backHome =() =>{
@@ -108,11 +105,11 @@ class Test extends Component {
                 this.state.answer5, this.state.answer6, this.state.answer7, this.state.answer8, this.state.answer9]
         })
 
-        if(this.state.number < 8){
+        if(this.state.number < 9){
             this.nextQuestion()
         }
         
-        this.checkPercent()
+        
     };
     
 
