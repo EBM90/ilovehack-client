@@ -31,6 +31,7 @@ export default function FAQQ() {
 
 </div>
 </main>
+<img className="modal-img" src="images/logo.png" alt="love" width="100rem" />
         </div>
     )
 }
